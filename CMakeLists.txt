@@ -14,9 +14,15 @@ if(NOT DEFINED DASLANG_DIR)
     message(FATAL_ERROR "DASLANG_DIR must be set to the daslang SDK root (contains include/ and lib/)")
 endif()
 
+# RAYLIB_DIR can be passed explicitly or inherited from the environment (e.g. set in .bashrc).
 if(NOT DEFINED RAYLIB_DIR)
-    message(FATAL_ERROR "RAYLIB_DIR must be set to a raylib installation with shared libs (contains include/ and lib/)")
+    if(DEFINED ENV{RAYLIB_DIR})
+        set(RAYLIB_DIR "$ENV{RAYLIB_DIR}")
+    else()
+        message(FATAL_ERROR "RAYLIB_DIR must be set (pass -DRAYLIB_DIR=... or set it in the environment)")
+    endif()
 endif()
+message(STATUS "RAYLIB_DIR: ${RAYLIB_DIR}")
 
 # ── Source files ───────────────────────────────────────────────────────────────
 # The generated .inc files are #included directly by module_raylib.cpp.
@@ -112,9 +118,16 @@ endif()
 set_target_properties(dasModuleRaylib PROPERTIES
     SUFFIX ".shared_module"
     PREFIX ""
-    RUNTIME_OUTPUT_DIRECTORY_RELEASE "${CMAKE_CURRENT_SOURCE_DIR}"
-    RUNTIME_OUTPUT_DIRECTORY_DEBUG   "${CMAKE_CURRENT_SOURCE_DIR}"
-    LIBRARY_OUTPUT_DIRECTORY         "${CMAKE_CURRENT_SOURCE_DIR}"
+)
+
+# ── Also produce a _debug copy so daslang debug builds can load it ────────────
+# daslang's debug runtime rewrites foo.shared_module -> foo_debug.shared_module
+# at load time. We copy the Release build as the _debug variant so both work.
+add_custom_command(TARGET dasModuleRaylib POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "$<TARGET_FILE:dasModuleRaylib>"
+        "$<TARGET_FILE_DIR:dasModuleRaylib>/dasModuleRaylib_debug.shared_module"
+    COMMENT "Creating _debug copy of dasModuleRaylib.shared_module"
 )
 
 # ── Copy raylib shared lib next to the .shared_module ─────────────────────────
@@ -138,7 +151,7 @@ if(WIN32)
     add_custom_command(TARGET dasModuleRaylib POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_if_different
             "${_RAYLIB_DLL}"
-            "${CMAKE_CURRENT_SOURCE_DIR}/libraylib.dll"
+            "$<TARGET_FILE_DIR:dasModuleRaylib>/libraylib.dll"
         COMMENT "Copying libraylib.dll alongside dasModuleRaylib.shared_module"
     )
 elseif(APPLE)

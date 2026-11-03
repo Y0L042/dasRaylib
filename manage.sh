@@ -10,7 +10,6 @@ DAS_FORMATTER="$SCRIPT_DIR/rl_das/vendor/daslang/utils/dasCodeFormatter/main.das
 DASROOT="$SCRIPT_DIR/rl_das/vendor/daslang"
 
 GEN_RAYLIB_BIND_PY="$SCRIPT_DIR/rl_das/tools/gen_raylib_bindings.py"
-RAYLIB_H="${RAYLIB_DIR}/include/raylib.h"
 GENERATED_DIR="$SCRIPT_DIR/rl_das/src/generated"
 RAYLIB_DAS_SCRIPTS="$SCRIPT_DIR/rl_das/src/scripts"
 
@@ -25,6 +24,7 @@ usage() {
     echo "  codegen                      Run the full pipeline: gen-raylib-bind, gen-inc"
     echo "  build-module                 Build dasModuleRaylib.shared_module"
     echo "                               Uses \$DASLANG_DIR and \$RAYLIB_DIR from environment"
+    echo "  package                      Bundle built artifacts into raylib/ for use as a modules/ package"
     echo "  help                         Show this help message"
 }
 
@@ -96,6 +96,28 @@ cmd_codegen() {
     cmd_gen_inc
 }
 
+cmd_package() {
+    local src_release="$SCRIPT_DIR/_build/Release"
+    local out_dir="$SCRIPT_DIR/raylib"
+
+    if [[ ! -f "$src_release/dasModuleRaylib.shared_module" ]]; then
+        echo "ERROR: _build/Release/dasModuleRaylib.shared_module not found. Run build-module first."
+        exit 1
+    fi
+
+    echo "==> Packaging into $out_dir"
+    rm -rf "$out_dir"
+    mkdir -p "$out_dir/_build/Release"
+
+    cp "$SCRIPT_DIR/.das_module"  "$out_dir/.das_module"
+    cp "$SCRIPT_DIR/.das_package" "$out_dir/.das_package"
+    cp "$src_release/dasModuleRaylib.shared_module" "$out_dir/_build/Release/"
+    cp "$src_release/libraylib.dll"                 "$out_dir/_build/Release/"
+
+    echo "==> Done. Copy raylib/ into your project's modules/ folder:"
+    echo "    cp -r $out_dir <your_project>/modules/raylib"
+}
+
 cmd_build_module() {
     if [[ -z "${DASLANG_DIR:-}" ]]; then
         echo "ERROR: DASLANG_DIR is not set"
@@ -116,7 +138,7 @@ cmd_build_module() {
     echo "==> Building"
     cmake --build "$build_dir" --config Release
 
-    echo "==> Done: $SCRIPT_DIR/dasModuleRaylib.shared_module"
+    echo "==> Done: $SCRIPT_DIR/_build/Release/dasModuleRaylib.shared_module"
 }
 
 case "${1:-}" in
@@ -126,6 +148,7 @@ case "${1:-}" in
     fmt-all)         cmd_fmt_all ;;
     codegen)         cmd_codegen ;;
     build-module)    cmd_build_module "${2:-}" "${3:-}" ;;
+    package)         cmd_package ;;
     help|"")         usage ;;
     *)               echo "Unknown command: $1"; usage; exit 1 ;;
 esac

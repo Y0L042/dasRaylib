@@ -3,7 +3,7 @@ require daslib/daspkg
 
 [export]
 def package() {
-    package_name("dasRaylib")
+    package_name("raylib")
     package_description("Raylib bindings for Daslang — full RLAPI, enums, and types")
 }
 
@@ -15,9 +15,9 @@ def build() {
 [export]
 def release() {
     let p = get_platform_name()
-    if p == "windows" {
-        release_include_dll("raylib.dll")
-    } elif p == "darwin" {
+    if (p == "windows") {
+        release_include_dll("libraylib.dll")
+    } elif (p == "darwin") {
         release_include_dll("libraylib.dylib")
     } else {
         release_include_dll("libraylib.so")

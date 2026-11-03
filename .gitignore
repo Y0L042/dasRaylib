@@ -41,6 +41,8 @@ flecs_das/vendor/daslang/
 # daspkg artifacts
 daspkg.lock
 dasModuleRaylib.shared_module
+dasModuleRaylib_debug.shared_module
+_build/
 
 # IDE and editor-specific files
 .vscode/
