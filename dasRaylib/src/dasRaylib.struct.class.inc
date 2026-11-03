@@ -1,51 +1,6 @@
 // this file is generated via Daslang automatic binder
 // all user modifications will be lost after this file is re-generated
 
-// from raylib.h:214:16
-struct Vector2_GeneratedAnnotation : ManagedStructureAnnotation<Vector2> {
-	virtual bool isLocal() const override { return true; }
-	virtual bool canBePlacedInContainer() const override { return true; }
-	virtual bool hasNonTrivialCtor() const override { return false; }
-	virtual bool canCopy() const override { return true; }
-	Vector2_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("Vector2", ml, "Vector2") {
-	}
-	void init () {
-		addField<DAS_BIND_MANAGED_FIELD(x)>("x","x");
-		addField<DAS_BIND_MANAGED_FIELD(y)>("y","y");
-	}
-};
-
-// from raylib.h:220:16
-struct Vector3_GeneratedAnnotation : ManagedStructureAnnotation<Vector3> {
-	virtual bool isLocal() const override { return true; }
-	virtual bool canBePlacedInContainer() const override { return true; }
-	virtual bool hasNonTrivialCtor() const override { return false; }
-	virtual bool canCopy() const override { return true; }
-	Vector3_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("Vector3", ml, "Vector3") {
-	}
-	void init () {
-		addField<DAS_BIND_MANAGED_FIELD(x)>("x","x");
-		addField<DAS_BIND_MANAGED_FIELD(y)>("y","y");
-		addField<DAS_BIND_MANAGED_FIELD(z)>("z","z");
-	}
-};
-
-// from raylib.h:227:16
-struct Vector4_GeneratedAnnotation : ManagedStructureAnnotation<Vector4> {
-	virtual bool isLocal() const override { return true; }
-	virtual bool canBePlacedInContainer() const override { return true; }
-	virtual bool hasNonTrivialCtor() const override { return false; }
-	virtual bool canCopy() const override { return true; }
-	Vector4_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("Vector4", ml, "Vector4") {
-	}
-	void init () {
-		addField<DAS_BIND_MANAGED_FIELD(x)>("x","x");
-		addField<DAS_BIND_MANAGED_FIELD(y)>("y","y");
-		addField<DAS_BIND_MANAGED_FIELD(z)>("z","z");
-		addField<DAS_BIND_MANAGED_FIELD(w)>("w","w");
-	}
-};
-
 // from raylib.h:238:16
 struct Matrix_GeneratedAnnotation : ManagedStructureAnnotation<::Matrix> {
 	virtual bool isLocal() const override { return true; }
@@ -87,22 +42,6 @@ struct Color_GeneratedAnnotation : ManagedStructureAnnotation<Color> {
 		addField<DAS_BIND_MANAGED_FIELD(g)>("g","g");
 		addField<DAS_BIND_MANAGED_FIELD(b)>("b","b");
 		addField<DAS_BIND_MANAGED_FIELD(a)>("a","a");
-	}
-};
-
-// from raylib.h:254:16
-struct Rectangle_GeneratedAnnotation : ManagedStructureAnnotation<Rectangle> {
-	virtual bool isLocal() const override { return true; }
-	virtual bool canBePlacedInContainer() const override { return true; }
-	virtual bool hasNonTrivialCtor() const override { return false; }
-	virtual bool canCopy() const override { return true; }
-	Rectangle_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("Rectangle", ml, "Rectangle") {
-	}
-	void init () {
-		addField<DAS_BIND_MANAGED_FIELD(x)>("x","x");
-		addField<DAS_BIND_MANAGED_FIELD(y)>("y","y");
-		addField<DAS_BIND_MANAGED_FIELD(width)>("width","width");
-		addField<DAS_BIND_MANAGED_FIELD(height)>("height","height");
 	}
 };
 

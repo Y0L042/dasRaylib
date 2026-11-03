@@ -9,6 +9,7 @@ public:
 protected:
 virtual bool initDependencies() override;
 	void initMain ();
+	void initAotAlias ();
 	virtual ModuleAotType aotRequire ( TextWriter & tw ) const override;
 	#include "dasRaylib.func.decl.inc"
 public:

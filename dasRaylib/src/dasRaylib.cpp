@@ -20,6 +20,7 @@ bool Module_dasRaylib::initDependencies() {
 	initialized = true;
 	lib.addModule(this);
 	lib.addBuiltInModule();
+	initAotAlias();
 	#include "dasRaylib.const.inc"
 	#include "dasRaylib.enum.add.inc"
 	#include "dasRaylib.dummy.add.inc"

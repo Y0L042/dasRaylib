@@ -164,10 +164,10 @@ void Module_dasRaylib::initFunctions_4() {
 	makeExtern< int (*)() , GetMouseY , SimNode_ExtFuncCall >(lib,"GetMouseY","GetMouseY")
 		->addToModule(*this, SideEffects::worstDefault);
 // from raylib.h:1228:15
-	makeExtern< Vector2 (*)() , GetMousePosition , SimNode_ExtFuncCallAndCopyOrMove >(lib,"GetMousePosition","GetMousePosition")
+	makeExtern< Vector2 (*)() , GetMousePosition , SimNode_ExtFuncCall >(lib,"GetMousePosition","GetMousePosition")
 		->addToModule(*this, SideEffects::worstDefault);
 // from raylib.h:1229:15
-	makeExtern< Vector2 (*)() , GetMouseDelta , SimNode_ExtFuncCallAndCopyOrMove >(lib,"GetMouseDelta","GetMouseDelta")
+	makeExtern< Vector2 (*)() , GetMouseDelta , SimNode_ExtFuncCall >(lib,"GetMouseDelta","GetMouseDelta")
 		->addToModule(*this, SideEffects::worstDefault);
 // from raylib.h:1230:12
 	makeExtern< void (*)(int,int) , SetMousePosition , SimNode_ExtFuncCall >(lib,"SetMousePosition","SetMousePosition")
@@ -185,7 +185,7 @@ void Module_dasRaylib::initFunctions_4() {
 	makeExtern< float (*)() , GetMouseWheelMove , SimNode_ExtFuncCall >(lib,"GetMouseWheelMove","GetMouseWheelMove")
 		->addToModule(*this, SideEffects::worstDefault);
 // from raylib.h:1234:15
-	makeExtern< Vector2 (*)() , GetMouseWheelMoveV , SimNode_ExtFuncCallAndCopyOrMove >(lib,"GetMouseWheelMoveV","GetMouseWheelMoveV")
+	makeExtern< Vector2 (*)() , GetMouseWheelMoveV , SimNode_ExtFuncCall >(lib,"GetMouseWheelMoveV","GetMouseWheelMoveV")
 		->addToModule(*this, SideEffects::worstDefault);
 // from raylib.h:1235:12
 	makeExtern< void (*)(int) , SetMouseCursor , SimNode_ExtFuncCall >(lib,"SetMouseCursor","SetMouseCursor")
@@ -198,7 +198,7 @@ void Module_dasRaylib::initFunctions_4() {
 	makeExtern< int (*)() , GetTouchY , SimNode_ExtFuncCall >(lib,"GetTouchY","GetTouchY")
 		->addToModule(*this, SideEffects::worstDefault);
 // from raylib.h:1240:15
-	makeExtern< Vector2 (*)(int) , GetTouchPosition , SimNode_ExtFuncCallAndCopyOrMove >(lib,"GetTouchPosition","GetTouchPosition")
+	makeExtern< Vector2 (*)(int) , GetTouchPosition , SimNode_ExtFuncCall >(lib,"GetTouchPosition","GetTouchPosition")
 		->args({"index"})
 		->addToModule(*this, SideEffects::worstDefault);
 }

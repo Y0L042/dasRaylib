@@ -131,7 +131,7 @@ void Module_dasRaylib::initFunctions_1() {
 	makeExtern< int (*)() , GetCurrentMonitor , SimNode_ExtFuncCall >(lib,"GetCurrentMonitor","GetCurrentMonitor")
 		->addToModule(*this, SideEffects::worstDefault);
 // from raylib.h:1021:15
-	makeExtern< Vector2 (*)(int) , GetMonitorPosition , SimNode_ExtFuncCallAndCopyOrMove >(lib,"GetMonitorPosition","GetMonitorPosition")
+	makeExtern< Vector2 (*)(int) , GetMonitorPosition , SimNode_ExtFuncCall >(lib,"GetMonitorPosition","GetMonitorPosition")
 		->args({"monitor"})
 		->addToModule(*this, SideEffects::worstDefault);
 // from raylib.h:1022:11
@@ -155,10 +155,10 @@ void Module_dasRaylib::initFunctions_1() {
 		->args({"monitor"})
 		->addToModule(*this, SideEffects::worstDefault);
 // from raylib.h:1027:15
-	makeExtern< Vector2 (*)() , GetWindowPosition , SimNode_ExtFuncCallAndCopyOrMove >(lib,"GetWindowPosition","GetWindowPosition")
+	makeExtern< Vector2 (*)() , GetWindowPosition , SimNode_ExtFuncCall >(lib,"GetWindowPosition","GetWindowPosition")
 		->addToModule(*this, SideEffects::worstDefault);
 // from raylib.h:1028:15
-	makeExtern< Vector2 (*)() , GetWindowScaleDPI , SimNode_ExtFuncCallAndCopyOrMove >(lib,"GetWindowScaleDPI","GetWindowScaleDPI")
+	makeExtern< Vector2 (*)() , GetWindowScaleDPI , SimNode_ExtFuncCall >(lib,"GetWindowScaleDPI","GetWindowScaleDPI")
 		->addToModule(*this, SideEffects::worstDefault);
 // from raylib.h:1029:19
 	makeExtern< const char * (*)(int) , GetMonitorName , SimNode_ExtFuncCall >(lib,"GetMonitorName","GetMonitorName")

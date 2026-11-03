@@ -10,3 +10,4 @@ namespace das {
 	#include "dasRaylib.struct.cast.inc"
 }
 
+#include "dasRaylib.wrap.inc"

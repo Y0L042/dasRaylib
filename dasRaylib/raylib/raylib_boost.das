@@ -7,32 +7,33 @@ module raylib_boost shared public
 require raylib public
 
 // ── raylib color macros (#define RED CLITERAL(Color){...}) — not visible to the binder ──
-let public LIGHTGRAY  = Color(r = 200u8, g = 200u8, b = 200u8, a = 255u8)
-let public GRAY       = Color(r = 130u8, g = 130u8, b = 130u8, a = 255u8)
-let public DARKGRAY   = Color(r = 80u8,  g = 80u8,  b = 80u8,  a = 255u8)
-let public YELLOW     = Color(r = 253u8, g = 249u8, b = 0u8,   a = 255u8)
-let public GOLD       = Color(r = 255u8, g = 203u8, b = 0u8,   a = 255u8)
-let public ORANGE     = Color(r = 255u8, g = 161u8, b = 0u8,   a = 255u8)
-let public PINK       = Color(r = 255u8, g = 109u8, b = 194u8, a = 255u8)
-let public RED        = Color(r = 230u8, g = 41u8,  b = 55u8,  a = 255u8)
-let public MAROON     = Color(r = 190u8, g = 33u8,  b = 55u8,  a = 255u8)
-let public GREEN      = Color(r = 0u8,   g = 228u8, b = 48u8,  a = 255u8)
-let public LIME       = Color(r = 0u8,   g = 158u8, b = 47u8,  a = 255u8)
-let public DARKGREEN  = Color(r = 0u8,   g = 117u8, b = 44u8,  a = 255u8)
-let public SKYBLUE    = Color(r = 102u8, g = 191u8, b = 255u8, a = 255u8)
-let public BLUE       = Color(r = 0u8,   g = 121u8, b = 241u8, a = 255u8)
-let public DARKBLUE   = Color(r = 0u8,   g = 82u8,  b = 172u8, a = 255u8)
-let public PURPLE     = Color(r = 200u8, g = 122u8, b = 255u8, a = 255u8)
-let public VIOLET     = Color(r = 135u8, g = 60u8,  b = 190u8, a = 255u8)
-let public DARKPURPLE = Color(r = 112u8, g = 31u8,  b = 126u8, a = 255u8)
-let public BEIGE      = Color(r = 211u8, g = 176u8, b = 131u8, a = 255u8)
-let public BROWN      = Color(r = 127u8, g = 106u8, b = 80u8,  a = 255u8)
-let public DARKBROWN  = Color(r = 76u8,  g = 63u8,  b = 47u8,  a = 255u8)
-let public WHITE      = Color(r = 255u8, g = 255u8, b = 255u8, a = 255u8)
-let public BLACK      = Color(r = 0u8,   g = 0u8,   b = 0u8,   a = 255u8)
-let public BLANK      = Color(r = 0u8,   g = 0u8,   b = 0u8,   a = 0u8)
-let public MAGENTA    = Color(r = 255u8, g = 0u8,   b = 255u8, a = 255u8)
-let public RAYWHITE   = Color(r = 245u8, g = 245u8, b = 245u8, a = 255u8)
+// Colors are das float4 RGBA in 0..1; raylib functions convert them to bytes (exact round-trip).
+let public LIGHTGRAY = float4(200.0, 200.0, 200.0, 255.0) / 255.0
+let public GRAY = float4(130.0, 130.0, 130.0, 255.0) / 255.0
+let public DARKGRAY = float4(80.0, 80.0, 80.0, 255.0) / 255.0
+let public YELLOW = float4(253.0, 249.0, 0.0, 255.0) / 255.0
+let public GOLD = float4(255.0, 203.0, 0.0, 255.0) / 255.0
+let public ORANGE = float4(255.0, 161.0, 0.0, 255.0) / 255.0
+let public PINK = float4(255.0, 109.0, 194.0, 255.0) / 255.0
+let public RED = float4(230.0, 41.0, 55.0, 255.0) / 255.0
+let public MAROON = float4(190.0, 33.0, 55.0, 255.0) / 255.0
+let public GREEN = float4(0.0, 228.0, 48.0, 255.0) / 255.0
+let public LIME = float4(0.0, 158.0, 47.0, 255.0) / 255.0
+let public DARKGREEN = float4(0.0, 117.0, 44.0, 255.0) / 255.0
+let public SKYBLUE = float4(102.0, 191.0, 255.0, 255.0) / 255.0
+let public BLUE = float4(0.0, 121.0, 241.0, 255.0) / 255.0
+let public DARKBLUE = float4(0.0, 82.0, 172.0, 255.0) / 255.0
+let public PURPLE = float4(200.0, 122.0, 255.0, 255.0) / 255.0
+let public VIOLET = float4(135.0, 60.0, 190.0, 255.0) / 255.0
+let public DARKPURPLE = float4(112.0, 31.0, 126.0, 255.0) / 255.0
+let public BEIGE = float4(211.0, 176.0, 131.0, 255.0) / 255.0
+let public BROWN = float4(127.0, 106.0, 80.0, 255.0) / 255.0
+let public DARKBROWN = float4(76.0, 63.0, 47.0, 255.0) / 255.0
+let public WHITE = float4(255.0, 255.0, 255.0, 255.0) / 255.0
+let public BLACK = float4(0.0, 0.0, 0.0, 255.0) / 255.0
+let public BLANK = float4(0.0, 0.0, 0.0, 0.0) / 255.0
+let public MAGENTA = float4(255.0, 0.0, 255.0, 255.0) / 255.0
+let public RAYWHITE = float4(245.0, 245.0, 245.0, 255.0) / 255.0
 
 // ── typed overloads: raylib takes plain int for keys/buttons/flags ──
 def public IsKeyPressed(key : KeyboardKey) : bool { return IsKeyPressed(int(key)); }

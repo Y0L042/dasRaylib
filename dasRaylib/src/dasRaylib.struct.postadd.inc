@@ -1,12 +1,8 @@
 // this file is generated via Daslang automatic binder
 // all user modifications will be lost after this file is re-generated
 
-initRecAnnotation(ann_Vector2,lib);
-initRecAnnotation(ann_Vector3,lib);
-initRecAnnotation(ann_Vector4,lib);
 initRecAnnotation(ann_Matrix,lib);
 initRecAnnotation(ann_Color,lib);
-initRecAnnotation(ann_Rectangle,lib);
 initRecAnnotation(ann_Image,lib);
 initRecAnnotation(ann_Texture,lib);
 initRecAnnotation(ann_RenderTexture,lib);

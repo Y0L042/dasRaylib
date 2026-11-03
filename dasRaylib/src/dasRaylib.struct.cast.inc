@@ -1,24 +1,6 @@
 // this file is generated via Daslang automatic binder
 // all user modifications will be lost after this file is re-generated
 
-template <> struct cast_arg<Vector2> {
-	static __forceinline const Vector2 & to ( Context & ctx, SimNode * node ) {
-		vec4f res = node->eval(ctx);
-		return * cast<Vector2 *>::to(res);
-	}
-};
-template <> struct cast_arg<Vector3> {
-	static __forceinline const Vector3 & to ( Context & ctx, SimNode * node ) {
-		vec4f res = node->eval(ctx);
-		return * cast<Vector3 *>::to(res);
-	}
-};
-template <> struct cast_arg<Vector4> {
-	static __forceinline const Vector4 & to ( Context & ctx, SimNode * node ) {
-		vec4f res = node->eval(ctx);
-		return * cast<Vector4 *>::to(res);
-	}
-};
 template <> struct cast_arg<::Matrix> {
 	static __forceinline const ::Matrix & to ( Context & ctx, SimNode * node ) {
 		vec4f res = node->eval(ctx);
@@ -29,12 +11,6 @@ template <> struct cast_arg<Color> {
 	static __forceinline const Color & to ( Context & ctx, SimNode * node ) {
 		vec4f res = node->eval(ctx);
 		return * cast<Color *>::to(res);
-	}
-};
-template <> struct cast_arg<Rectangle> {
-	static __forceinline const Rectangle & to ( Context & ctx, SimNode * node ) {
-		vec4f res = node->eval(ctx);
-		return * cast<Rectangle *>::to(res);
 	}
 };
 template <> struct cast_arg<Image> {

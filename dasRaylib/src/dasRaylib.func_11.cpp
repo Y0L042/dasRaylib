@@ -39,13 +39,11 @@ void Module_dasRaylib::initFunctions_11() {
 	makeExtern< Mesh (*)(Image,Vector3) , GenMeshHeightmap , SimNode_ExtFuncCallAndCopyOrMove >(lib,"GenMeshHeightmap","GenMeshHeightmap")
 		->args({"heightmap","size"})
 		->arg_type(0,makeType<const Image>(lib))
-		->arg_type(1,makeType<const Vector3>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
 // from raylib.h:1629:12
 	makeExtern< Mesh (*)(Image,Vector3) , GenMeshCubicmap , SimNode_ExtFuncCallAndCopyOrMove >(lib,"GenMeshCubicmap","GenMeshCubicmap")
 		->args({"cubicmap","cubeSize"})
 		->arg_type(0,makeType<const Image>(lib))
-		->arg_type(1,makeType<const Vector3>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
 // from raylib.h:1632:17
 	makeExtern< Material * (*)(const char *,int *) , LoadMaterials , SimNode_ExtFuncCall >(lib,"LoadMaterials","LoadMaterials")
@@ -103,8 +101,6 @@ void Module_dasRaylib::initFunctions_11() {
 // from raylib.h:1647:12
 	makeExtern< bool (*)(Vector3,float,Vector3,float) , CheckCollisionSpheres , SimNode_ExtFuncCall >(lib,"CheckCollisionSpheres","CheckCollisionSpheres")
 		->args({"center1","radius1","center2","radius2"})
-		->arg_type(0,makeType<const Vector3>(lib))
-		->arg_type(2,makeType<const Vector3>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
 // from raylib.h:1648:12
 	makeExtern< bool (*)(BoundingBox,BoundingBox) , CheckCollisionBoxes , SimNode_ExtFuncCall >(lib,"CheckCollisionBoxes","CheckCollisionBoxes")
@@ -116,13 +112,11 @@ void Module_dasRaylib::initFunctions_11() {
 	makeExtern< bool (*)(BoundingBox,Vector3,float) , CheckCollisionBoxSphere , SimNode_ExtFuncCall >(lib,"CheckCollisionBoxSphere","CheckCollisionBoxSphere")
 		->args({"box","center","radius"})
 		->arg_type(0,makeType<const BoundingBox>(lib))
-		->arg_type(1,makeType<const Vector3>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
 // from raylib.h:1650:20
 	makeExtern< RayCollision (*)(Ray,Vector3,float) , GetRayCollisionSphere , SimNode_ExtFuncCallAndCopyOrMove >(lib,"GetRayCollisionSphere","GetRayCollisionSphere")
 		->args({"ray","center","radius"})
 		->arg_type(0,makeType<const Ray>(lib))
-		->arg_type(1,makeType<const Vector3>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
 // from raylib.h:1651:20
 	makeExtern< RayCollision (*)(Ray,BoundingBox) , GetRayCollisionBox , SimNode_ExtFuncCallAndCopyOrMove >(lib,"GetRayCollisionBox","GetRayCollisionBox")
@@ -131,28 +125,20 @@ void Module_dasRaylib::initFunctions_11() {
 		->arg_type(1,makeType<const BoundingBox>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
 // from raylib.h:1652:20
-	makeExtern< RayCollision (*)(Ray,Mesh,::Matrix) , GetRayCollisionMesh , SimNode_ExtFuncCallAndCopyOrMove >(lib,"GetRayCollisionMesh","GetRayCollisionMesh")
+	makeExtern< RayCollision (*)(Ray,Mesh,const float4x4 &) , _rlw_GetRayCollisionMesh , SimNode_ExtFuncCallAndCopyOrMove >(lib,"GetRayCollisionMesh","das::_rlw_GetRayCollisionMesh")
 		->args({"ray","mesh","transform"})
 		->arg_type(0,makeType<const Ray>(lib))
 		->arg_type(1,makeType<const Mesh>(lib))
-		->arg_type(2,makeType<const ::Matrix>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
 // from raylib.h:1653:20
 	makeExtern< RayCollision (*)(Ray,Vector3,Vector3,Vector3) , GetRayCollisionTriangle , SimNode_ExtFuncCallAndCopyOrMove >(lib,"GetRayCollisionTriangle","GetRayCollisionTriangle")
 		->args({"ray","p1","p2","p3"})
 		->arg_type(0,makeType<const Ray>(lib))
-		->arg_type(1,makeType<const Vector3>(lib))
-		->arg_type(2,makeType<const Vector3>(lib))
-		->arg_type(3,makeType<const Vector3>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
 // from raylib.h:1654:20
 	makeExtern< RayCollision (*)(Ray,Vector3,Vector3,Vector3,Vector3) , GetRayCollisionQuad , SimNode_ExtFuncCallAndCopyOrMove >(lib,"GetRayCollisionQuad","GetRayCollisionQuad")
 		->args({"ray","p1","p2","p3","p4"})
 		->arg_type(0,makeType<const Ray>(lib))
-		->arg_type(1,makeType<const Vector3>(lib))
-		->arg_type(2,makeType<const Vector3>(lib))
-		->arg_type(3,makeType<const Vector3>(lib))
-		->arg_type(4,makeType<const Vector3>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
 // from raylib.h:1662:12
 	makeExtern< void (*)() , InitAudioDevice , SimNode_ExtFuncCall >(lib,"InitAudioDevice","InitAudioDevice")

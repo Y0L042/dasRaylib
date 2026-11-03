@@ -27,9 +27,8 @@ void Module_dasRaylib::initFunctions_2() {
 	makeExtern< bool (*)() , IsCursorOnScreen , SimNode_ExtFuncCall >(lib,"IsCursorOnScreen","IsCursorOnScreen")
 		->addToModule(*this, SideEffects::worstDefault);
 // from raylib.h:1045:12
-	makeExtern< void (*)(Color) , ClearBackground , SimNode_ExtFuncCall >(lib,"ClearBackground","ClearBackground")
+	makeExtern< void (*)(float4) , _rlw_ClearBackground , SimNode_ExtFuncCall >(lib,"ClearBackground","das::_rlw_ClearBackground")
 		->args({"color"})
-		->arg_type(0,makeType<const Color>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
 // from raylib.h:1046:12
 	makeExtern< void (*)() , BeginDrawing , SimNode_ExtFuncCall >(lib,"BeginDrawing","BeginDrawing")
@@ -135,10 +134,9 @@ void Module_dasRaylib::initFunctions_2() {
 		->arg_type(0,makeType<const Shader>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
 // from raylib.h:1076:12
-	makeExtern< void (*)(Shader,int,::Matrix) , SetShaderValueMatrix , SimNode_ExtFuncCall >(lib,"SetShaderValueMatrix","SetShaderValueMatrix")
+	makeExtern< void (*)(Shader,int,const float4x4 &) , _rlw_SetShaderValueMatrix , SimNode_ExtFuncCall >(lib,"SetShaderValueMatrix","das::_rlw_SetShaderValueMatrix")
 		->args({"shader","locIndex","mat"})
 		->arg_type(0,makeType<const Shader>(lib))
-		->arg_type(2,makeType<const ::Matrix>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
 // from raylib.h:1077:12
 	makeExtern< void (*)(Shader,int,Texture) , SetShaderValueTexture , SimNode_ExtFuncCall >(lib,"SetShaderValueTexture","SetShaderValueTexture")
@@ -154,46 +152,40 @@ void Module_dasRaylib::initFunctions_2() {
 // from raylib.h:1082:11
 	makeExtern< Ray (*)(Vector2,Camera3D) , GetScreenToWorldRay , SimNode_ExtFuncCallAndCopyOrMove >(lib,"GetScreenToWorldRay","GetScreenToWorldRay")
 		->args({"position","camera"})
-		->arg_type(0,makeType<const Vector2>(lib))
 		->arg_type(1,makeType<const Camera3D>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
 // from raylib.h:1083:11
 	makeExtern< Ray (*)(Vector2,Camera3D,int,int) , GetScreenToWorldRayEx , SimNode_ExtFuncCallAndCopyOrMove >(lib,"GetScreenToWorldRayEx","GetScreenToWorldRayEx")
 		->args({"position","camera","width","height"})
-		->arg_type(0,makeType<const Vector2>(lib))
 		->arg_type(1,makeType<const Camera3D>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
 // from raylib.h:1084:15
-	makeExtern< Vector2 (*)(Vector3,Camera3D) , GetWorldToScreen , SimNode_ExtFuncCallAndCopyOrMove >(lib,"GetWorldToScreen","GetWorldToScreen")
+	makeExtern< Vector2 (*)(Vector3,Camera3D) , GetWorldToScreen , SimNode_ExtFuncCall >(lib,"GetWorldToScreen","GetWorldToScreen")
 		->args({"position","camera"})
-		->arg_type(0,makeType<const Vector3>(lib))
 		->arg_type(1,makeType<const Camera3D>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
 // from raylib.h:1085:15
-	makeExtern< Vector2 (*)(Vector3,Camera3D,int,int) , GetWorldToScreenEx , SimNode_ExtFuncCallAndCopyOrMove >(lib,"GetWorldToScreenEx","GetWorldToScreenEx")
+	makeExtern< Vector2 (*)(Vector3,Camera3D,int,int) , GetWorldToScreenEx , SimNode_ExtFuncCall >(lib,"GetWorldToScreenEx","GetWorldToScreenEx")
 		->args({"position","camera","width","height"})
-		->arg_type(0,makeType<const Vector3>(lib))
 		->arg_type(1,makeType<const Camera3D>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
 // from raylib.h:1086:15
-	makeExtern< Vector2 (*)(Vector2,Camera2D) , GetWorldToScreen2D , SimNode_ExtFuncCallAndCopyOrMove >(lib,"GetWorldToScreen2D","GetWorldToScreen2D")
+	makeExtern< Vector2 (*)(Vector2,Camera2D) , GetWorldToScreen2D , SimNode_ExtFuncCall >(lib,"GetWorldToScreen2D","GetWorldToScreen2D")
 		->args({"position","camera"})
-		->arg_type(0,makeType<const Vector2>(lib))
 		->arg_type(1,makeType<const Camera2D>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
 // from raylib.h:1087:15
-	makeExtern< Vector2 (*)(Vector2,Camera2D) , GetScreenToWorld2D , SimNode_ExtFuncCallAndCopyOrMove >(lib,"GetScreenToWorld2D","GetScreenToWorld2D")
+	makeExtern< Vector2 (*)(Vector2,Camera2D) , GetScreenToWorld2D , SimNode_ExtFuncCall >(lib,"GetScreenToWorld2D","GetScreenToWorld2D")
 		->args({"position","camera"})
-		->arg_type(0,makeType<const Vector2>(lib))
 		->arg_type(1,makeType<const Camera2D>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
 // from raylib.h:1088:14
-	makeExtern< ::Matrix (*)(Camera3D) , GetCameraMatrix , SimNode_ExtFuncCallAndCopyOrMove >(lib,"GetCameraMatrix","GetCameraMatrix")
+	makeExtern< float4x4 (*)(Camera3D) , _rlw_GetCameraMatrix , SimNode_ExtFuncCallAndCopyOrMove >(lib,"GetCameraMatrix","das::_rlw_GetCameraMatrix")
 		->args({"camera"})
 		->arg_type(0,makeType<const Camera3D>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
 // from raylib.h:1089:14
-	makeExtern< ::Matrix (*)(Camera2D) , GetCameraMatrix2D , SimNode_ExtFuncCallAndCopyOrMove >(lib,"GetCameraMatrix2D","GetCameraMatrix2D")
+	makeExtern< float4x4 (*)(Camera2D) , _rlw_GetCameraMatrix2D , SimNode_ExtFuncCallAndCopyOrMove >(lib,"GetCameraMatrix2D","das::_rlw_GetCameraMatrix2D")
 		->args({"camera"})
 		->arg_type(0,makeType<const Camera2D>(lib))
 		->addToModule(*this, SideEffects::worstDefault);

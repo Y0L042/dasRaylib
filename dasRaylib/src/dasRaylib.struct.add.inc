@@ -1,18 +1,10 @@
 // this file is generated via Daslang automatic binder
 // all user modifications will be lost after this file is re-generated
 
-auto ann_Vector2 = new Vector2_GeneratedAnnotation(lib);
-addAnnotation(ann_Vector2);
-auto ann_Vector3 = new Vector3_GeneratedAnnotation(lib);
-addAnnotation(ann_Vector3);
-auto ann_Vector4 = new Vector4_GeneratedAnnotation(lib);
-addAnnotation(ann_Vector4);
 auto ann_Matrix = new Matrix_GeneratedAnnotation(lib);
 addAnnotation(ann_Matrix);
 auto ann_Color = new Color_GeneratedAnnotation(lib);
 addAnnotation(ann_Color);
-auto ann_Rectangle = new Rectangle_GeneratedAnnotation(lib);
-addAnnotation(ann_Rectangle);
 auto ann_Image = new Image_GeneratedAnnotation(lib);
 addAnnotation(ann_Image);
 auto ann_Texture = new Texture_GeneratedAnnotation(lib);

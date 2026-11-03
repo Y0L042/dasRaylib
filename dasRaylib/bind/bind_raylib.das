@@ -75,6 +75,8 @@ class RaylibGen : CppGenBind {
     raylib_skip_const : table<string; bool>
     raylib_include_prefix : string  // stripped from "// from <file>:<line>" comments so output is machine-independent
     pending_arg_types : int     // getCursorArgType calls left that are for arguments (the next one is the result)
+    wrap_file : FILE const?     // dasRaylib.wrap.inc: C++ wrappers converting Color <-> float4, Matrix <-> float4x4
+    wrapper_func_count : int
     def RaylibGen(module_dir, raylib_include, clang_resource : string) {
         raylib_include_prefix = "{raylib_include}/"
         bind_root = "{module_dir}/src"
@@ -91,6 +93,7 @@ class RaylibGen : CppGenBind {
             "-std=c++17",
             "-I{raylib_include}",
             "-isystem{clang_resource}",
+            "-DDAS_RAYLIB_BINDER_PARSE=1",      // hide the C++ glue in cb_dasRaylib.h from libclang
             "-D_ALLOW_COMPILER_AND_STL_VERSION_MISMATCH=1"
         )
         func_per_chunk = 50
@@ -116,7 +119,27 @@ class RaylibGen : CppGenBind {
             "PI" => true,
             "EPSILON" => true
         }
+        // raylib vector types become das math types (glue in src/cb_dasRaylib.h)
+        aot_alias <- {
+            "Vector2" => true,
+            "Vector3" => true,
+            "Vector4" => true,
+            "Rectangle" => true
+        }
         openAllFiles()
+        wrap_file = openFile("{bind_root}/{bind_module}.wrap.inc")
+        wrap_file |> fwrite("#pragma once\n\n")
+        wrap_file |> fwrite("// Wrappers for raylib functions taking or returning Color / Matrix by value:\n")
+        wrap_file |> fwrite("// das sees float4 (RGBA 0..1) and float4x4 instead. Helpers: src/cb_dasRaylib.h\n\n")
+        wrap_file |> fwrite("namespace das \{\n\n")
+    }
+    def finishWrapFile {
+        wrap_file |> fwrite("\}\n")
+        closeFile(wrap_file)
+    }
+    def override generateModuleNeedH {
+        CppGenBind`generateModuleNeedH(self)
+        module_need_h_file |> fwrite("#include \"{bind_module}.wrap.inc\"\n")
     }
     def override clang_getCursorLocationDescription(var c : CXCursor) : string {
         let desc = AnyGenBind`clang_getCursorLocationDescription(self, c)
@@ -165,7 +188,116 @@ class RaylibGen : CppGenBind {
     def override typeSpelling(var c : CXType) {
         return global_qualify(CppGenBind`typeSpelling(self, c))
     }
+    // "Color" / "Matrix" for a by-value raylib Color / Matrix, "" otherwise
+    def converted_kind(var t : CXType) : string {
+        var ct = clang_getCanonicalType(t)
+        if (ct.kind != CXTypeKind.Record) {
+            return ""
+        }
+        let sp = string(clang_getTypeSpelling(ct))
+        return (sp == "Color" || sp == "Matrix") ? sp : ""
+    }
+    def needs_wrapper(var c : CXCursor) : bool {
+        var fun_type = clang_getCursorType(c)
+        var res_type = clang_getResultType(fun_type)
+        if (!empty(converted_kind(res_type))) {
+            return true
+        }
+        let narg = clang_Cursor_getNumArguments(c)
+        for (ai in urange(narg)) {
+            var carg = clang_Cursor_getArgument(c, ai)
+            var arg_type = clang_getCursorType(carg)
+            if (!empty(converted_kind(arg_type))) {
+                return true
+            }
+        }
+        return false
+    }
+    def is_handled_record(var t : CXType) : bool {
+        // by-value struct that stays a das handled type (not an aot alias, not converted)
+        var ct = clang_getCanonicalType(t)
+        if (ct.kind != CXTypeKind.Record || !empty(converted_kind(t))) {
+            return false
+        }
+        return !aot_alias |> key_exists(string(clang_getTypeSpelling(ct)))
+    }
+    def emit_converting_wrapper(var c : CXCursor) {
+        step_Function()
+        wrapper_func_count ++
+        let function_name = string(clang_getCursorSpelling(c))
+        let wrapper_name = "_rlw_{function_name}"
+        var fun_type = clang_getCursorType(c)
+        var res_type = clang_getResultType(fun_type)
+        let res_kind = converted_kind(res_type)
+        let res_spelling = res_kind == "Color" ? "float4" : (res_kind == "Matrix" ? "float4x4" : typeSpelling(res_type))
+        let narg = clang_Cursor_getNumArguments(c)
+        var param_types : array<string>
+        var param_decls : array<string>
+        var call_args : array<string>
+        var arg_names : array<string>
+        for (ai in urange(narg)) {
+            var carg = clang_Cursor_getArgument(c, ai)
+            var arg_type = clang_getCursorType(carg)
+            var arg_name = string(clang_getCursorSpelling(carg))
+            if (empty(arg_name)) {
+                arg_name = "_arg_{int(ai)}"
+            }
+            let kind = converted_kind(arg_type)
+            var ptype = typeSpelling(arg_type)
+            var call = arg_name
+            if (kind == "Color") {
+                ptype = "float4"
+                call = "das_rl_color({arg_name})"
+            } elif (kind == "Matrix") {
+                ptype = "const float4x4 &"
+                call = "das_rl_matrix({arg_name})"
+            }
+            param_types |> push(ptype)
+            param_decls |> push("{ptype} {arg_name}")
+            call_args |> push(call)
+            arg_names |> push(arg_name)
+        }
+        // wrapper body
+        let call_expr = "::{function_name}({join(call_args, ", ")})"
+        var body = ""
+        if (res_kind == "Color") {
+            body = "return das_rl_float4({call_expr});"
+        } elif (res_kind == "Matrix") {
+            body = "return das_rl_float4x4({call_expr});"
+        } elif (res_type.kind == CXTypeKind.Void) {
+            body = "{call_expr};"
+        } else {
+            body = "return {call_expr};"
+        }
+        wrap_file |> fwrite("{from_comment(c)}inline {res_spelling} {wrapper_name}({join(param_decls, ", ")}) \{ {body} \}\n")
+        // registration
+        var sim_node = "SimNode_ExtFuncCall"
+        if (res_kind == "Matrix" || is_handled_record(res_type)) {
+            sim_node = "SimNode_ExtFuncCallAndCopyOrMove"
+        }
+        fprint(func_file, from_comment(c))
+        fprint(func_file, "\tmakeExtern< {res_spelling} (*)({join(param_types, ",")}) , {wrapper_name} , {sim_node} >(lib,\"{function_name}\",\"das::{wrapper_name}\")")
+        if (narg != 0) {
+            fprint(func_file, "\n\t\t->args(\{")
+            for (n, i in arg_names, count()) {
+                fprint(func_file, "{i != 0 ? "," : ""}\"{n}\"")
+            }
+            fprint(func_file, "\})")
+            for (ai in urange(narg)) {
+                var carg = clang_Cursor_getArgument(c, ai)
+                var arg_type = clang_getCursorType(carg)
+                if (is_handled_record(arg_type)) {
+                    fprint(func_file, "\n\t\t->arg_type({int(ai)},makeType<const {typeSpelling(arg_type)}>(lib))")
+                }
+            }
+        }
+        fprint(func_file, "\n\t\t->addToModule(*this, SideEffects::worstDefault);\n")
+    }
     def override parse_anyFunctionDecl(var c : CXCursor; isMethod : bool) {
+        if (!isMethod && needs_wrapper(c)) {
+            emit_converting_wrapper(c)
+            return
+        }
         // CppGenBind calls getCursorArgType once per argument, then once for the result
         pending_arg_types = clang_Cursor_getNumArguments(c)
         CppGenBind`parse_anyFunctionDecl(self, c, isMethod)
@@ -177,8 +309,7 @@ class RaylibGen : CppGenBind {
             pending_arg_types --
             // By-value struct args (Vector3, Color, ...) are copies on the C side. das handled
             // types otherwise come out as non-const `T implicit`, which rejects `let` values.
-            var ct = clang_getCanonicalType(t)
-            if (ct.kind == CXTypeKind.Record) {
+            if (is_handled_record(t)) {
                 return "const {empty(base) ? typeSpelling(t) : base}"
             }
         }
@@ -224,5 +355,7 @@ def main {
         }
     }
     cgb->generate()
+    cgb->finishWrapFile()
+    print("{cgb.wrapper_func_count} function(s) wrapped for Color/Matrix conversion\n")
     print("generated {cgb.func_chunk_index} function chunk(s) into {module_dir}/src\n")
 }

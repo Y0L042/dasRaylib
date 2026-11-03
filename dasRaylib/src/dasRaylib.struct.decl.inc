@@ -1,12 +1,8 @@
 // this file is generated via Daslang automatic binder
 // all user modifications will be lost after this file is re-generated
 
-MAKE_EXTERNAL_TYPE_FACTORY(Vector2,Vector2);
-MAKE_EXTERNAL_TYPE_FACTORY(Vector3,Vector3);
-MAKE_EXTERNAL_TYPE_FACTORY(Vector4,Vector4);
 MAKE_EXTERNAL_TYPE_FACTORY(Matrix,::Matrix);
 MAKE_EXTERNAL_TYPE_FACTORY(Color,Color);
-MAKE_EXTERNAL_TYPE_FACTORY(Rectangle,Rectangle);
 MAKE_EXTERNAL_TYPE_FACTORY(Image,Image);
 MAKE_EXTERNAL_TYPE_FACTORY(Texture,Texture);
 MAKE_EXTERNAL_TYPE_FACTORY(RenderTexture,RenderTexture);

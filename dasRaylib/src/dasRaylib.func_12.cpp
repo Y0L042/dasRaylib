@@ -219,32 +219,26 @@ void Module_dasRaylib::initFunctions_12() {
 		->args({"x","y"})
 		->addToModule(*this, SideEffects::worstDefault);
 // from raymath.h:275:15
-	makeExtern< Vector2 (*)() , Vector2Zero , SimNode_ExtFuncCallAndCopyOrMove >(lib,"Vector2Zero","Vector2Zero")
+	makeExtern< Vector2 (*)() , Vector2Zero , SimNode_ExtFuncCall >(lib,"Vector2Zero","Vector2Zero")
 		->addToModule(*this, SideEffects::worstDefault);
 // from raymath.h:283:15
-	makeExtern< Vector2 (*)() , Vector2One , SimNode_ExtFuncCallAndCopyOrMove >(lib,"Vector2One","Vector2One")
+	makeExtern< Vector2 (*)() , Vector2One , SimNode_ExtFuncCall >(lib,"Vector2One","Vector2One")
 		->addToModule(*this, SideEffects::worstDefault);
 // from raymath.h:291:15
-	makeExtern< Vector2 (*)(Vector2,Vector2) , Vector2Add , SimNode_ExtFuncCallAndCopyOrMove >(lib,"Vector2Add","Vector2Add")
+	makeExtern< Vector2 (*)(Vector2,Vector2) , Vector2Add , SimNode_ExtFuncCall >(lib,"Vector2Add","Vector2Add")
 		->args({"v1","v2"})
-		->arg_type(0,makeType<const Vector2>(lib))
-		->arg_type(1,makeType<const Vector2>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
 // from raymath.h:299:15
-	makeExtern< Vector2 (*)(Vector2,float) , Vector2AddValue , SimNode_ExtFuncCallAndCopyOrMove >(lib,"Vector2AddValue","Vector2AddValue")
+	makeExtern< Vector2 (*)(Vector2,float) , Vector2AddValue , SimNode_ExtFuncCall >(lib,"Vector2AddValue","Vector2AddValue")
 		->args({"v","add"})
-		->arg_type(0,makeType<const Vector2>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
 // from raymath.h:307:15
-	makeExtern< Vector2 (*)(Vector2,Vector2) , Vector2Subtract , SimNode_ExtFuncCallAndCopyOrMove >(lib,"Vector2Subtract","Vector2Subtract")
+	makeExtern< Vector2 (*)(Vector2,Vector2) , Vector2Subtract , SimNode_ExtFuncCall >(lib,"Vector2Subtract","Vector2Subtract")
 		->args({"v1","v2"})
-		->arg_type(0,makeType<const Vector2>(lib))
-		->arg_type(1,makeType<const Vector2>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
 // from raymath.h:315:15
-	makeExtern< Vector2 (*)(Vector2,float) , Vector2SubtractValue , SimNode_ExtFuncCallAndCopyOrMove >(lib,"Vector2SubtractValue","Vector2SubtractValue")
+	makeExtern< Vector2 (*)(Vector2,float) , Vector2SubtractValue , SimNode_ExtFuncCall >(lib,"Vector2SubtractValue","Vector2SubtractValue")
 		->args({"v","sub"})
-		->arg_type(0,makeType<const Vector2>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
 }
 }

@@ -47,38 +47,28 @@ void Module_dasRaylib::initFunctions_9() {
 		->args({"posX","posY"})
 		->addToModule(*this, SideEffects::worstDefault);
 // from raylib.h:1503:12
-	makeExtern< void (*)(const char *,int,int,int,Color) , DrawText , SimNode_ExtFuncCall >(lib,"DrawText","DrawText")
+	makeExtern< void (*)(const char *,int,int,int,float4) , _rlw_DrawText , SimNode_ExtFuncCall >(lib,"DrawText","das::_rlw_DrawText")
 		->args({"text","posX","posY","fontSize","color"})
-		->arg_type(4,makeType<const Color>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
 // from raylib.h:1504:12
-	makeExtern< void (*)(Font,const char *,Vector2,float,float,Color) , DrawTextEx , SimNode_ExtFuncCall >(lib,"DrawTextEx","DrawTextEx")
+	makeExtern< void (*)(Font,const char *,Vector2,float,float,float4) , _rlw_DrawTextEx , SimNode_ExtFuncCall >(lib,"DrawTextEx","das::_rlw_DrawTextEx")
 		->args({"font","text","position","fontSize","spacing","tint"})
 		->arg_type(0,makeType<const Font>(lib))
-		->arg_type(2,makeType<const Vector2>(lib))
-		->arg_type(5,makeType<const Color>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
 // from raylib.h:1505:12
-	makeExtern< void (*)(Font,const char *,Vector2,Vector2,float,float,float,Color) , DrawTextPro , SimNode_ExtFuncCall >(lib,"DrawTextPro","DrawTextPro")
+	makeExtern< void (*)(Font,const char *,Vector2,Vector2,float,float,float,float4) , _rlw_DrawTextPro , SimNode_ExtFuncCall >(lib,"DrawTextPro","das::_rlw_DrawTextPro")
 		->args({"font","text","position","origin","rotation","fontSize","spacing","tint"})
 		->arg_type(0,makeType<const Font>(lib))
-		->arg_type(2,makeType<const Vector2>(lib))
-		->arg_type(3,makeType<const Vector2>(lib))
-		->arg_type(7,makeType<const Color>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
 // from raylib.h:1506:12
-	makeExtern< void (*)(Font,int,Vector2,float,Color) , DrawTextCodepoint , SimNode_ExtFuncCall >(lib,"DrawTextCodepoint","DrawTextCodepoint")
+	makeExtern< void (*)(Font,int,Vector2,float,float4) , _rlw_DrawTextCodepoint , SimNode_ExtFuncCall >(lib,"DrawTextCodepoint","das::_rlw_DrawTextCodepoint")
 		->args({"font","codepoint","position","fontSize","tint"})
 		->arg_type(0,makeType<const Font>(lib))
-		->arg_type(2,makeType<const Vector2>(lib))
-		->arg_type(4,makeType<const Color>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
 // from raylib.h:1507:12
-	makeExtern< void (*)(Font,const int *,int,Vector2,float,float,Color) , DrawTextCodepoints , SimNode_ExtFuncCall >(lib,"DrawTextCodepoints","DrawTextCodepoints")
+	makeExtern< void (*)(Font,const int *,int,Vector2,float,float,float4) , _rlw_DrawTextCodepoints , SimNode_ExtFuncCall >(lib,"DrawTextCodepoints","das::_rlw_DrawTextCodepoints")
 		->args({"font","codepoints","codepointCount","position","fontSize","spacing","tint"})
 		->arg_type(0,makeType<const Font>(lib))
-		->arg_type(3,makeType<const Vector2>(lib))
-		->arg_type(6,makeType<const Color>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
 // from raylib.h:1510:12
 	makeExtern< void (*)(int) , SetTextLineSpacing , SimNode_ExtFuncCall >(lib,"SetTextLineSpacing","SetTextLineSpacing")
@@ -89,12 +79,12 @@ void Module_dasRaylib::initFunctions_9() {
 		->args({"text","fontSize"})
 		->addToModule(*this, SideEffects::worstDefault);
 // from raylib.h:1512:15
-	makeExtern< Vector2 (*)(Font,const char *,float,float) , MeasureTextEx , SimNode_ExtFuncCallAndCopyOrMove >(lib,"MeasureTextEx","MeasureTextEx")
+	makeExtern< Vector2 (*)(Font,const char *,float,float) , MeasureTextEx , SimNode_ExtFuncCall >(lib,"MeasureTextEx","MeasureTextEx")
 		->args({"font","text","fontSize","spacing"})
 		->arg_type(0,makeType<const Font>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
 // from raylib.h:1513:15
-	makeExtern< Vector2 (*)(Font,const int *,int,float,float) , MeasureTextCodepoints , SimNode_ExtFuncCallAndCopyOrMove >(lib,"MeasureTextCodepoints","MeasureTextCodepoints")
+	makeExtern< Vector2 (*)(Font,const int *,int,float,float) , MeasureTextCodepoints , SimNode_ExtFuncCall >(lib,"MeasureTextCodepoints","MeasureTextCodepoints")
 		->args({"font","codepoints","length","fontSize","spacing"})
 		->arg_type(0,makeType<const Font>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
@@ -109,7 +99,7 @@ void Module_dasRaylib::initFunctions_9() {
 		->arg_type(0,makeType<const Font>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
 // from raylib.h:1516:17
-	makeExtern< Rectangle (*)(Font,int) , GetGlyphAtlasRec , SimNode_ExtFuncCallAndCopyOrMove >(lib,"GetGlyphAtlasRec","GetGlyphAtlasRec")
+	makeExtern< Rectangle (*)(Font,int) , GetGlyphAtlasRec , SimNode_ExtFuncCall >(lib,"GetGlyphAtlasRec","GetGlyphAtlasRec")
 		->args({"font","codepoint"})
 		->arg_type(0,makeType<const Font>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
