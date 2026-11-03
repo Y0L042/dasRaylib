@@ -80,3 +80,5 @@ enc_temp_folder/
 /.flecs_BAK
 /rl_das/tools/__pycache__
 /temp.txt
+*.dascache
+*.manifest
