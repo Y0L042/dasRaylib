@@ -1,7 +1,7 @@
 // this file is generated via Daslang automatic binder
 // all user modifications will be lost after this file is re-generated
 
-// from raylib.h:238:16
+// from raylib.h:240:16
 struct Matrix_GeneratedAnnotation : ManagedStructureAnnotation<::Matrix> {
 	virtual bool isLocal() const override { return true; }
 	virtual bool canBePlacedInContainer() const override { return true; }
@@ -29,7 +29,7 @@ struct Matrix_GeneratedAnnotation : ManagedStructureAnnotation<::Matrix> {
 	}
 };
 
-// from raylib.h:246:16
+// from raylib.h:248:16
 struct Color_GeneratedAnnotation : ManagedStructureAnnotation<Color> {
 	virtual bool isLocal() const override { return true; }
 	virtual bool canBePlacedInContainer() const override { return true; }
@@ -45,7 +45,7 @@ struct Color_GeneratedAnnotation : ManagedStructureAnnotation<Color> {
 	}
 };
 
-// from raylib.h:262:16
+// from raylib.h:264:16
 struct Image_GeneratedAnnotation : ManagedStructureAnnotation<Image> {
 	virtual bool isLocal() const override { return true; }
 	virtual bool canBePlacedInContainer() const override { return true; }
@@ -62,7 +62,7 @@ struct Image_GeneratedAnnotation : ManagedStructureAnnotation<Image> {
 	}
 };
 
-// from raylib.h:271:16
+// from raylib.h:273:16
 struct Texture_GeneratedAnnotation : ManagedStructureAnnotation<Texture> {
 	virtual bool isLocal() const override { return true; }
 	virtual bool canBePlacedInContainer() const override { return true; }
@@ -79,7 +79,7 @@ struct Texture_GeneratedAnnotation : ManagedStructureAnnotation<Texture> {
 	}
 };
 
-// from raylib.h:286:16
+// from raylib.h:288:16
 struct RenderTexture_GeneratedAnnotation : ManagedStructureAnnotation<RenderTexture> {
 	virtual bool isLocal() const override { return true; }
 	virtual bool canBePlacedInContainer() const override { return true; }
@@ -94,7 +94,7 @@ struct RenderTexture_GeneratedAnnotation : ManagedStructureAnnotation<RenderText
 	}
 };
 
-// from raylib.h:296:16
+// from raylib.h:298:16
 struct NPatchInfo_GeneratedAnnotation : ManagedStructureAnnotation<NPatchInfo> {
 	virtual bool isLocal() const override { return true; }
 	virtual bool canBePlacedInContainer() const override { return true; }
@@ -112,7 +112,7 @@ struct NPatchInfo_GeneratedAnnotation : ManagedStructureAnnotation<NPatchInfo> {
 	}
 };
 
-// from raylib.h:306:16
+// from raylib.h:308:16
 struct GlyphInfo_GeneratedAnnotation : ManagedStructureAnnotation<GlyphInfo> {
 	virtual bool isLocal() const override { return true; }
 	virtual bool canBePlacedInContainer() const override { return true; }
@@ -129,7 +129,7 @@ struct GlyphInfo_GeneratedAnnotation : ManagedStructureAnnotation<GlyphInfo> {
 	}
 };
 
-// from raylib.h:315:16
+// from raylib.h:317:16
 struct Font_GeneratedAnnotation : ManagedStructureAnnotation<Font> {
 	virtual bool isLocal() const override { return true; }
 	virtual bool canBePlacedInContainer() const override { return true; }
@@ -147,7 +147,7 @@ struct Font_GeneratedAnnotation : ManagedStructureAnnotation<Font> {
 	}
 };
 
-// from raylib.h:325:16
+// from raylib.h:327:16
 struct Camera3D_GeneratedAnnotation : ManagedStructureAnnotation<Camera3D> {
 	virtual bool isLocal() const override { return true; }
 	virtual bool canBePlacedInContainer() const override { return true; }
@@ -164,7 +164,7 @@ struct Camera3D_GeneratedAnnotation : ManagedStructureAnnotation<Camera3D> {
 	}
 };
 
-// from raylib.h:336:16
+// from raylib.h:338:16
 struct Camera2D_GeneratedAnnotation : ManagedStructureAnnotation<Camera2D> {
 	virtual bool isLocal() const override { return true; }
 	virtual bool canBePlacedInContainer() const override { return true; }
@@ -180,7 +180,7 @@ struct Camera2D_GeneratedAnnotation : ManagedStructureAnnotation<Camera2D> {
 	}
 };
 
-// from raylib.h:344:16
+// from raylib.h:346:16
 struct Mesh_GeneratedAnnotation : ManagedStructureAnnotation<Mesh> {
 	virtual bool isLocal() const override { return true; }
 	virtual bool canBePlacedInContainer() const override { return true; }
@@ -208,7 +208,7 @@ struct Mesh_GeneratedAnnotation : ManagedStructureAnnotation<Mesh> {
 	}
 };
 
-// from raylib.h:373:16
+// from raylib.h:375:16
 struct Shader_GeneratedAnnotation : ManagedStructureAnnotation<Shader> {
 	virtual bool isLocal() const override { return true; }
 	virtual bool canBePlacedInContainer() const override { return true; }
@@ -222,7 +222,7 @@ struct Shader_GeneratedAnnotation : ManagedStructureAnnotation<Shader> {
 	}
 };
 
-// from raylib.h:379:16
+// from raylib.h:381:16
 struct MaterialMap_GeneratedAnnotation : ManagedStructureAnnotation<MaterialMap> {
 	virtual bool isLocal() const override { return true; }
 	virtual bool canBePlacedInContainer() const override { return true; }
@@ -237,7 +237,7 @@ struct MaterialMap_GeneratedAnnotation : ManagedStructureAnnotation<MaterialMap>
 	}
 };
 
-// from raylib.h:386:16
+// from raylib.h:388:16
 struct Material_GeneratedAnnotation : ManagedStructureAnnotation<Material> {
 	virtual bool isLocal() const override { return true; }
 	virtual bool canBePlacedInContainer() const override { return true; }
@@ -252,7 +252,7 @@ struct Material_GeneratedAnnotation : ManagedStructureAnnotation<Material> {
 	}
 };
 
-// from raylib.h:393:16
+// from raylib.h:395:16
 struct Transform_GeneratedAnnotation : ManagedStructureAnnotation<Transform> {
 	virtual bool isLocal() const override { return true; }
 	virtual bool canBePlacedInContainer() const override { return true; }
@@ -267,7 +267,7 @@ struct Transform_GeneratedAnnotation : ManagedStructureAnnotation<Transform> {
 	}
 };
 
-// from raylib.h:403:16
+// from raylib.h:405:16
 struct BoneInfo_GeneratedAnnotation : ManagedStructureAnnotation<BoneInfo> {
 	virtual bool isLocal() const override { return true; }
 	virtual bool canBePlacedInContainer() const override { return true; }
@@ -281,7 +281,7 @@ struct BoneInfo_GeneratedAnnotation : ManagedStructureAnnotation<BoneInfo> {
 	}
 };
 
-// from raylib.h:409:16
+// from raylib.h:411:16
 struct ModelSkeleton_GeneratedAnnotation : ManagedStructureAnnotation<ModelSkeleton> {
 	virtual bool isLocal() const override { return true; }
 	virtual bool canBePlacedInContainer() const override { return true; }
@@ -296,7 +296,7 @@ struct ModelSkeleton_GeneratedAnnotation : ManagedStructureAnnotation<ModelSkele
 	}
 };
 
-// from raylib.h:416:16
+// from raylib.h:418:16
 struct Model_GeneratedAnnotation : ManagedStructureAnnotation<Model> {
 	virtual bool isLocal() const override { return true; }
 	virtual bool canBePlacedInContainer() const override { return true; }
@@ -317,7 +317,7 @@ struct Model_GeneratedAnnotation : ManagedStructureAnnotation<Model> {
 	}
 };
 
-// from raylib.h:434:16
+// from raylib.h:436:16
 struct ModelAnimation_GeneratedAnnotation : ManagedStructureAnnotation<ModelAnimation> {
 	virtual bool isLocal() const override { return true; }
 	virtual bool canBePlacedInContainer() const override { return true; }
@@ -333,7 +333,7 @@ struct ModelAnimation_GeneratedAnnotation : ManagedStructureAnnotation<ModelAnim
 	}
 };
 
-// from raylib.h:443:16
+// from raylib.h:445:16
 struct Ray_GeneratedAnnotation : ManagedStructureAnnotation<Ray> {
 	virtual bool isLocal() const override { return true; }
 	virtual bool canBePlacedInContainer() const override { return true; }
@@ -347,7 +347,7 @@ struct Ray_GeneratedAnnotation : ManagedStructureAnnotation<Ray> {
 	}
 };
 
-// from raylib.h:449:16
+// from raylib.h:451:16
 struct RayCollision_GeneratedAnnotation : ManagedStructureAnnotation<RayCollision> {
 	virtual bool isLocal() const override { return true; }
 	virtual bool canBePlacedInContainer() const override { return true; }
@@ -363,7 +363,7 @@ struct RayCollision_GeneratedAnnotation : ManagedStructureAnnotation<RayCollisio
 	}
 };
 
-// from raylib.h:457:16
+// from raylib.h:459:16
 struct BoundingBox_GeneratedAnnotation : ManagedStructureAnnotation<BoundingBox> {
 	virtual bool isLocal() const override { return true; }
 	virtual bool canBePlacedInContainer() const override { return true; }
@@ -377,7 +377,7 @@ struct BoundingBox_GeneratedAnnotation : ManagedStructureAnnotation<BoundingBox>
 	}
 };
 
-// from raylib.h:463:16
+// from raylib.h:465:16
 struct Wave_GeneratedAnnotation : ManagedStructureAnnotation<Wave> {
 	virtual bool isLocal() const override { return true; }
 	virtual bool canBePlacedInContainer() const override { return true; }
@@ -394,7 +394,7 @@ struct Wave_GeneratedAnnotation : ManagedStructureAnnotation<Wave> {
 	}
 };
 
-// from raylib.h:477:16
+// from raylib.h:479:16
 struct AudioStream_GeneratedAnnotation : ManagedStructureAnnotation<AudioStream> {
 	virtual bool isLocal() const override { return true; }
 	virtual bool canBePlacedInContainer() const override { return true; }
@@ -411,7 +411,7 @@ struct AudioStream_GeneratedAnnotation : ManagedStructureAnnotation<AudioStream>
 	}
 };
 
-// from raylib.h:487:16
+// from raylib.h:489:16
 struct Sound_GeneratedAnnotation : ManagedStructureAnnotation<Sound> {
 	virtual bool isLocal() const override { return true; }
 	virtual bool canBePlacedInContainer() const override { return true; }
@@ -425,7 +425,7 @@ struct Sound_GeneratedAnnotation : ManagedStructureAnnotation<Sound> {
 	}
 };
 
-// from raylib.h:493:16
+// from raylib.h:495:16
 struct Music_GeneratedAnnotation : ManagedStructureAnnotation<Music> {
 	virtual bool isLocal() const override { return true; }
 	virtual bool canBePlacedInContainer() const override { return true; }
@@ -442,7 +442,7 @@ struct Music_GeneratedAnnotation : ManagedStructureAnnotation<Music> {
 	}
 };
 
-// from raylib.h:503:16
+// from raylib.h:505:16
 struct VrDeviceInfo_GeneratedAnnotation : ManagedStructureAnnotation<VrDeviceInfo> {
 	virtual bool isLocal() const override { return true; }
 	virtual bool canBePlacedInContainer() const override { return true; }
@@ -463,7 +463,7 @@ struct VrDeviceInfo_GeneratedAnnotation : ManagedStructureAnnotation<VrDeviceInf
 	}
 };
 
-// from raylib.h:516:16
+// from raylib.h:518:16
 struct VrStereoConfig_GeneratedAnnotation : ManagedStructureAnnotation<VrStereoConfig> {
 	virtual bool isLocal() const override { return true; }
 	virtual bool canBePlacedInContainer() const override { return true; }
@@ -483,7 +483,7 @@ struct VrStereoConfig_GeneratedAnnotation : ManagedStructureAnnotation<VrStereoC
 	}
 };
 
-// from raylib.h:528:16
+// from raylib.h:530:16
 struct FilePathList_GeneratedAnnotation : ManagedStructureAnnotation<FilePathList> {
 	virtual bool isLocal() const override { return true; }
 	virtual bool canBePlacedInContainer() const override { return true; }
@@ -497,7 +497,7 @@ struct FilePathList_GeneratedAnnotation : ManagedStructureAnnotation<FilePathLis
 	}
 };
 
-// from raylib.h:534:16
+// from raylib.h:536:16
 struct AutomationEvent_GeneratedAnnotation : ManagedStructureAnnotation<AutomationEvent> {
 	virtual bool isLocal() const override { return true; }
 	virtual bool canBePlacedInContainer() const override { return true; }
@@ -512,7 +512,7 @@ struct AutomationEvent_GeneratedAnnotation : ManagedStructureAnnotation<Automati
 	}
 };
 
-// from raylib.h:541:16
+// from raylib.h:543:16
 struct AutomationEventList_GeneratedAnnotation : ManagedStructureAnnotation<AutomationEventList> {
 	virtual bool isLocal() const override { return true; }
 	virtual bool canBePlacedInContainer() const override { return true; }

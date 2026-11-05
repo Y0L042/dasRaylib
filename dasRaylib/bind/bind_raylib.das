@@ -189,12 +189,21 @@ class RaylibGen : CppGenBind {
         return global_qualify(CppGenBind`typeSpelling(self, c))
     }
     // "Color" / "Matrix" for a by-value raylib Color / Matrix, "" otherwise
+    // canonical record name without cv-qualifier ("const Vector3" -> "Vector3")
+    def record_name(var t : CXType) : string {
+        var ct = clang_getCanonicalType(t)
+        let sp = string(clang_getTypeSpelling(ct))
+        return starts_with(sp, "const ") ? slice(sp, 6) : sp
+    }
+    def add_const(s : string) : string {
+        return starts_with(s, "const ") ? s : "const {s}"
+    }
     def converted_kind(var t : CXType) : string {
         var ct = clang_getCanonicalType(t)
         if (ct.kind != CXTypeKind.Record) {
             return ""
         }
-        let sp = string(clang_getTypeSpelling(ct))
+        let sp = record_name(t)
         return (sp == "Color" || sp == "Matrix") ? sp : ""
     }
     def needs_wrapper(var c : CXCursor) : bool {
@@ -219,7 +228,7 @@ class RaylibGen : CppGenBind {
         if (ct.kind != CXTypeKind.Record || !empty(converted_kind(t))) {
             return false
         }
-        return !aot_alias |> key_exists(string(clang_getTypeSpelling(ct)))
+        return !aot_alias |> key_exists(record_name(t))
     }
     def emit_converting_wrapper(var c : CXCursor) {
         step_Function()
@@ -287,7 +296,7 @@ class RaylibGen : CppGenBind {
                 var carg = clang_Cursor_getArgument(c, ai)
                 var arg_type = clang_getCursorType(carg)
                 if (is_handled_record(arg_type)) {
-                    fprint(func_file, "\n\t\t->arg_type({int(ai)},makeType<const {typeSpelling(arg_type)}>(lib))")
+                    fprint(func_file, "\n\t\t->arg_type({int(ai)},makeType<{add_const(typeSpelling(arg_type))}>(lib))")
                 }
             }
         }
@@ -310,7 +319,7 @@ class RaylibGen : CppGenBind {
             // By-value struct args (Vector3, Color, ...) are copies on the C side. das handled
             // types otherwise come out as non-const `T implicit`, which rejects `let` values.
             if (is_handled_record(t)) {
-                return "const {empty(base) ? typeSpelling(t) : base}"
+                return add_const(empty(base) ? typeSpelling(t) : base)
             }
         }
         return base

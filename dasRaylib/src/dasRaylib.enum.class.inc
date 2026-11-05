@@ -1,7 +1,7 @@
 // this file is generated via Daslang automatic binder
 // all user modifications will be lost after this file is re-generated
 
-// from raylib.h:553:9
+// from raylib.h:555:9
 class Enumeration_ConfigFlags : public das::Enumeration {
 public:
 	Enumeration_ConfigFlags() : das::Enumeration("ConfigFlags") {
@@ -27,7 +27,7 @@ public:
 	}
 };
 
-// from raylib.h:574:9
+// from raylib.h:576:9
 class Enumeration_TraceLogLevel : public das::Enumeration {
 public:
 	Enumeration_TraceLogLevel() : das::Enumeration("TraceLogLevel") {
@@ -45,7 +45,7 @@ public:
 	}
 };
 
-// from raylib.h:587:9
+// from raylib.h:589:9
 class Enumeration_KeyboardKey : public das::Enumeration {
 public:
 	Enumeration_KeyboardKey() : das::Enumeration("KeyboardKey") {
@@ -165,7 +165,7 @@ public:
 	}
 };
 
-// from raylib.h:710:9
+// from raylib.h:712:9
 class Enumeration_MouseButton : public das::Enumeration {
 public:
 	Enumeration_MouseButton() : das::Enumeration("MouseButton") {
@@ -182,7 +182,7 @@ public:
 	}
 };
 
-// from raylib.h:721:9
+// from raylib.h:723:9
 class Enumeration_MouseCursor : public das::Enumeration {
 public:
 	Enumeration_MouseCursor() : das::Enumeration("MouseCursor") {
@@ -203,7 +203,7 @@ public:
 	}
 };
 
-// from raylib.h:736:9
+// from raylib.h:738:9
 class Enumeration_GamepadButton : public das::Enumeration {
 public:
 	Enumeration_GamepadButton() : das::Enumeration("GamepadButton") {
@@ -231,7 +231,7 @@ public:
 	}
 };
 
-// from raylib.h:758:9
+// from raylib.h:760:9
 class Enumeration_GamepadAxis : public das::Enumeration {
 public:
 	Enumeration_GamepadAxis() : das::Enumeration("GamepadAxis") {
@@ -247,7 +247,7 @@ public:
 	}
 };
 
-// from raylib.h:768:9
+// from raylib.h:770:9
 class Enumeration_MaterialMapIndex : public das::Enumeration {
 public:
 	Enumeration_MaterialMapIndex() : das::Enumeration("MaterialMapIndex") {
@@ -268,7 +268,7 @@ public:
 	}
 };
 
-// from raylib.h:788:9
+// from raylib.h:790:9
 class Enumeration_ShaderLocationIndex : public das::Enumeration {
 public:
 	Enumeration_ShaderLocationIndex() : das::Enumeration("ShaderLocationIndex") {
@@ -308,7 +308,7 @@ public:
 	}
 };
 
-// from raylib.h:825:9
+// from raylib.h:827:9
 class Enumeration_ShaderUniformDataType : public das::Enumeration {
 public:
 	Enumeration_ShaderUniformDataType() : das::Enumeration("ShaderUniformDataType") {
@@ -331,7 +331,7 @@ public:
 	}
 };
 
-// from raylib.h:842:9
+// from raylib.h:844:9
 class Enumeration_ShaderAttributeDataType : public das::Enumeration {
 public:
 	Enumeration_ShaderAttributeDataType() : das::Enumeration("ShaderAttributeDataType") {
@@ -345,7 +345,7 @@ public:
 	}
 };
 
-// from raylib.h:851:9
+// from raylib.h:853:9
 class Enumeration_PixelFormat : public das::Enumeration {
 public:
 	Enumeration_PixelFormat() : das::Enumeration("PixelFormat") {
@@ -379,7 +379,7 @@ public:
 	}
 };
 
-// from raylib.h:881:9
+// from raylib.h:883:9
 class Enumeration_TextureFilter : public das::Enumeration {
 public:
 	Enumeration_TextureFilter() : das::Enumeration("TextureFilter") {
@@ -395,7 +395,7 @@ public:
 	}
 };
 
-// from raylib.h:891:9
+// from raylib.h:893:9
 class Enumeration_TextureWrap : public das::Enumeration {
 public:
 	Enumeration_TextureWrap() : das::Enumeration("TextureWrap") {
@@ -409,7 +409,7 @@ public:
 	}
 };
 
-// from raylib.h:899:9
+// from raylib.h:901:9
 class Enumeration_CubemapLayout : public das::Enumeration {
 public:
 	Enumeration_CubemapLayout() : das::Enumeration("CubemapLayout") {
@@ -424,7 +424,7 @@ public:
 	}
 };
 
-// from raylib.h:908:9
+// from raylib.h:910:9
 class Enumeration_FontType : public das::Enumeration {
 public:
 	Enumeration_FontType() : das::Enumeration("FontType") {
@@ -437,7 +437,7 @@ public:
 	}
 };
 
-// from raylib.h:915:9
+// from raylib.h:917:9
 class Enumeration_BlendMode : public das::Enumeration {
 public:
 	Enumeration_BlendMode() : das::Enumeration("BlendMode") {
@@ -455,7 +455,7 @@ public:
 	}
 };
 
-// from raylib.h:928:9
+// from raylib.h:930:9
 class Enumeration_Gesture : public das::Enumeration {
 public:
 	Enumeration_Gesture() : das::Enumeration("Gesture") {
@@ -476,7 +476,7 @@ public:
 	}
 };
 
-// from raylib.h:943:9
+// from raylib.h:945:9
 class Enumeration_CameraMode : public das::Enumeration {
 public:
 	Enumeration_CameraMode() : das::Enumeration("CameraMode") {
@@ -491,7 +491,7 @@ public:
 	}
 };
 
-// from raylib.h:952:9
+// from raylib.h:954:9
 class Enumeration_CameraProjection : public das::Enumeration {
 public:
 	Enumeration_CameraProjection() : das::Enumeration("CameraProjection") {
@@ -503,7 +503,7 @@ public:
 	}
 };
 
-// from raylib.h:958:9
+// from raylib.h:960:9
 class Enumeration_NPatchLayout : public das::Enumeration {
 public:
 	Enumeration_NPatchLayout() : das::Enumeration("NPatchLayout") {
