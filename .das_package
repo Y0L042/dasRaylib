@@ -16,10 +16,10 @@ def build() {
 def release() {
     let p = get_platform_name()
     if (p == "windows") {
-        release_include_dll("libraylib.dll")
+        release_include("_build/Release/raylib.dll")
     } elif (p == "darwin") {
-        release_include_dll("libraylib.dylib")
+        release_include("_build/Release/libraylib.620.dylib")
     } else {
-        release_include_dll("libraylib.so")
+        release_include("_build/Release/libraylib.so.620")
     }
 }
