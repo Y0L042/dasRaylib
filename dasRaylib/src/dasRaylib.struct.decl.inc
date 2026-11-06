@@ -34,3 +34,7 @@ MAKE_EXTERNAL_TYPE_FACTORY(VrStereoConfig,VrStereoConfig);
 MAKE_EXTERNAL_TYPE_FACTORY(FilePathList,FilePathList);
 MAKE_EXTERNAL_TYPE_FACTORY(AutomationEvent,AutomationEvent);
 MAKE_EXTERNAL_TYPE_FACTORY(AutomationEventList,AutomationEventList);
+MAKE_EXTERNAL_TYPE_FACTORY(rlVertexBuffer,rlVertexBuffer);
+MAKE_EXTERNAL_TYPE_FACTORY(rlDrawCall,rlDrawCall);
+MAKE_EXTERNAL_TYPE_FACTORY(rlRenderBatch,rlRenderBatch);
+MAKE_EXTERNAL_TYPE_FACTORY(GuiStyleProp,GuiStyleProp);

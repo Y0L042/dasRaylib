@@ -71,8 +71,8 @@ pre code { display: block; overflow-x: auto; padding: 10px; font-family: "Courie
 #pmodels { color: var(--models-p); } #models code { border-color: var(--models-b); background: var(--models-c); }
 #paudio { color: var(--audio-p); } #audio code { border-color: var(--audio-b); background: var(--audio-c); }
 #praymath { color: var(--raymath-p); } #raymath code { border-color: var(--raymath-b); background: var(--raymath-c); }
-#pstructs, #penums, #pcolors, #pextras, #punbound, #legend > p { color: var(--plain-p); }
-#structs code, #enums code, #colors code, #extras code, #unbound code, #legend code { border-color: var(--plain-b); background: var(--plain-c); }
+#pstructs, #penums, #pcolors, #pextras, #punbound, #prlgl, #praygui, #legend > p { color: var(--plain-p); }
+#structs code, #enums code, #colors code, #extras code, #unbound code, #rlgl code, #raygui code, #legend code { border-color: var(--plain-b); background: var(--plain-c); }
 footer { margin-top: 20px; font-size: 11px; color: var(--muted); }
 @media (max-width: 1550px) { #fullgroup { grid-template-columns: minmax(0, 1fr); } }
 </style>
@@ -83,7 +83,7 @@ footer { margin-top: 20px; font-size: 11px; color: var(--muted); }
     <p class="links">raylib bindings for daslang. <a href="https://github.com/Y0L042/dasRaylib">GitHub</a> | <a href="https://www.raylib.com/cheatsheet/cheatsheet.html">raylib C cheatsheet</a> | <a href="https://daslang.io/">daslang</a></p>
     <p>raylib v6.2 quick reference card <button id="theme" type="button">light / dark</button></p>
     <nav>
-        <a href="#pcore">rcore</a><a href="#pshapes">rshapes</a><a href="#ptextures">rtextures</a><a href="#ptext">rtext</a><a href="#pmodels">rmodels</a><a href="#paudio">raudio</a><a href="#praymath">raymath</a><a href="#pstructs">structs</a><a href="#penums">enums</a><a href="#pcolors">colors</a><a href="#pextras">converters</a><a href="#punbound">not bound</a>
+        <a href="#pcore">rcore</a><a href="#pshapes">rshapes</a><a href="#ptextures">rtextures</a><a href="#ptext">rtext</a><a href="#pmodels">rmodels</a><a href="#paudio">raudio</a><a href="#praymath">raymath</a><a href="#prlgl">rlgl</a><a href="#praygui">raygui</a><a href="#pstructs">structs</a><a href="#penums">enums</a><a href="#pcolors">colors</a><a href="#pextras">converters</a><a href="#punbound">not bound</a>
     </nav>
 </header>
 <div id="legend">
@@ -101,7 +101,8 @@ const char *                -&gt; <span class="t">string</span>
 T *                         -&gt; <span class="t">T?</span>
 
 <span class="c">// float4 is both Color and Rectangle: the parameter name tells you which.</span>
-<span class="c">// Enum parameters are plain int unless a raylib_boost overload is listed.</span></code></pre>
+<span class="c">// Enum parameters are plain int unless a raylib_boost overload is listed.</span>
+<span class="c">// raygui text boxes write to their text, so pass text_buffer(), not a string.</span></code></pre>
 </div>
 <div id="fullgroup">
 <div class="group">
@@ -896,6 +897,537 @@ T *                         -&gt; <span class="t">T?</span>
     NPATCH_THREE_PATCH_VERTICAL = 1    <span class="c">// Npatch layout: 1x3 tiles</span>
     NPATCH_THREE_PATCH_HORIZONTAL = 2  <span class="c">// Npatch layout: 3x1 tiles</span>
 
+<span class="k">enum</span> <span class="f">GuiCheckBoxProperty</span>
+    CHECK_PADDING = 16
+
+<span class="k">enum</span> <span class="f">GuiColorPickerProperty</span>
+    COLOR_SELECTOR_SIZE = 16
+    HUEBAR_WIDTH = 17
+    HUEBAR_PADDING = 18
+    HUEBAR_SELECTOR_HEIGHT = 19
+    HUEBAR_SELECTOR_OVERFLOW = 20
+
+<span class="k">enum</span> <span class="f">GuiComboBoxProperty</span>
+    COMBO_BUTTON_WIDTH = 16
+    COMBO_BUTTON_SPACING = 17
+
+<span class="k">enum</span> <span class="f">GuiControl</span>
+    DEFAULT = 0
+    LABEL = 1
+    BUTTON = 2
+    TOGGLE = 3
+    SLIDER = 4
+    PROGRESSBAR = 5
+    CHECKBOX = 6
+    COMBOBOX = 7
+    DROPDOWNBOX = 8
+    TEXTBOX = 9
+    VALUEBOX = 10
+    TABBAR = 11
+    LISTVIEW = 12
+    COLORPICKER = 13
+    SCROLLBAR = 14
+    STATUSBAR = 15
+
+<span class="k">enum</span> <span class="f">GuiControlProperty</span>
+    BORDER_COLOR_NORMAL = 0
+    BASE_COLOR_NORMAL = 1
+    TEXT_COLOR_NORMAL = 2
+    BORDER_COLOR_FOCUSED = 3
+    BASE_COLOR_FOCUSED = 4
+    TEXT_COLOR_FOCUSED = 5
+    BORDER_COLOR_PRESSED = 6
+    BASE_COLOR_PRESSED = 7
+    TEXT_COLOR_PRESSED = 8
+    BORDER_COLOR_DISABLED = 9
+    BASE_COLOR_DISABLED = 10
+    TEXT_COLOR_DISABLED = 11
+    BORDER_WIDTH = 12
+    TEXT_PADDING = 13
+    TEXT_ALIGNMENT = 14
+    BASEPROP16 = 15
+
+<span class="k">enum</span> <span class="f">GuiDefaultProperty</span>
+    TEXT_SIZE = 16
+    TEXT_SPACING = 17
+    LINE_COLOR = 18
+    BACKGROUND_COLOR = 19
+    TEXT_LINE_SPACING = 20
+    TEXT_ALIGNMENT_VERTICAL = 21
+    TEXT_WRAP_MODE = 22
+    EXTPROP08 = 23
+
+<span class="k">enum</span> <span class="f">GuiDropdownBoxProperty</span>
+    ARROW_PADDING = 16
+    DROPDOWN_ITEMS_SPACING = 17
+    DROPDOWN_ARROW_HIDDEN = 18
+    DROPDOWN_ROLL_UP = 19
+    DROPDOWN_MAX_HEIGHT = 20
+
+<span class="k">enum</span> <span class="f">GuiIconName</span>
+    ICON_NONE = 0
+    ICON_FOLDER_FILE_OPEN = 1
+    ICON_FILE_SAVE_CLASSIC = 2
+    ICON_FOLDER_OPEN = 3
+    ICON_FOLDER_SAVE = 4
+    ICON_FILE_OPEN = 5
+    ICON_FILE_SAVE = 6
+    ICON_FILE_EXPORT = 7
+    ICON_FILE_ADD = 8
+    ICON_FILE_DELETE = 9
+    ICON_FILETYPE_TEXT = 10
+    ICON_FILETYPE_AUDIO = 11
+    ICON_FILETYPE_IMAGE = 12
+    ICON_FILETYPE_PLAY = 13
+    ICON_FILETYPE_VIDEO = 14
+    ICON_FILETYPE_INFO = 15
+    ICON_FILE_COPY = 16
+    ICON_FILE_CUT = 17
+    ICON_FILE_PASTE = 18
+    ICON_CURSOR_HAND = 19
+    ICON_CURSOR_POINTER = 20
+    ICON_CURSOR_CLASSIC = 21
+    ICON_PENCIL = 22
+    ICON_PENCIL_BIG = 23
+    ICON_BRUSH_CLASSIC = 24
+    ICON_BRUSH_PAINTER = 25
+    ICON_WATER_DROP = 26
+    ICON_COLOR_PICKER = 27
+    ICON_RUBBER = 28
+    ICON_COLOR_BUCKET = 29
+    ICON_TEXT_T = 30
+    ICON_TEXT_A = 31
+    ICON_SCALE = 32
+    ICON_RESIZE = 33
+    ICON_FILTER_POINT = 34
+    ICON_FILTER_BILINEAR = 35
+    ICON_CROP = 36
+    ICON_CROP_ALPHA = 37
+    ICON_SQUARE_TOGGLE = 38
+    ICON_SYMMETRY = 39
+    ICON_SYMMETRY_HORIZONTAL = 40
+    ICON_SYMMETRY_VERTICAL = 41
+    ICON_LENS = 42
+    ICON_LENS_BIG = 43
+    ICON_EYE_ON = 44
+    ICON_EYE_OFF = 45
+    ICON_FILTER_TOP = 46
+    ICON_FILTER = 47
+    ICON_TARGET_POINT = 48
+    ICON_TARGET_SMALL = 49
+    ICON_TARGET_BIG = 50
+    ICON_TARGET_MOVE = 51
+    ICON_CURSOR_MOVE = 52
+    ICON_CURSOR_SCALE = 53
+    ICON_CURSOR_SCALE_RIGHT = 54
+    ICON_CURSOR_SCALE_LEFT = 55
+    ICON_UNDO = 56
+    ICON_REDO = 57
+    ICON_REREDO = 58
+    ICON_MUTATE = 59
+    ICON_ROTATE = 60
+    ICON_REPEAT = 61
+    ICON_SHUFFLE = 62
+    ICON_EMPTYBOX = 63
+    ICON_TARGET = 64
+    ICON_TARGET_SMALL_FILL = 65
+    ICON_TARGET_BIG_FILL = 66
+    ICON_TARGET_MOVE_FILL = 67
+    ICON_CURSOR_MOVE_FILL = 68
+    ICON_CURSOR_SCALE_FILL = 69
+    ICON_CURSOR_SCALE_RIGHT_FILL = 70
+    ICON_CURSOR_SCALE_LEFT_FILL = 71
+    ICON_UNDO_FILL = 72
+    ICON_REDO_FILL = 73
+    ICON_REREDO_FILL = 74
+    ICON_MUTATE_FILL = 75
+    ICON_ROTATE_FILL = 76
+    ICON_REPEAT_FILL = 77
+    ICON_SHUFFLE_FILL = 78
+    ICON_EMPTYBOX_SMALL = 79
+    ICON_BOX = 80
+    ICON_BOX_TOP = 81
+    ICON_BOX_TOP_RIGHT = 82
+    ICON_BOX_RIGHT = 83
+    ICON_BOX_BOTTOM_RIGHT = 84
+    ICON_BOX_BOTTOM = 85
+    ICON_BOX_BOTTOM_LEFT = 86
+    ICON_BOX_LEFT = 87
+    ICON_BOX_TOP_LEFT = 88
+    ICON_BOX_CENTER = 89
+    ICON_BOX_CIRCLE_MASK = 90
+    ICON_POT = 91
+    ICON_ALPHA_MULTIPLY = 92
+    ICON_ALPHA_CLEAR = 93
+    ICON_DITHERING = 94
+    ICON_MIPMAPS = 95
+    ICON_BOX_GRID = 96
+    ICON_GRID = 97
+    ICON_BOX_CORNERS_SMALL = 98
+    ICON_BOX_CORNERS_BIG = 99
+    ICON_FOUR_BOXES = 100
+    ICON_GRID_FILL = 101
+    ICON_BOX_MULTISIZE = 102
+    ICON_ZOOM_SMALL = 103
+    ICON_ZOOM_MEDIUM = 104
+    ICON_ZOOM_BIG = 105
+    ICON_ZOOM_ALL = 106
+    ICON_ZOOM_CENTER = 107
+    ICON_BOX_DOTS_SMALL = 108
+    ICON_BOX_DOTS_BIG = 109
+    ICON_BOX_CONCENTRIC = 110
+    ICON_BOX_GRID_BIG = 111
+    ICON_OK_TICK = 112
+    ICON_CROSS = 113
+    ICON_ARROW_LEFT = 114
+    ICON_ARROW_RIGHT = 115
+    ICON_ARROW_DOWN = 116
+    ICON_ARROW_UP = 117
+    ICON_ARROW_LEFT_FILL = 118
+    ICON_ARROW_RIGHT_FILL = 119
+    ICON_ARROW_DOWN_FILL = 120
+    ICON_ARROW_UP_FILL = 121
+    ICON_AUDIO = 122
+    ICON_FX = 123
+    ICON_WAVE = 124
+    ICON_WAVE_SINUS = 125
+    ICON_WAVE_SQUARE = 126
+    ICON_WAVE_TRIANGULAR = 127
+    ICON_CROSS_SMALL = 128
+    ICON_PLAYER_PREVIOUS = 129
+    ICON_PLAYER_PLAY_BACK = 130
+    ICON_PLAYER_PLAY = 131
+    ICON_PLAYER_PAUSE = 132
+    ICON_PLAYER_STOP = 133
+    ICON_PLAYER_NEXT = 134
+    ICON_PLAYER_RECORD = 135
+    ICON_MAGNET = 136
+    ICON_LOCK_CLOSE = 137
+    ICON_LOCK_OPEN = 138
+    ICON_CLOCK = 139
+    ICON_TOOLS = 140
+    ICON_GEAR = 141
+    ICON_GEAR_BIG = 142
+    ICON_BIN = 143
+    ICON_HAND_POINTER = 144
+    ICON_LASER = 145
+    ICON_COIN = 146
+    ICON_EXPLOSION = 147
+    ICON_1UP = 148
+    ICON_PLAYER = 149
+    ICON_PLAYER_JUMP = 150
+    ICON_KEY = 151
+    ICON_DEMON = 152
+    ICON_TEXT_POPUP = 153
+    ICON_GEAR_EX = 154
+    ICON_CRACK = 155
+    ICON_CRACK_POINTS = 156
+    ICON_STAR = 157
+    ICON_DOOR = 158
+    ICON_EXIT = 159
+    ICON_MODE_2D = 160
+    ICON_MODE_3D = 161
+    ICON_CUBE = 162
+    ICON_CUBE_FACE_TOP = 163
+    ICON_CUBE_FACE_LEFT = 164
+    ICON_CUBE_FACE_FRONT = 165
+    ICON_CUBE_FACE_BOTTOM = 166
+    ICON_CUBE_FACE_RIGHT = 167
+    ICON_CUBE_FACE_BACK = 168
+    ICON_CAMERA = 169
+    ICON_SPECIAL = 170
+    ICON_LINK_NET = 171
+    ICON_LINK_BOXES = 172
+    ICON_LINK_MULTI = 173
+    ICON_LINK = 174
+    ICON_LINK_BROKE = 175
+    ICON_TEXT_NOTES = 176
+    ICON_NOTEBOOK = 177
+    ICON_SUITCASE = 178
+    ICON_SUITCASE_ZIP = 179
+    ICON_MAILBOX = 180
+    ICON_MONITOR = 181
+    ICON_PRINTER = 182
+    ICON_PHOTO_CAMERA = 183
+    ICON_PHOTO_CAMERA_FLASH = 184
+    ICON_HOUSE = 185
+    ICON_HEART = 186
+    ICON_CORNER = 187
+    ICON_VERTICAL_BARS = 188
+    ICON_VERTICAL_BARS_FILL = 189
+    ICON_LIFE_BARS = 190
+    ICON_INFO = 191
+    ICON_CROSSLINE = 192
+    ICON_HELP = 193
+    ICON_FILETYPE_ALPHA = 194
+    ICON_FILETYPE_HOME = 195
+    ICON_LAYERS_VISIBLE = 196
+    ICON_LAYERS = 197
+    ICON_WINDOW = 198
+    ICON_HIDPI = 199
+    ICON_FILETYPE_BINARY = 200
+    ICON_HEX = 201
+    ICON_SHIELD = 202
+    ICON_FILE_NEW = 203
+    ICON_FOLDER_ADD = 204
+    ICON_ALARM = 205
+    ICON_CPU = 206
+    ICON_ROM = 207
+    ICON_STEP_OVER = 208
+    ICON_STEP_INTO = 209
+    ICON_STEP_OUT = 210
+    ICON_RESTART = 211
+    ICON_BREAKPOINT_ON = 212
+    ICON_BREAKPOINT_OFF = 213
+    ICON_BURGER_MENU = 214
+    ICON_CASE_SENSITIVE = 215
+    ICON_REG_EXP = 216
+    ICON_FOLDER = 217
+    ICON_FILE = 218
+    ICON_SAND_TIMER = 219
+    ICON_WARNING = 220
+    ICON_HELP_BOX = 221
+    ICON_INFO_BOX = 222
+    ICON_PRIORITY = 223
+    ICON_LAYERS_ISO = 224
+    ICON_LAYERS2 = 225
+    ICON_MLAYERS = 226
+    ICON_MAPS = 227
+    ICON_HOT = 228
+    ICON_LABEL = 229
+    ICON_NAME_ID = 230
+    ICON_SLICING = 231
+    ICON_MANUAL_CONTROL = 232
+    ICON_COLLISION = 233
+    ICON_CIRCLE_ADD = 234
+    ICON_CIRCLE_ADD_FILL = 235
+    ICON_CIRCLE_WARNING = 236
+    ICON_CIRCLE_WARNING_FILL = 237
+    ICON_BOX_MORE = 238
+    ICON_BOX_MORE_FILL = 239
+    ICON_BOX_MINUS = 240
+    ICON_BOX_MINUS_FILL = 241
+    ICON_UNION = 242
+    ICON_INTERSECTION = 243
+    ICON_DIFFERENCE = 244
+    ICON_SPHERE = 245
+    ICON_CYLINDER = 246
+    ICON_CONE = 247
+    ICON_ELLIPSOID = 248
+    ICON_CAPSULE = 249
+    ICON_FILETYPE_FONT = 250
+    ICON_FILETYPE_3D = 251
+    ICON_FILETYPE_CODE_XML = 252
+    ICON_FILETYPE_CODE_C = 253
+    ICON_FILETYPE_CODE_PYTHON = 254
+    ICON_FILETYPE_CODE_JS = 255
+    ICON_FILETYPE_ICON = 256
+
+<span class="k">enum</span> <span class="f">GuiListViewProperty</span>
+    LIST_ITEMS_HEIGHT = 16
+    LIST_ITEMS_SPACING = 17
+    SCROLLBAR_WIDTH = 18
+    SCROLLBAR_SIDE = 19
+    LIST_ITEMS_BORDER_NORMAL = 20
+    LIST_ITEMS_BORDER_WIDTH = 21
+
+<span class="k">enum</span> <span class="f">GuiProgressBarProperty</span>
+    PROGRESS_PADDING = 16
+    PROGRESS_SIDE = 17
+
+<span class="k">enum</span> <span class="f">GuiResult</span>
+    RESULT_NONE = 0
+    RESULT_PRESSED = 1
+    RESULT_CHANGED = 2
+    RESULT_TAB_CLOSE = 4
+
+<span class="k">enum</span> <span class="f">GuiScrollBarProperty</span>
+    ARROWS_SIZE = 16
+    ARROWS_VISIBLE = 17
+    SCROLL_SLIDER_PADDING = 18
+    SCROLL_SLIDER_SIZE = 19
+    SCROLL_PADDING = 20
+    SCROLL_SPEED = 21
+
+<span class="k">enum</span> <span class="f">GuiSliderProperty</span>
+    SLIDER_WIDTH = 16
+    SLIDER_PADDING = 17
+
+<span class="k">enum</span> <span class="f">GuiState</span>
+    STATE_NORMAL = 0
+    STATE_FOCUSED = 1
+    STATE_PRESSED = 2
+    STATE_DISABLED = 3
+
+<span class="k">enum</span> <span class="f">GuiTabBarProperty</span>
+    TAB_ITEMS_WIDTH = 16
+    TAB_CLOSE_BUTTON = 17
+    TAB_LINE_SIDE = 18
+
+<span class="k">enum</span> <span class="f">GuiTextAlignment</span>
+    TEXT_ALIGN_LEFT = 0
+    TEXT_ALIGN_CENTER = 1
+    TEXT_ALIGN_RIGHT = 2
+
+<span class="k">enum</span> <span class="f">GuiTextAlignmentVertical</span>
+    TEXT_ALIGN_TOP = 0
+    TEXT_ALIGN_MIDDLE = 1
+    TEXT_ALIGN_BOTTOM = 2
+
+<span class="k">enum</span> <span class="f">GuiTextBoxProperty</span>
+    TEXT_READONLY = 16
+
+<span class="k">enum</span> <span class="f">GuiTextWrapMode</span>
+    TEXT_WRAP_NONE = 0
+    TEXT_WRAP_CHAR = 1
+    TEXT_WRAP_WORD = 2
+
+<span class="k">enum</span> <span class="f">GuiToggleProperty</span>
+    GROUP_PADDING = 16
+    GROUP_WIDTH_FULL = 17
+
+<span class="k">enum</span> <span class="f">GuiValueBoxProperty</span>
+    SPINNER_BUTTON_WIDTH = 16
+    SPINNER_BUTTON_SPACING = 17
+
+<span class="k">enum</span> <span class="f">rlBlendMode</span>
+    RL_BLEND_ALPHA = 0
+    RL_BLEND_ADDITIVE = 1
+    RL_BLEND_MULTIPLIED = 2
+    RL_BLEND_ADD_COLORS = 3
+    RL_BLEND_SUBTRACT_COLORS = 4
+    RL_BLEND_ALPHA_PREMULTIPLY = 5
+    RL_BLEND_CUSTOM = 6
+    RL_BLEND_CUSTOM_SEPARATE = 7
+
+<span class="k">enum</span> <span class="f">rlCullMode</span>
+    RL_CULL_FACE_FRONT = 0
+    RL_CULL_FACE_BACK = 1
+
+<span class="k">enum</span> <span class="f">rlFramebufferAttachTextureType</span>
+    RL_ATTACHMENT_CUBEMAP_POSITIVE_X = 0
+    RL_ATTACHMENT_CUBEMAP_NEGATIVE_X = 1
+    RL_ATTACHMENT_CUBEMAP_POSITIVE_Y = 2
+    RL_ATTACHMENT_CUBEMAP_NEGATIVE_Y = 3
+    RL_ATTACHMENT_CUBEMAP_POSITIVE_Z = 4
+    RL_ATTACHMENT_CUBEMAP_NEGATIVE_Z = 5
+    RL_ATTACHMENT_TEXTURE2D = 100
+    RL_ATTACHMENT_RENDERBUFFER = 200
+
+<span class="k">enum</span> <span class="f">rlFramebufferAttachType</span>
+    RL_ATTACHMENT_COLOR_CHANNEL0 = 0
+    RL_ATTACHMENT_COLOR_CHANNEL1 = 1
+    RL_ATTACHMENT_COLOR_CHANNEL2 = 2
+    RL_ATTACHMENT_COLOR_CHANNEL3 = 3
+    RL_ATTACHMENT_COLOR_CHANNEL4 = 4
+    RL_ATTACHMENT_COLOR_CHANNEL5 = 5
+    RL_ATTACHMENT_COLOR_CHANNEL6 = 6
+    RL_ATTACHMENT_COLOR_CHANNEL7 = 7
+    RL_ATTACHMENT_DEPTH = 100
+    RL_ATTACHMENT_STENCIL = 200
+
+<span class="k">enum</span> <span class="f">rlGlVersion</span>
+    RL_OPENGL_SOFTWARE = 0
+    RL_OPENGL_11 = 1
+    RL_OPENGL_21 = 2
+    RL_OPENGL_33 = 3
+    RL_OPENGL_43 = 4
+    RL_OPENGL_ES_20 = 5
+    RL_OPENGL_ES_30 = 6
+
+<span class="k">enum</span> <span class="f">rlPixelFormat</span>
+    RL_PIXELFORMAT_UNCOMPRESSED_GRAYSCALE = 1
+    RL_PIXELFORMAT_UNCOMPRESSED_GRAY_ALPHA = 2
+    RL_PIXELFORMAT_UNCOMPRESSED_R5G6B5 = 3
+    RL_PIXELFORMAT_UNCOMPRESSED_R8G8B8 = 4
+    RL_PIXELFORMAT_UNCOMPRESSED_R5G5B5A1 = 5
+    RL_PIXELFORMAT_UNCOMPRESSED_R4G4B4A4 = 6
+    RL_PIXELFORMAT_UNCOMPRESSED_R8G8B8A8 = 7
+    RL_PIXELFORMAT_UNCOMPRESSED_R32 = 8
+    RL_PIXELFORMAT_UNCOMPRESSED_R32G32B32 = 9
+    RL_PIXELFORMAT_UNCOMPRESSED_R32G32B32A32 = 10
+    RL_PIXELFORMAT_UNCOMPRESSED_R16 = 11
+    RL_PIXELFORMAT_UNCOMPRESSED_R16G16B16 = 12
+    RL_PIXELFORMAT_UNCOMPRESSED_R16G16B16A16 = 13
+    RL_PIXELFORMAT_COMPRESSED_DXT1_RGB = 14
+    RL_PIXELFORMAT_COMPRESSED_DXT1_RGBA = 15
+    RL_PIXELFORMAT_COMPRESSED_DXT3_RGBA = 16
+    RL_PIXELFORMAT_COMPRESSED_DXT5_RGBA = 17
+    RL_PIXELFORMAT_COMPRESSED_ETC1_RGB = 18
+    RL_PIXELFORMAT_COMPRESSED_ETC2_RGB = 19
+    RL_PIXELFORMAT_COMPRESSED_ETC2_EAC_RGBA = 20
+    RL_PIXELFORMAT_COMPRESSED_PVRT_RGB = 21
+    RL_PIXELFORMAT_COMPRESSED_PVRT_RGBA = 22
+    RL_PIXELFORMAT_COMPRESSED_ASTC_4x4_RGBA = 23
+    RL_PIXELFORMAT_COMPRESSED_ASTC_8x8_RGBA = 24
+
+<span class="k">enum</span> <span class="f">rlShaderAttributeDataType</span>
+    RL_SHADER_ATTRIB_FLOAT = 0
+    RL_SHADER_ATTRIB_VEC2 = 1
+    RL_SHADER_ATTRIB_VEC3 = 2
+    RL_SHADER_ATTRIB_VEC4 = 3
+
+<span class="k">enum</span> <span class="f">rlShaderLocationIndex</span>
+    RL_SHADER_LOC_VERTEX_POSITION = 0
+    RL_SHADER_LOC_VERTEX_TEXCOORD01 = 1
+    RL_SHADER_LOC_VERTEX_TEXCOORD02 = 2
+    RL_SHADER_LOC_VERTEX_NORMAL = 3
+    RL_SHADER_LOC_VERTEX_TANGENT = 4
+    RL_SHADER_LOC_VERTEX_COLOR = 5
+    RL_SHADER_LOC_MATRIX_MVP = 6
+    RL_SHADER_LOC_MATRIX_VIEW = 7
+    RL_SHADER_LOC_MATRIX_PROJECTION = 8
+    RL_SHADER_LOC_MATRIX_MODEL = 9
+    RL_SHADER_LOC_MATRIX_NORMAL = 10
+    RL_SHADER_LOC_VECTOR_VIEW = 11
+    RL_SHADER_LOC_COLOR_DIFFUSE = 12
+    RL_SHADER_LOC_COLOR_SPECULAR = 13
+    RL_SHADER_LOC_COLOR_AMBIENT = 14
+    RL_SHADER_LOC_MAP_ALBEDO = 15
+    RL_SHADER_LOC_MAP_METALNESS = 16
+    RL_SHADER_LOC_MAP_NORMAL = 17
+    RL_SHADER_LOC_MAP_ROUGHNESS = 18
+    RL_SHADER_LOC_MAP_OCCLUSION = 19
+    RL_SHADER_LOC_MAP_EMISSION = 20
+    RL_SHADER_LOC_MAP_HEIGHT = 21
+    RL_SHADER_LOC_MAP_CUBEMAP = 22
+    RL_SHADER_LOC_MAP_IRRADIANCE = 23
+    RL_SHADER_LOC_MAP_PREFILTER = 24
+    RL_SHADER_LOC_MAP_BRDF = 25
+
+<span class="k">enum</span> <span class="f">rlShaderUniformDataType</span>
+    RL_SHADER_UNIFORM_FLOAT = 0
+    RL_SHADER_UNIFORM_VEC2 = 1
+    RL_SHADER_UNIFORM_VEC3 = 2
+    RL_SHADER_UNIFORM_VEC4 = 3
+    RL_SHADER_UNIFORM_INT = 4
+    RL_SHADER_UNIFORM_IVEC2 = 5
+    RL_SHADER_UNIFORM_IVEC3 = 6
+    RL_SHADER_UNIFORM_IVEC4 = 7
+    RL_SHADER_UNIFORM_UINT = 8
+    RL_SHADER_UNIFORM_UIVEC2 = 9
+    RL_SHADER_UNIFORM_UIVEC3 = 10
+    RL_SHADER_UNIFORM_UIVEC4 = 11
+    RL_SHADER_UNIFORM_SAMPLER2D = 12
+
+<span class="k">enum</span> <span class="f">rlTextureFilter</span>
+    RL_TEXTURE_FILTER_POINT = 0
+    RL_TEXTURE_FILTER_BILINEAR = 1
+    RL_TEXTURE_FILTER_TRILINEAR = 2
+    RL_TEXTURE_FILTER_ANISOTROPIC_4X = 3
+    RL_TEXTURE_FILTER_ANISOTROPIC_8X = 4
+    RL_TEXTURE_FILTER_ANISOTROPIC_16X = 5
+
+<span class="k">enum</span> <span class="f">rlTraceLogLevel</span>
+    RL_LOG_ALL = 0
+    RL_LOG_TRACE = 1
+    RL_LOG_DEBUG = 2
+    RL_LOG_INFO = 3
+    RL_LOG_WARNING = 4
+    RL_LOG_ERROR = 5
+    RL_LOG_FATAL = 6
+    RL_LOG_NONE = 7
+
 </code></pre></div>
 </div>
 <div class="group">
@@ -1387,6 +1919,297 @@ T *                         -&gt; <span class="t">T?</span>
 <span class="k">def</span> <span class="f">MatrixCompose</span>(translation : <span class="t">float3</span>; rotation : <span class="t">float4</span>; scale : <span class="t">float3</span>) : <span class="t">float4x4</span>  <span class="c">// Compose a transformation matrix from rotational, translational and scaling components</span>
 <span class="k">def</span> <span class="f">MatrixDecompose</span>(mat : <span class="t">float4x4</span>; translation : <span class="t">float3?</span>; rotation : <span class="t">float4?</span>; scale : <span class="t">float3?</span>)  <span class="c">// Decompose a transformation matrix into its rotational, translational and scaling components and remove shear</span>
 </code></pre></div>
+<p id="prlgl">module: rlgl</p>
+<div id="rlgl"><pre><code><span class="k">def</span> <span class="f">rlMatrixMode</span>(mode : <span class="t">int</span>)                                   <span class="c">// Choose the current matrix to be transformed</span>
+<span class="k">def</span> <span class="f">rlPushMatrix</span>()                                             <span class="c">// Push the current matrix to stack</span>
+<span class="k">def</span> <span class="f">rlPopMatrix</span>()                                              <span class="c">// Pop latest inserted matrix from stack</span>
+<span class="k">def</span> <span class="f">rlLoadIdentity</span>()                                           <span class="c">// Reset current matrix to identity matrix</span>
+<span class="k">def</span> <span class="f">rlTranslatef</span>(x : <span class="t">float</span>; y : <span class="t">float</span>; z : <span class="t">float</span>)              <span class="c">// Multiply the current matrix by a translation matrix</span>
+<span class="k">def</span> <span class="f">rlRotatef</span>(angle : <span class="t">float</span>; x : <span class="t">float</span>; y : <span class="t">float</span>; z : <span class="t">float</span>)  <span class="c">// Multiply the current matrix by a rotation matrix</span>
+<span class="k">def</span> <span class="f">rlScalef</span>(x : <span class="t">float</span>; y : <span class="t">float</span>; z : <span class="t">float</span>)                  <span class="c">// Multiply the current matrix by a scaling matrix</span>
+<span class="k">def</span> <span class="f">rlMultMatrixf</span>(matf : <span class="t">float const?</span>)                         <span class="c">// Multiply the current matrix by another matrix</span>
+<span class="k">def</span> <span class="f">rlFrustum</span>(left : <span class="t">double</span>; right : <span class="t">double</span>; bottom : <span class="t">double</span>; top : <span class="t">double</span>; znear : <span class="t">double</span>; zfar : <span class="t">double</span>)
+<span class="k">def</span> <span class="f">rlOrtho</span>(left : <span class="t">double</span>; right : <span class="t">double</span>; bottom : <span class="t">double</span>; top : <span class="t">double</span>; znear : <span class="t">double</span>; zfar : <span class="t">double</span>)
+<span class="k">def</span> <span class="f">rlViewport</span>(x : <span class="t">int</span>; y : <span class="t">int</span>; width : <span class="t">int</span>; height : <span class="t">int</span>)    <span class="c">// Set the viewport area</span>
+<span class="k">def</span> <span class="f">rlSetClipPlanes</span>(nearPlane : <span class="t">double</span>; farPlane : <span class="t">double</span>)     <span class="c">// Set clip planes distances</span>
+<span class="k">def</span> <span class="f">rlGetCullDistanceNear</span>() : <span class="t">double</span>                           <span class="c">// Get cull plane distance near</span>
+<span class="k">def</span> <span class="f">rlGetCullDistanceFar</span>() : <span class="t">double</span>                            <span class="c">// Get cull plane distance far</span>
+
+<span class="c">// Functions Declaration - Vertex level operations</span>
+<span class="k">def</span> <span class="f">rlBegin</span>(mode : <span class="t">int</span>)                                     <span class="c">// Initialize drawing mode (how to organize vertex)</span>
+<span class="k">def</span> <span class="f">rlBegin</span>(mode : <span class="t">uint</span>)                                    <span class="c">// raylib_boost overload, takes the enum directly</span>
+<span class="k">def</span> <span class="f">rlEnd</span>()                                                 <span class="c">// Finish vertex providing</span>
+<span class="k">def</span> <span class="f">rlVertex2i</span>(x : <span class="t">int</span>; y : <span class="t">int</span>)                            <span class="c">// Define one vertex (position) - 2 int</span>
+<span class="k">def</span> <span class="f">rlVertex2f</span>(x : <span class="t">float</span>; y : <span class="t">float</span>)                        <span class="c">// Define one vertex (position) - 2 float</span>
+<span class="k">def</span> <span class="f">rlVertex3f</span>(x : <span class="t">float</span>; y : <span class="t">float</span>; z : <span class="t">float</span>)             <span class="c">// Define one vertex (position) - 3 float</span>
+<span class="k">def</span> <span class="f">rlTexCoord2f</span>(x : <span class="t">float</span>; y : <span class="t">float</span>)                      <span class="c">// Define one vertex (texture coordinate) - 2 float</span>
+<span class="k">def</span> <span class="f">rlNormal3f</span>(x : <span class="t">float</span>; y : <span class="t">float</span>; z : <span class="t">float</span>)             <span class="c">// Define one vertex (normal) - 3 float</span>
+<span class="k">def</span> <span class="f">rlColor4ub</span>(r : <span class="t">uint8</span>; g : <span class="t">uint8</span>; b : <span class="t">uint8</span>; a : <span class="t">uint8</span>)  <span class="c">// Define one vertex (color) - 4 byte</span>
+<span class="k">def</span> <span class="f">rlColor3f</span>(x : <span class="t">float</span>; y : <span class="t">float</span>; z : <span class="t">float</span>)              <span class="c">// Define one vertex (color) - 3 float</span>
+<span class="k">def</span> <span class="f">rlColor4f</span>(x : <span class="t">float</span>; y : <span class="t">float</span>; z : <span class="t">float</span>; w : <span class="t">float</span>)   <span class="c">// Define one vertex (color) - 4 float</span>
+
+<span class="c">// Vertex buffers state</span>
+<span class="k">def</span> <span class="f">rlEnableVertexArray</span>(vaoId : <span class="t">uint</span>) : <span class="t">bool</span>                      <span class="c">// Enable vertex array (VAO, if supported)</span>
+<span class="k">def</span> <span class="f">rlDisableVertexArray</span>()                                        <span class="c">// Disable vertex array (VAO, if supported)</span>
+<span class="k">def</span> <span class="f">rlEnableVertexBuffer</span>(id : <span class="t">uint</span>)                               <span class="c">// Enable vertex buffer (VBO)</span>
+<span class="k">def</span> <span class="f">rlDisableVertexBuffer</span>()                                       <span class="c">// Disable vertex buffer (VBO)</span>
+<span class="k">def</span> <span class="f">rlEnableVertexBufferElement</span>(id : <span class="t">uint</span>)                        <span class="c">// Enable vertex buffer element (VBO element)</span>
+<span class="k">def</span> <span class="f">rlDisableVertexBufferElement</span>()                                <span class="c">// Disable vertex buffer element (VBO element)</span>
+<span class="k">def</span> <span class="f">rlEnableVertexAttribute</span>(index : <span class="t">uint</span>)                         <span class="c">// Enable vertex attribute index</span>
+<span class="k">def</span> <span class="f">rlDisableVertexAttribute</span>(index : <span class="t">uint</span>)                        <span class="c">// Disable vertex attribute index</span>
+<span class="k">def</span> <span class="f">rlEnableStatePointer</span>(vertexAttribType : <span class="t">int</span>; buffer : <span class="t">void?</span>)  <span class="c">// Enable attribute state pointer</span>
+<span class="k">def</span> <span class="f">rlDisableStatePointer</span>(vertexAttribType : <span class="t">int</span>)                 <span class="c">// Disable attribute state pointer</span>
+
+<span class="c">// Textures state</span>
+<span class="k">def</span> <span class="f">rlActiveTextureSlot</span>(slot : <span class="t">int</span>)                           <span class="c">// Select and active a texture slot</span>
+<span class="k">def</span> <span class="f">rlEnableTexture</span>(id : <span class="t">uint</span>)                                <span class="c">// Enable texture</span>
+<span class="k">def</span> <span class="f">rlDisableTexture</span>()                                        <span class="c">// Disable texture</span>
+<span class="k">def</span> <span class="f">rlEnableTextureCubemap</span>(id : <span class="t">uint</span>)                         <span class="c">// Enable texture cubemap</span>
+<span class="k">def</span> <span class="f">rlDisableTextureCubemap</span>()                                 <span class="c">// Disable texture cubemap</span>
+<span class="k">def</span> <span class="f">rlTextureParameters</span>(id : <span class="t">uint</span>; param : <span class="t">int</span>; value : <span class="t">int</span>)  <span class="c">// Set texture parameters (filter, wrap)</span>
+<span class="k">def</span> <span class="f">rlCubemapParameters</span>(id : <span class="t">uint</span>; param : <span class="t">int</span>; value : <span class="t">int</span>)  <span class="c">// Set cubemap parameters (filter, wrap)</span>
+
+<span class="c">// Shader state</span>
+<span class="k">def</span> <span class="f">rlEnableShader</span>(id : <span class="t">uint</span>)  <span class="c">// Enable shader program</span>
+<span class="k">def</span> <span class="f">rlDisableShader</span>()          <span class="c">// Disable shader program</span>
+
+<span class="c">// Framebuffer state</span>
+<span class="k">def</span> <span class="f">rlEnableFramebuffer</span>(id : <span class="t">uint</span>)                        <span class="c">// Enable render texture (fbo)</span>
+<span class="k">def</span> <span class="f">rlDisableFramebuffer</span>()                                <span class="c">// Disable render texture (fbo), return to default framebuffer</span>
+<span class="k">def</span> <span class="f">rlGetActiveFramebuffer</span>() : <span class="t">uint</span>                       <span class="c">// Get the currently active render texture (fbo), 0 for default framebuffer</span>
+<span class="k">def</span> <span class="f">rlActiveDrawBuffers</span>(count : <span class="t">int</span>)                      <span class="c">// Activate multiple draw color buffers</span>
+<span class="k">def</span> <span class="f">rlBlitFramebuffer</span>(srcX : <span class="t">int</span>; srcY : <span class="t">int</span>; srcWidth : <span class="t">int</span>; srcHeight : <span class="t">int</span>; dstX : <span class="t">int</span>; dstY : <span class="t">int</span>; dstWidth : <span class="t">int</span>; dstHeight : <span class="t">int</span>; bufferMask : <span class="t">int</span>)  <span class="c">// Blit active framebuffer to main framebuffer</span>
+<span class="k">def</span> <span class="f">rlBindFramebuffer</span>(target : <span class="t">uint</span>; framebuffer : <span class="t">uint</span>)  <span class="c">// Bind framebuffer (FBO)</span>
+
+<span class="c">// General render state</span>
+<span class="k">def</span> <span class="f">rlEnableColorBlend</span>()                                      <span class="c">// Enable color blending</span>
+<span class="k">def</span> <span class="f">rlDisableColorBlend</span>()                                     <span class="c">// Disable color blending</span>
+<span class="k">def</span> <span class="f">rlEnableDepthTest</span>()                                       <span class="c">// Enable depth test</span>
+<span class="k">def</span> <span class="f">rlDisableDepthTest</span>()                                      <span class="c">// Disable depth test</span>
+<span class="k">def</span> <span class="f">rlEnableDepthMask</span>()                                       <span class="c">// Enable depth write</span>
+<span class="k">def</span> <span class="f">rlDisableDepthMask</span>()                                      <span class="c">// Disable depth write</span>
+<span class="k">def</span> <span class="f">rlEnableBackfaceCulling</span>()                                 <span class="c">// Enable backface culling</span>
+<span class="k">def</span> <span class="f">rlDisableBackfaceCulling</span>()                                <span class="c">// Disable backface culling</span>
+<span class="k">def</span> <span class="f">rlColorMask</span>(r : <span class="t">bool</span>; g : <span class="t">bool</span>; b : <span class="t">bool</span>; a : <span class="t">bool</span>)       <span class="c">// Color mask control</span>
+<span class="k">def</span> <span class="f">rlSetCullFace</span>(mode : <span class="t">int</span>)                                 <span class="c">// Set face culling mode</span>
+<span class="k">def</span> <span class="f">rlEnableScissorTest</span>()                                     <span class="c">// Enable scissor test</span>
+<span class="k">def</span> <span class="f">rlDisableScissorTest</span>()                                    <span class="c">// Disable scissor test</span>
+<span class="k">def</span> <span class="f">rlScissor</span>(x : <span class="t">int</span>; y : <span class="t">int</span>; width : <span class="t">int</span>; height : <span class="t">int</span>)    <span class="c">// Scissor test</span>
+<span class="k">def</span> <span class="f">rlEnablePointMode</span>()                                       <span class="c">// Enable point mode</span>
+<span class="k">def</span> <span class="f">rlDisablePointMode</span>()                                      <span class="c">// Disable point mode</span>
+<span class="k">def</span> <span class="f">rlSetPointSize</span>(size : <span class="t">float</span>)                              <span class="c">// Set the point drawing size</span>
+<span class="k">def</span> <span class="f">rlGetPointSize</span>() : <span class="t">float</span>                                  <span class="c">// Get the point drawing size</span>
+<span class="k">def</span> <span class="f">rlEnableWireMode</span>()                                        <span class="c">// Enable wire mode</span>
+<span class="k">def</span> <span class="f">rlDisableWireMode</span>()                                       <span class="c">// Disable wire mode</span>
+<span class="k">def</span> <span class="f">rlSetLineWidth</span>(width : <span class="t">float</span>)                             <span class="c">// Set the line drawing width</span>
+<span class="k">def</span> <span class="f">rlGetLineWidth</span>() : <span class="t">float</span>                                  <span class="c">// Get the line drawing width</span>
+<span class="k">def</span> <span class="f">rlEnableSmoothLines</span>()                                     <span class="c">// Enable line aliasing</span>
+<span class="k">def</span> <span class="f">rlDisableSmoothLines</span>()                                    <span class="c">// Disable line aliasing</span>
+<span class="k">def</span> <span class="f">rlEnableStereoRender</span>()                                    <span class="c">// Enable stereo rendering</span>
+<span class="k">def</span> <span class="f">rlDisableStereoRender</span>()                                   <span class="c">// Disable stereo rendering</span>
+<span class="k">def</span> <span class="f">rlIsStereoRenderEnabled</span>() : <span class="t">bool</span>                          <span class="c">// Check if stereo render is enabled</span>
+<span class="k">def</span> <span class="f">rlClearColor</span>(r : <span class="t">uint8</span>; g : <span class="t">uint8</span>; b : <span class="t">uint8</span>; a : <span class="t">uint8</span>)  <span class="c">// Clear color buffer with color</span>
+<span class="k">def</span> <span class="f">rlClearScreenBuffers</span>()                                    <span class="c">// Clear used screen buffers (color and depth)</span>
+<span class="k">def</span> <span class="f">rlCheckErrors</span>()                                           <span class="c">// Check and log OpenGL error codes</span>
+<span class="k">def</span> <span class="f">rlSetBlendMode</span>(mode : <span class="t">int</span>)                                <span class="c">// Set blending mode</span>
+<span class="k">def</span> <span class="f">rlSetBlendFactors</span>(glSrcFactor : <span class="t">int</span>; glDstFactor : <span class="t">int</span>; glEquation : <span class="t">int</span>)  <span class="c">// Set blending mode factor and equation (using OpenGL factors)</span>
+<span class="k">def</span> <span class="f">rlSetBlendFactorsSeparate</span>(glSrcRGB : <span class="t">int</span>; glDstRGB : <span class="t">int</span>; glSrcAlpha : <span class="t">int</span>; glDstAlpha : <span class="t">int</span>; glEqRGB : <span class="t">int</span>; glEqAlpha : <span class="t">int</span>)  <span class="c">// Set blending mode factors and equations separately (using OpenGL factors)</span>
+
+<span class="c">// Functions Declaration - rlgl functionality</span>
+<span class="c">// rlgl initialization functions</span>
+<span class="k">def</span> <span class="f">rlglInit</span>(width : <span class="t">int</span>; height : <span class="t">int</span>)          <span class="c">// Initialize rlgl (buffers, shaders, textures, states)</span>
+<span class="k">def</span> <span class="f">rlglClose</span>()                                  <span class="c">// De-initialize rlgl (buffers, shaders, textures)</span>
+<span class="k">def</span> <span class="f">rlLoadExtensions</span>(loader : <span class="t">void?</span>)             <span class="c">// Load OpenGL extensions (loader function required)</span>
+<span class="k">def</span> <span class="f">rlGetProcAddress</span>(procName : <span class="t">string</span>) : <span class="t">void?</span>  <span class="c">// Get OpenGL procedure address</span>
+<span class="k">def</span> <span class="f">rlGetVersion</span>() : <span class="t">int</span>                         <span class="c">// Get current OpenGL version</span>
+<span class="k">def</span> <span class="f">rlSetFramebufferWidth</span>(width : <span class="t">int</span>)           <span class="c">// Set current framebuffer width</span>
+<span class="k">def</span> <span class="f">rlGetFramebufferWidth</span>() : <span class="t">int</span>                <span class="c">// Get default framebuffer width</span>
+<span class="k">def</span> <span class="f">rlSetFramebufferHeight</span>(height : <span class="t">int</span>)         <span class="c">// Set current framebuffer height</span>
+<span class="k">def</span> <span class="f">rlGetFramebufferHeight</span>() : <span class="t">int</span>               <span class="c">// Get default framebuffer height</span>
+<span class="k">def</span> <span class="f">rlGetTextureIdDefault</span>() : <span class="t">uint</span>               <span class="c">// Get default texture id</span>
+<span class="k">def</span> <span class="f">rlGetShaderIdDefault</span>() : <span class="t">uint</span>                <span class="c">// Get default shader id</span>
+<span class="k">def</span> <span class="f">rlGetShaderLocsDefault</span>() : <span class="t">int?</span>              <span class="c">// Get default shader locations</span>
+
+<span class="c">// Render batch management</span>
+<span class="c">// NOTE: rlgl provides a default render batch to behave like OpenGL 1.1 immediate mode</span>
+<span class="c">// but this render batch API is exposed in case of custom batches are required</span>
+<span class="k">def</span> <span class="f">rlLoadRenderBatch</span>(numBuffers : <span class="t">int</span>; bufferElements : <span class="t">int</span>) : <span class="t">rlRenderBatch</span>  <span class="c">// Load a render batch system</span>
+<span class="k">def</span> <span class="f">rlUnloadRenderBatch</span>(batch : <span class="t">rlRenderBatch</span>)      <span class="c">// Unload render batch system</span>
+<span class="k">def</span> <span class="f">rlDrawRenderBatch</span>(batch : <span class="t">rlRenderBatch?</span>)       <span class="c">// Draw render batch data (Update-&gt;Draw-&gt;Reset)</span>
+<span class="k">def</span> <span class="f">rlSetRenderBatchActive</span>(batch : <span class="t">rlRenderBatch?</span>)  <span class="c">// Set the active render batch for rlgl (NULL for default internal)</span>
+<span class="k">def</span> <span class="f">rlDrawRenderBatchActive</span>()                       <span class="c">// Update and draw internal render batch</span>
+<span class="k">def</span> <span class="f">rlCheckRenderBatchLimit</span>(vCount : <span class="t">int</span>) : <span class="t">bool</span>    <span class="c">// Check internal buffer overflow for a given number of vertex</span>
+<span class="k">def</span> <span class="f">rlSetTexture</span>(id : <span class="t">uint</span>)                         <span class="c">// Set current texture for render batch and check buffers limits</span>
+
+<span class="c">// Vertex buffers management</span>
+<span class="k">def</span> <span class="f">rlLoadVertexArray</span>() : <span class="t">uint</span>                                              <span class="c">// Load vertex array (vao) if supported</span>
+<span class="k">def</span> <span class="f">rlLoadVertexBuffer</span>(buffer : <span class="t">void?</span>; size : <span class="t">int</span>; dynamic : <span class="t">bool</span>) : <span class="t">uint</span>   <span class="c">// Load a vertex buffer object</span>
+<span class="k">def</span> <span class="f">rlLoadVertexBufferElement</span>(buffer : <span class="t">void?</span>; size : <span class="t">int</span>; dynamic : <span class="t">bool</span>) : <span class="t">uint</span>  <span class="c">// Load vertex buffer elements object</span>
+<span class="k">def</span> <span class="f">rlUpdateVertexBuffer</span>(bufferId : <span class="t">uint</span>; data : <span class="t">void?</span>; dataSize : <span class="t">int</span>; offset : <span class="t">int</span>)  <span class="c">// Update vertex buffer object data on GPU buffer</span>
+<span class="k">def</span> <span class="f">rlUpdateVertexBufferElements</span>(id : <span class="t">uint</span>; data : <span class="t">void?</span>; dataSize : <span class="t">int</span>; offset : <span class="t">int</span>)  <span class="c">// Update vertex buffer elements data on GPU buffer</span>
+<span class="k">def</span> <span class="f">rlUnloadVertexArray</span>(vaoId : <span class="t">uint</span>)                                       <span class="c">// Unload vertex array (vao)</span>
+<span class="k">def</span> <span class="f">rlUnloadVertexBuffer</span>(vboId : <span class="t">uint</span>)                                      <span class="c">// Unload vertex buffer object</span>
+<span class="k">def</span> <span class="f">rlSetVertexAttribute</span>(index : <span class="t">uint</span>; compSize : <span class="t">int</span>; type : <span class="t">int</span>; normalized : <span class="t">bool</span>; stride : <span class="t">int</span>; offset : <span class="t">int</span>)  <span class="c">// Set vertex attribute data configuration</span>
+<span class="k">def</span> <span class="f">rlSetVertexAttributeDivisor</span>(index : <span class="t">uint</span>; divisor : <span class="t">int</span>)                <span class="c">// Set vertex attribute data divisor</span>
+<span class="k">def</span> <span class="f">rlSetVertexAttributeDefault</span>(locIndex : <span class="t">int</span>; value : <span class="t">void?</span>; attribType : <span class="t">int</span>; count : <span class="t">int</span>)  <span class="c">// Set vertex attribute default value, when attribute to provided</span>
+<span class="k">def</span> <span class="f">rlDrawVertexArray</span>(offset : <span class="t">int</span>; count : <span class="t">int</span>)                            <span class="c">// Draw vertex array (currently active vao)</span>
+<span class="k">def</span> <span class="f">rlDrawVertexArrayElements</span>(offset : <span class="t">int</span>; count : <span class="t">int</span>; buffer : <span class="t">void?</span>)    <span class="c">// Draw vertex array elements</span>
+<span class="k">def</span> <span class="f">rlDrawVertexArrayInstanced</span>(offset : <span class="t">int</span>; count : <span class="t">int</span>; instances : <span class="t">int</span>)  <span class="c">// Draw vertex array (currently active vao) with instancing</span>
+<span class="k">def</span> <span class="f">rlDrawVertexArrayElementsInstanced</span>(offset : <span class="t">int</span>; count : <span class="t">int</span>; buffer : <span class="t">void?</span>; instances : <span class="t">int</span>)  <span class="c">// Draw vertex array elements with instancing</span>
+
+<span class="c">// Textures management</span>
+<span class="k">def</span> <span class="f">rlLoadTexture</span>(data : <span class="t">void?</span>; width : <span class="t">int</span>; height : <span class="t">int</span>; format : <span class="t">int</span>; mipmapCount : <span class="t">int</span>) : <span class="t">uint</span>  <span class="c">// Load texture data</span>
+<span class="k">def</span> <span class="f">rlLoadTextureDepth</span>(width : <span class="t">int</span>; height : <span class="t">int</span>; useRenderBuffer : <span class="t">bool</span>) : <span class="t">uint</span>  <span class="c">// Load depth texture/renderbuffer (to be attached to fbo)</span>
+<span class="k">def</span> <span class="f">rlLoadTextureCubemap</span>(data : <span class="t">void?</span>; size : <span class="t">int</span>; format : <span class="t">int</span>; mipmapCount : <span class="t">int</span>) : <span class="t">uint</span>  <span class="c">// Load texture cubemap data</span>
+<span class="k">def</span> <span class="f">rlUpdateTexture</span>(id : <span class="t">uint</span>; offsetX : <span class="t">int</span>; offsetY : <span class="t">int</span>; width : <span class="t">int</span>; height : <span class="t">int</span>; format : <span class="t">int</span>; data : <span class="t">void?</span>)  <span class="c">// Update texture with new data on GPU</span>
+<span class="k">def</span> <span class="f">rlGetGlTextureFormats</span>(format : <span class="t">int</span>; glInternalFormat : <span class="t">uint?</span>; glFormat : <span class="t">uint?</span>; glType : <span class="t">uint?</span>)  <span class="c">// Get OpenGL internal formats</span>
+<span class="k">def</span> <span class="f">rlGetPixelFormatName</span>(format : <span class="t">uint</span>) : <span class="t">string</span>            <span class="c">// Get name string for pixel format</span>
+<span class="k">def</span> <span class="f">rlUnloadTexture</span>(id : <span class="t">uint</span>)                              <span class="c">// Unload texture from GPU memory</span>
+<span class="k">def</span> <span class="f">rlGenTextureMipmaps</span>(id : <span class="t">uint</span>; width : <span class="t">int</span>; height : <span class="t">int</span>; format : <span class="t">int</span>; mipmaps : <span class="t">int?</span>)  <span class="c">// Generate mipmap data for selected texture</span>
+<span class="k">def</span> <span class="f">rlReadTexturePixels</span>(id : <span class="t">uint</span>; width : <span class="t">int</span>; height : <span class="t">int</span>; format : <span class="t">int</span>) : <span class="t">void?</span>  <span class="c">// Read texture pixel data</span>
+<span class="k">def</span> <span class="f">rlReadScreenPixels</span>(width : <span class="t">int</span>; height : <span class="t">int</span>) : <span class="t">uint8?</span>  <span class="c">// Read screen pixel data (color buffer)</span>
+
+<span class="c">// Framebuffer management (fbo)</span>
+<span class="k">def</span> <span class="f">rlLoadFramebuffer</span>() : <span class="t">uint</span>               <span class="c">// Load an empty framebuffer</span>
+<span class="k">def</span> <span class="f">rlFramebufferAttach</span>(id : <span class="t">uint</span>; texId : <span class="t">uint</span>; attachType : <span class="t">int</span>; texType : <span class="t">int</span>; mipLevel : <span class="t">int</span>)  <span class="c">// Attach texture/renderbuffer to a framebuffer</span>
+<span class="k">def</span> <span class="f">rlFramebufferComplete</span>(id : <span class="t">uint</span>) : <span class="t">bool</span>  <span class="c">// Verify framebuffer is complete</span>
+<span class="k">def</span> <span class="f">rlUnloadFramebuffer</span>(id : <span class="t">uint</span>)           <span class="c">// Delete framebuffer from GPU</span>
+
+<span class="c">// WARNING: Copy and resize framebuffer functionality only defined for software backend</span>
+<span class="k">def</span> <span class="f">rlCopyFramebuffer</span>(x : <span class="t">int</span>; y : <span class="t">int</span>; width : <span class="t">int</span>; height : <span class="t">int</span>; format : <span class="t">int</span>; pixels : <span class="t">void?</span>)  <span class="c">// Copy framebuffer pixel data to internal buffer</span>
+<span class="k">def</span> <span class="f">rlResizeFramebuffer</span>(width : <span class="t">int</span>; height : <span class="t">int</span>)  <span class="c">// Resize internal framebuffer</span>
+
+<span class="c">// Shaders management</span>
+<span class="k">def</span> <span class="f">rlLoadShader</span>(code : <span class="t">string</span>; type : <span class="t">int</span>) : <span class="t">uint</span>                          <span class="c">// Load (compile) shader and return shader id (type: RL_VERTEX_SHADER, RL_FRAGMENT_SHADER, RL_COMPUTE_SHADER)</span>
+<span class="k">def</span> <span class="f">rlLoadShaderProgram</span>(vsCode : <span class="t">string</span>; fsCode : <span class="t">string</span>) : <span class="t">uint</span>            <span class="c">// Load shader from code strings</span>
+<span class="k">def</span> <span class="f">rlLoadShaderProgramEx</span>(vsId : <span class="t">uint</span>; fsId : <span class="t">uint</span>) : <span class="t">uint</span>                  <span class="c">// Load shader program, using already loaded shader ids</span>
+<span class="k">def</span> <span class="f">rlLoadShaderProgramCompute</span>(csId : <span class="t">uint</span>) : <span class="t">uint</span>                          <span class="c">// Load compute shader program</span>
+<span class="k">def</span> <span class="f">rlUnloadShader</span>(id : <span class="t">uint</span>)                                               <span class="c">// Unload shader, loaded with rlLoadShader()</span>
+<span class="k">def</span> <span class="f">rlUnloadShaderProgram</span>(id : <span class="t">uint</span>)                                        <span class="c">// Unload shader program</span>
+<span class="k">def</span> <span class="f">rlGetLocationUniform</span>(id : <span class="t">uint</span>; uniformName : <span class="t">string</span>) : <span class="t">int</span>             <span class="c">// Get shader location uniform, requires shader program id</span>
+<span class="k">def</span> <span class="f">rlGetLocationAttrib</span>(id : <span class="t">uint</span>; attribName : <span class="t">string</span>) : <span class="t">int</span>               <span class="c">// Get shader location attribute, requires shader program id</span>
+<span class="k">def</span> <span class="f">rlSetUniform</span>(locIndex : <span class="t">int</span>; value : <span class="t">void?</span>; uniformType : <span class="t">int</span>; count : <span class="t">int</span>)  <span class="c">// Set shader value uniform</span>
+<span class="k">def</span> <span class="f">rlSetUniformMatrix</span>(locIndex : <span class="t">int</span>; mat : <span class="t">float4x4</span>)                      <span class="c">// Set shader value matrix</span>
+<span class="k">def</span> <span class="f">rlSetUniformMatrices</span>(locIndex : <span class="t">int</span>; mat : <span class="t">Matrix const?</span>; count : <span class="t">int</span>)  <span class="c">// Set shader value matrices</span>
+<span class="k">def</span> <span class="f">rlSetUniformSampler</span>(locIndex : <span class="t">int</span>; textureId : <span class="t">uint</span>)                   <span class="c">// Set shader value sampler</span>
+<span class="k">def</span> <span class="f">rlSetShader</span>(id : <span class="t">uint</span>; locs : <span class="t">int?</span>)                                     <span class="c">// Set shader currently active (id and locations)</span>
+
+<span class="c">// Compute shader management</span>
+<span class="k">def</span> <span class="f">rlComputeShaderDispatch</span>(groupX : <span class="t">uint</span>; groupY : <span class="t">uint</span>; groupZ : <span class="t">uint</span>)  <span class="c">// Dispatch compute shader (equivalent to *draw* for graphics pipeline)</span>
+
+<span class="c">// Shader buffer storage object management (ssbo)</span>
+<span class="k">def</span> <span class="f">rlLoadShaderBuffer</span>(size : <span class="t">uint</span>; data : <span class="t">void?</span>; usageHint : <span class="t">int</span>) : <span class="t">uint</span>     <span class="c">// Load shader storage buffer object (SSBO)</span>
+<span class="k">def</span> <span class="f">rlUnloadShaderBuffer</span>(ssboId : <span class="t">uint</span>)                                       <span class="c">// Unload shader storage buffer object (SSBO)</span>
+<span class="k">def</span> <span class="f">rlUpdateShaderBuffer</span>(id : <span class="t">uint</span>; data : <span class="t">void?</span>; dataSize : <span class="t">uint</span>; offset : <span class="t">uint</span>)  <span class="c">// Update SSBO buffer data</span>
+<span class="k">def</span> <span class="f">rlBindShaderBuffer</span>(id : <span class="t">uint</span>; index : <span class="t">uint</span>)                               <span class="c">// Bind SSBO buffer</span>
+<span class="k">def</span> <span class="f">rlReadShaderBuffer</span>(id : <span class="t">uint</span>; dest : <span class="t">void?</span>; count : <span class="t">uint</span>; offset : <span class="t">uint</span>)  <span class="c">// Read SSBO buffer data (GPU-&gt;CPU)</span>
+<span class="k">def</span> <span class="f">rlCopyShaderBuffer</span>(destId : <span class="t">uint</span>; srcId : <span class="t">uint</span>; destOffset : <span class="t">uint</span>; srcOffset : <span class="t">uint</span>; count : <span class="t">uint</span>)  <span class="c">// Copy SSBO data between buffers</span>
+<span class="k">def</span> <span class="f">rlGetShaderBufferSize</span>(id : <span class="t">uint</span>) : <span class="t">uint</span>                                   <span class="c">// Get SSBO buffer size</span>
+
+<span class="c">// Buffer management</span>
+<span class="k">def</span> <span class="f">rlBindImageTexture</span>(id : <span class="t">uint</span>; index : <span class="t">uint</span>; format : <span class="t">int</span>; readonly : <span class="t">bool</span>)  <span class="c">// Bind image texture</span>
+
+<span class="c">// Matrix state management</span>
+<span class="k">def</span> <span class="f">rlGetMatrixModelview</span>() : <span class="t">float4x4</span>                               <span class="c">// Get internal modelview matrix</span>
+<span class="k">def</span> <span class="f">rlGetMatrixProjection</span>() : <span class="t">float4x4</span>                              <span class="c">// Get internal projection matrix</span>
+<span class="k">def</span> <span class="f">rlGetMatrixTransform</span>() : <span class="t">float4x4</span>                               <span class="c">// Get internal accumulated transform matrix</span>
+<span class="k">def</span> <span class="f">rlGetMatrixProjectionStereo</span>(eye : <span class="t">int</span>) : <span class="t">float4x4</span>               <span class="c">// Get internal projection matrix for stereo render (selected eye)</span>
+<span class="k">def</span> <span class="f">rlGetMatrixViewOffsetStereo</span>(eye : <span class="t">int</span>) : <span class="t">float4x4</span>               <span class="c">// Get internal view offset matrix for stereo render (selected eye)</span>
+<span class="k">def</span> <span class="f">rlSetMatrixProjection</span>(proj : <span class="t">float4x4</span>)                          <span class="c">// Set a custom projection matrix (replaces internal projection matrix)</span>
+<span class="k">def</span> <span class="f">rlSetMatrixModelview</span>(view : <span class="t">float4x4</span>)                           <span class="c">// Set a custom modelview matrix (replaces internal modelview matrix)</span>
+<span class="k">def</span> <span class="f">rlSetMatrixProjectionStereo</span>(right : <span class="t">float4x4</span>; left : <span class="t">float4x4</span>)  <span class="c">// Set eyes projection matrices for stereo rendering</span>
+<span class="k">def</span> <span class="f">rlSetMatrixViewOffsetStereo</span>(right : <span class="t">float4x4</span>; left : <span class="t">float4x4</span>)  <span class="c">// Set eyes view offsets matrices for stereo rendering</span>
+
+<span class="c">// Quick and dirty cube/quad buffers load-&gt;draw-&gt;unload</span>
+<span class="k">def</span> <span class="f">rlLoadDrawCube</span>()  <span class="c">// Load and draw a cube</span>
+<span class="k">def</span> <span class="f">rlLoadDrawQuad</span>()  <span class="c">// Load and draw a quad</span>
+</code></pre></div>
+<p id="praygui">module: raygui</p>
+<div id="raygui"><pre><code><span class="c">// Global gui state control functions</span>
+<span class="k">def</span> <span class="f">GuiEnable</span>()                 <span class="c">// Enable gui controls (global state)</span>
+<span class="k">def</span> <span class="f">GuiDisable</span>()                <span class="c">// Disable gui controls (global state)</span>
+<span class="k">def</span> <span class="f">GuiLock</span>()                   <span class="c">// Lock gui controls (global state)</span>
+<span class="k">def</span> <span class="f">GuiUnlock</span>()                 <span class="c">// Unlock gui controls (global state)</span>
+<span class="k">def</span> <span class="f">GuiIsLocked</span>() : <span class="t">bool</span>        <span class="c">// Check if gui is locked (global state)</span>
+<span class="k">def</span> <span class="f">GuiSetAlpha</span>(alpha : <span class="t">float</span>)  <span class="c">// Set gui controls alpha (global state), alpha goes from 0.0f to 1.0f</span>
+<span class="k">def</span> <span class="f">GuiSetState</span>(state : <span class="t">int</span>)    <span class="c">// Set gui state (global state)</span>
+<span class="k">def</span> <span class="f">GuiGetState</span>() : <span class="t">int</span>         <span class="c">// Get gui state (global state)</span>
+
+<span class="c">// Font set/get functions</span>
+<span class="k">def</span> <span class="f">GuiSetFont</span>(font : <span class="t">Font</span>)  <span class="c">// Set gui custom font (global state)</span>
+<span class="k">def</span> <span class="f">GuiGetFont</span>() : <span class="t">Font</span>      <span class="c">// Get gui custom font (global state)</span>
+
+<span class="c">// Style set/get functions</span>
+<span class="k">def</span> <span class="f">GuiSetStyle</span>(control : <span class="t">int</span>; property : <span class="t">int</span>; value : <span class="t">int</span>)  <span class="c">// Set one style property</span>
+<span class="k">def</span> <span class="f">GuiGetStyle</span>(control : <span class="t">int</span>; property : <span class="t">int</span>) : <span class="t">int</span>         <span class="c">// Get one style property</span>
+
+<span class="c">// Styles loading functions</span>
+<span class="k">def</span> <span class="f">GuiLoadStyle</span>(fileName : <span class="t">string</span>)                                  <span class="c">// Load style file over global style variable (.rgs)</span>
+<span class="k">def</span> <span class="f">GuiLoadStyleFromMemory</span>(fileData : <span class="t">uint8 const?</span>; dataSize : <span class="t">int</span>)  <span class="c">// Load style from memory (binary only)</span>
+<span class="k">def</span> <span class="f">GuiLoadStyleDefault</span>()                                            <span class="c">// Load style default over global style</span>
+
+<span class="c">// Tooltips management functions</span>
+<span class="k">def</span> <span class="f">GuiEnableTooltip</span>()               <span class="c">// Enable gui tooltips (global state)</span>
+<span class="k">def</span> <span class="f">GuiDisableTooltip</span>()              <span class="c">// Disable gui tooltips (global state)</span>
+<span class="k">def</span> <span class="f">GuiSetTooltip</span>(tooltip : <span class="t">string</span>)  <span class="c">// Set tooltip string</span>
+
+<span class="c">// Icons functionality</span>
+<span class="k">def</span> <span class="f">GuiIconText</span>(iconId : <span class="t">int</span>; text : <span class="t">string</span>) : <span class="t">string</span>                <span class="c">// Get text with icon id prepended (if supported)</span>
+<span class="k">def</span> <span class="f">GuiSetIconScale</span>(scale : <span class="t">int</span>)                                     <span class="c">// Set default icon drawing size</span>
+<span class="k">def</span> <span class="f">GuiGetIcons</span>() : <span class="t">uint?</span>                                            <span class="c">// Get raygui icons data pointer</span>
+<span class="k">def</span> <span class="f">GuiLoadIcons</span>(fileName : <span class="t">string</span>; loadIconsName : <span class="t">bool</span>) : <span class="t">string?</span>  <span class="c">// Load raygui icons file (.rgi) into internal icons data</span>
+<span class="k">def</span> <span class="f">GuiLoadIconsFromMemory</span>(fileData : <span class="t">uint8 const?</span>; dataSize : <span class="t">int</span>; loadIconsName : <span class="t">bool</span>) : <span class="t">string?</span>  <span class="c">// Load raygui icons file (.rgi) from memory into internal icons data</span>
+<span class="k">def</span> <span class="f">GuiDrawIcon</span>(iconId : <span class="t">int</span>; posX : <span class="t">int</span>; posY : <span class="t">int</span>; pixelSize : <span class="t">int</span>; color : <span class="t">float4</span>)  <span class="c">// Draw icon using pixel size at specified position</span>
+
+<span class="c">// Utility functions</span>
+<span class="k">def</span> <span class="f">GuiGetTextWidth</span>(text : <span class="t">string</span>) : <span class="t">int</span>  <span class="c">// Get text width considering gui style and icon size (if required)</span>
+
+<span class="c">// Controls</span>
+<span class="c">// Container/separator controls, useful for controls organization</span>
+<span class="k">def</span> <span class="f">GuiWindowBox</span>(bounds : <span class="t">float4</span>; title : <span class="t">string</span>) : <span class="t">int</span>  <span class="c">// Window Box control, shows a window that can be closed</span>
+<span class="k">def</span> <span class="f">GuiGroupBox</span>(bounds : <span class="t">float4</span>; text : <span class="t">string</span>) : <span class="t">int</span>    <span class="c">// Group Box control with text name</span>
+<span class="k">def</span> <span class="f">GuiLine</span>(bounds : <span class="t">float4</span>; text : <span class="t">string</span>) : <span class="t">int</span>        <span class="c">// Line separator control, could contain text</span>
+<span class="k">def</span> <span class="f">GuiPanel</span>(bounds : <span class="t">float4</span>; text : <span class="t">string</span>) : <span class="t">int</span>       <span class="c">// Panel control, useful to group controls</span>
+<span class="k">def</span> <span class="f">GuiScrollPanel</span>(bounds : <span class="t">float4</span>; text : <span class="t">string</span>; content : <span class="t">float4</span>; scroll : <span class="t">float2?</span>; view : <span class="t">float4?</span>) : <span class="t">int</span>  <span class="c">// Scroll Panel control</span>
+
+<span class="c">// Basic controls set</span>
+<span class="k">def</span> <span class="f">GuiLabel</span>(bounds : <span class="t">float4</span>; text : <span class="t">string</span>) : <span class="t">int</span>                           <span class="c">// Label control</span>
+<span class="k">def</span> <span class="f">GuiButton</span>(bounds : <span class="t">float4</span>; text : <span class="t">string</span>) : <span class="t">int</span>                          <span class="c">// Button control, returns true when clicked</span>
+<span class="k">def</span> <span class="f">GuiLabelButton</span>(bounds : <span class="t">float4</span>; text : <span class="t">string</span>) : <span class="t">int</span>                     <span class="c">// Label button control, returns true when clicked</span>
+<span class="k">def</span> <span class="f">GuiToggle</span>(bounds : <span class="t">float4</span>; text : <span class="t">string</span>; active : <span class="t">bool?</span>) : <span class="t">int</span>          <span class="c">// Toggle Button control</span>
+<span class="k">def</span> <span class="f">GuiToggleGroup</span>(bounds : <span class="t">float4</span>; text : <span class="t">string</span>; active : <span class="t">int?</span>) : <span class="t">int</span>      <span class="c">// Toggle Group control</span>
+<span class="k">def</span> <span class="f">GuiToggleSlider</span>(bounds : <span class="t">float4</span>; text : <span class="t">string</span>; active : <span class="t">int?</span>) : <span class="t">int</span>     <span class="c">// Toggle Slider control</span>
+<span class="k">def</span> <span class="f">GuiCheckBox</span>(bounds : <span class="t">float4</span>; text : <span class="t">string</span>; checked : <span class="t">bool?</span>) : <span class="t">int</span>       <span class="c">// Check Box control, returns true when active</span>
+<span class="k">def</span> <span class="f">GuiComboBox</span>(bounds : <span class="t">float4</span>; text : <span class="t">string</span>; active : <span class="t">int?</span>) : <span class="t">int</span>         <span class="c">// Combo Box control</span>
+<span class="k">def</span> <span class="f">GuiDropdownBox</span>(bounds : <span class="t">float4</span>; text : <span class="t">string</span>; active : <span class="t">int?</span>; editMode : <span class="t">bool</span>) : <span class="t">int</span>  <span class="c">// Dropdown Box control</span>
+<span class="k">def</span> <span class="f">GuiSpinner</span>(bounds : <span class="t">float4</span>; text : <span class="t">string</span>; value : <span class="t">int?</span>; minValue : <span class="t">int</span>; maxValue : <span class="t">int</span>; editMode : <span class="t">bool</span>) : <span class="t">int</span>  <span class="c">// Spinner control</span>
+<span class="k">def</span> <span class="f">GuiValueBox</span>(bounds : <span class="t">float4</span>; text : <span class="t">string</span>; value : <span class="t">int?</span>; minValue : <span class="t">int</span>; maxValue : <span class="t">int</span>; editMode : <span class="t">bool</span>) : <span class="t">int</span>  <span class="c">// Value Box control, updates input text with numbers</span>
+<span class="k">def</span> <span class="f">GuiValueBoxFloat</span>(bounds : <span class="t">float4</span>; text : <span class="t">string</span>; textValue : <span class="t">string</span>; value : <span class="t">float?</span>; editMode : <span class="t">bool</span>) : <span class="t">int</span>  <span class="c">// Value box control for float values</span>
+<span class="k">def</span> <span class="f">GuiTextBox</span>(bounds : <span class="t">float4</span>; text : <span class="t">string</span>; textSize : <span class="t">int</span>; editMode : <span class="t">bool</span>) : <span class="t">int</span>  <span class="c">// Text Box control, updates input text</span>
+<span class="k">def</span> <span class="f">GuiTextBox</span>(bounds : <span class="t">float4</span>; text : <span class="t">array&lt;uint8&gt;</span>; editMode : <span class="t">bool</span>) : <span class="t">int</span>  <span class="c">// raylib_boost overload, takes the enum directly</span>
+<span class="k">def</span> <span class="f">GuiSlider</span>(bounds : <span class="t">float4</span>; textLeft : <span class="t">string</span>; textRight : <span class="t">string</span>; value : <span class="t">float?</span>; minValue : <span class="t">float</span>; maxValue : <span class="t">float</span>) : <span class="t">int</span>  <span class="c">// Slider control</span>
+<span class="k">def</span> <span class="f">GuiSliderBar</span>(bounds : <span class="t">float4</span>; textLeft : <span class="t">string</span>; textRight : <span class="t">string</span>; value : <span class="t">float?</span>; minValue : <span class="t">float</span>; maxValue : <span class="t">float</span>) : <span class="t">int</span>  <span class="c">// Slider Bar control</span>
+<span class="k">def</span> <span class="f">GuiProgressBar</span>(bounds : <span class="t">float4</span>; textLeft : <span class="t">string</span>; textRight : <span class="t">string</span>; value : <span class="t">float?</span>; minValue : <span class="t">float</span>; maxValue : <span class="t">float</span>) : <span class="t">int</span>  <span class="c">// Progress Bar control</span>
+<span class="k">def</span> <span class="f">GuiStatusBar</span>(bounds : <span class="t">float4</span>; text : <span class="t">string</span>) : <span class="t">int</span>                       <span class="c">// Status Bar control, shows info text</span>
+<span class="k">def</span> <span class="f">GuiDummyRec</span>(bounds : <span class="t">float4</span>; text : <span class="t">string</span>) : <span class="t">int</span>                        <span class="c">// Dummy control for placeholders</span>
+<span class="k">def</span> <span class="f">GuiGrid</span>(bounds : <span class="t">float4</span>; text : <span class="t">string</span>; spacing : <span class="t">float</span>; subdivs : <span class="t">int</span>; mouseCell : <span class="t">float2?</span>) : <span class="t">int</span>  <span class="c">// Grid control</span>
+
+<span class="c">// Advance controls set</span>
+<span class="k">def</span> <span class="f">GuiListView</span>(bounds : <span class="t">float4</span>; text : <span class="t">string</span>; scrollIndex : <span class="t">int?</span>; active : <span class="t">int?</span>) : <span class="t">int</span>  <span class="c">// List View control</span>
+<span class="k">def</span> <span class="f">GuiListViewEx</span>(bounds : <span class="t">float4</span>; text : <span class="t">string?</span>; count : <span class="t">int</span>; scrollIndex : <span class="t">int?</span>; active : <span class="t">int?</span>; focus : <span class="t">int?</span>) : <span class="t">int</span>  <span class="c">// List View control, using text entries list and returning focus entry</span>
+<span class="k">def</span> <span class="f">GuiListViewEx</span>(bounds : <span class="t">float4</span>; items : <span class="t">array&lt;string&gt;</span>; scrollIndex : <span class="t">int?</span>; active : <span class="t">int?</span>; focus : <span class="t">int?</span>) : <span class="t">int</span>  <span class="c">// raylib_boost overload, takes the enum directly</span>
+<span class="k">def</span> <span class="f">GuiTabBar</span>(bounds : <span class="t">float4</span>; text : <span class="t">string</span>; hscroll : <span class="t">int?</span>; active : <span class="t">int?</span>) : <span class="t">int</span>  <span class="c">// Tab Bar control</span>
+<span class="k">def</span> <span class="f">GuiTabBarEx</span>(bounds : <span class="t">float4</span>; text : <span class="t">string?</span>; count : <span class="t">int</span>; hscroll : <span class="t">int?</span>; active : <span class="t">int?</span>; focus : <span class="t">int?</span>) : <span class="t">int</span>  <span class="c">// Tab Bar control, using text entries list and returning focus entry</span>
+<span class="k">def</span> <span class="f">GuiMessageBox</span>(bounds : <span class="t">float4</span>; title : <span class="t">string</span>; message : <span class="t">string</span>; btnText : <span class="t">string</span>; btnActive : <span class="t">int?</span>) : <span class="t">int</span>  <span class="c">// Message Box control, displays a message</span>
+<span class="k">def</span> <span class="f">GuiTextInputBox</span>(bounds : <span class="t">float4</span>; title : <span class="t">string</span>; message : <span class="t">string</span>; text : <span class="t">string</span>; textSize : <span class="t">int</span>; btnText : <span class="t">string</span>; btnActive : <span class="t">int?</span>; secretViewActive : <span class="t">bool?</span>) : <span class="t">int</span>  <span class="c">// Text Input Box control, ask for text, supports secret</span>
+<span class="k">def</span> <span class="f">GuiTextInputBox</span>(bounds : <span class="t">float4</span>; title : <span class="t">string</span>; message : <span class="t">string</span>; text : <span class="t">array&lt;uint8&gt;</span>; btnText : <span class="t">string</span>; btnActive : <span class="t">int?</span>; secretViewActive : <span class="t">bool?</span>) : <span class="t">int</span>  <span class="c">// raylib_boost overload, takes the enum directly</span>
+<span class="k">def</span> <span class="f">GuiColorPicker</span>(bounds : <span class="t">float4</span>; text : <span class="t">string</span>; color : <span class="t">Color?</span>) : <span class="t">int</span>    <span class="c">// Color Picker control, includes Color bar controls</span>
+<span class="k">def</span> <span class="f">GuiColorPanel</span>(bounds : <span class="t">float4</span>; text : <span class="t">string</span>; color : <span class="t">Color?</span>) : <span class="t">int</span>     <span class="c">// Color Panel control</span>
+<span class="k">def</span> <span class="f">GuiColorBarAlpha</span>(bounds : <span class="t">float4</span>; text : <span class="t">string</span>; alpha : <span class="t">float?</span>) : <span class="t">int</span>  <span class="c">// Color Bar Alpha control</span>
+<span class="k">def</span> <span class="f">GuiColorBarHue</span>(bounds : <span class="t">float4</span>; text : <span class="t">string</span>; value : <span class="t">float?</span>) : <span class="t">int</span>    <span class="c">// Color Bar Hue control</span>
+<span class="k">def</span> <span class="f">GuiColorPickerHSV</span>(bounds : <span class="t">float4</span>; text : <span class="t">string</span>; colorHsv : <span class="t">float3?</span>) : <span class="t">int</span>  <span class="c">// Color Picker control, using Hue-Saturation-Value color data, includes Color bar controls</span>
+<span class="k">def</span> <span class="f">GuiColorPanelHSV</span>(bounds : <span class="t">float4</span>; text : <span class="t">string</span>; colorHsv : <span class="t">float3?</span>) : <span class="t">int</span>  <span class="c">// Color Panel control, using Hue-Saturation-Value color data</span>
+</code></pre></div>
 <p id="pstructs">structs</p>
 <div id="structs"><pre><code><span class="k">struct</span> <span class="f">Matrix</span>    <span class="c">// Matrix, 4x4 components, column major, OpenGL style, right-handed</span>
     m0 : <span class="t">float</span>   <span class="c">// Matrix first row (4 components)</span>
@@ -1604,6 +2427,35 @@ T *                         -&gt; <span class="t">T?</span>
     count : <span class="t">uint</span>               <span class="c">// Events entries count</span>
     events : <span class="t">AutomationEvent?</span>  <span class="c">// Events entries</span>
 
+<span class="k">struct</span> <span class="f">GuiStyleProp</span>
+    controlId : <span class="t">uint16</span>
+    propertyId : <span class="t">uint16</span>
+    propertyValue : <span class="t">int</span>
+
+<span class="k">struct</span> <span class="f">rlDrawCall</span>
+    mode : <span class="t">int</span>
+    vertexCount : <span class="t">int</span>
+    vertexAlignment : <span class="t">int</span>
+    textureId : <span class="t">uint</span>
+
+<span class="k">struct</span> <span class="f">rlRenderBatch</span>
+    bufferCount : <span class="t">int</span>
+    currentBuffer : <span class="t">int</span>
+    vertexBuffer : <span class="t">rlVertexBuffer?</span>
+    draws : <span class="t">rlDrawCall?</span>
+    drawCounter : <span class="t">int</span>
+    currentDepth : <span class="t">float</span>
+
+<span class="k">struct</span> <span class="f">rlVertexBuffer</span>
+    elementCount : <span class="t">int</span>
+    vertices : <span class="t">float?</span>
+    texcoords : <span class="t">float?</span>
+    normals : <span class="t">float?</span>
+    colors : <span class="t">uint8?</span>
+    indices : <span class="t">uint?</span>
+    vaoId : <span class="t">uint</span>
+    vboId : <span class="t">uint[5]</span>
+
 <span class="c">// Type aliases</span>
 <span class="k">typedef</span> Camera = <span class="t">Camera3D</span>                <span class="c">// Camera type fallback, defaults to Camera3D</span>
 <span class="k">typedef</span> ModelAnimPose = <span class="t">Transform?</span>       <span class="c">// Anim pose, an array of Transform[]</span>
@@ -1646,11 +2498,13 @@ T *                         -&gt; <span class="t">T?</span>
 <span class="swatch" style="background:rgba(245,245,245,1)"></span><span class="k">let</span> RAYWHITE : <span class="t">float4</span>    <span class="c">// (245, 245, 245, 255) My own White (raylib logo)</span>
 </code></pre></div>
 <p id="pextras">converters and constants</p>
-<div id="extras"><pre><code><span class="c">// Converters for raw Color and Matrix values</span>
-<span class="k">def</span> <span class="f">to_float4</span>(color : <span class="t">Color</span>) : <span class="t">float4</span>        <span class="c">// Raw Color (as found in pointers and struct fields) to float4 RGBA 0..1</span>
-<span class="k">def</span> <span class="f">to_Color</span>(color : <span class="t">float4</span>) : <span class="t">Color</span>         <span class="c">// float4 RGBA 0..1 to raw Color</span>
-<span class="k">def</span> <span class="f">to_float4x4</span>(matrix : <span class="t">Matrix</span>) : <span class="t">float4x4</span>  <span class="c">// Raw Matrix (as found in pointers and struct fields) to float4x4</span>
-<span class="k">def</span> <span class="f">to_Matrix</span>(matrix : <span class="t">float4x4</span>) : <span class="t">Matrix</span>    <span class="c">// float4x4 to raw Matrix</span>
+<div id="extras"><pre><code><span class="c">// Converters for raw Color and Matrix values, and raygui text buffers</span>
+<span class="k">def</span> <span class="f">to_float4</span>(color : <span class="t">Color</span>) : <span class="t">float4</span>                      <span class="c">// Raw Color (as found in pointers and struct fields) to float4 RGBA 0..1</span>
+<span class="k">def</span> <span class="f">to_Color</span>(color : <span class="t">float4</span>) : <span class="t">Color</span>                       <span class="c">// float4 RGBA 0..1 to raw Color</span>
+<span class="k">def</span> <span class="f">to_float4x4</span>(matrix : <span class="t">Matrix</span>) : <span class="t">float4x4</span>                <span class="c">// Raw Matrix (as found in pointers and struct fields) to float4x4</span>
+<span class="k">def</span> <span class="f">to_Matrix</span>(matrix : <span class="t">float4x4</span>) : <span class="t">Matrix</span>                  <span class="c">// float4x4 to raw Matrix</span>
+<span class="k">def</span> <span class="f">text_buffer</span>(text : <span class="t">string</span>; size : <span class="t">int</span>) : <span class="t">array&lt;uint8&gt;</span>  <span class="c">// Zero-terminated byte buffer for the raygui text boxes, which write to their text</span>
+<span class="k">def</span> <span class="f">text_of</span>(buffer : <span class="t">array&lt;uint8&gt;</span>) : <span class="t">string</span>                <span class="c">// Read a text_buffer back as a string</span>
 
 <span class="c">// Constants</span>
 <span class="k">let</span> DEG2RAD : <span class="t">float</span>
@@ -1659,6 +2513,90 @@ T *                         -&gt; <span class="t">T?</span>
 <span class="k">let</span> RAYLIB_VERSION_MAJOR : <span class="t">int</span>
 <span class="k">let</span> RAYLIB_VERSION_MINOR : <span class="t">int</span>
 <span class="k">let</span> RAYLIB_VERSION_PATCH : <span class="t">int</span>
+<span class="k">let</span> RL_BLEND_COLOR : <span class="t">uint</span>
+<span class="k">let</span> RL_BLEND_DST_ALPHA : <span class="t">uint</span>
+<span class="k">let</span> RL_BLEND_DST_RGB : <span class="t">uint</span>
+<span class="k">let</span> RL_BLEND_EQUATION : <span class="t">uint</span>
+<span class="k">let</span> RL_BLEND_EQUATION_ALPHA : <span class="t">uint</span>
+<span class="k">let</span> RL_BLEND_EQUATION_RGB : <span class="t">uint</span>
+<span class="k">let</span> RL_BLEND_SRC_ALPHA : <span class="t">uint</span>
+<span class="k">let</span> RL_BLEND_SRC_RGB : <span class="t">uint</span>
+<span class="k">let</span> RL_COMPUTE_SHADER : <span class="t">uint</span>
+<span class="k">let</span> RL_CONSTANT_ALPHA : <span class="t">uint</span>
+<span class="k">let</span> RL_CONSTANT_COLOR : <span class="t">uint</span>
+<span class="k">let</span> RL_CULL_DISTANCE_FAR : <span class="t">int</span>
+<span class="k">let</span> RL_CULL_DISTANCE_NEAR : <span class="t">int</span>
+<span class="k">let</span> RL_DEFAULT_BATCH_BUFFERS : <span class="t">int</span>
+<span class="k">let</span> RL_DEFAULT_BATCH_BUFFER_ELEMENTS : <span class="t">int</span>
+<span class="k">let</span> RL_DEFAULT_BATCH_DRAWCALLS : <span class="t">int</span>
+<span class="k">let</span> RL_DEFAULT_BATCH_MAX_TEXTURE_UNITS : <span class="t">int</span>
+<span class="k">let</span> RL_DEFAULT_SHADER_ATTRIB_LOCATION_BONEINDICES : <span class="t">int</span>
+<span class="k">let</span> RL_DEFAULT_SHADER_ATTRIB_LOCATION_BONEWEIGHTS : <span class="t">int</span>
+<span class="k">let</span> RL_DEFAULT_SHADER_ATTRIB_LOCATION_COLOR : <span class="t">int</span>
+<span class="k">let</span> RL_DEFAULT_SHADER_ATTRIB_LOCATION_INDICES : <span class="t">int</span>
+<span class="k">let</span> RL_DEFAULT_SHADER_ATTRIB_LOCATION_INSTANCETRANSFORM : <span class="t">int</span>
+<span class="k">let</span> RL_DEFAULT_SHADER_ATTRIB_LOCATION_NORMAL : <span class="t">int</span>
+<span class="k">let</span> RL_DEFAULT_SHADER_ATTRIB_LOCATION_POSITION : <span class="t">int</span>
+<span class="k">let</span> RL_DEFAULT_SHADER_ATTRIB_LOCATION_TANGENT : <span class="t">int</span>
+<span class="k">let</span> RL_DEFAULT_SHADER_ATTRIB_LOCATION_TEXCOORD : <span class="t">int</span>
+<span class="k">let</span> RL_DEFAULT_SHADER_ATTRIB_LOCATION_TEXCOORD2 : <span class="t">int</span>
+<span class="k">let</span> RL_DRAW_FRAMEBUFFER : <span class="t">uint</span>
+<span class="k">let</span> RL_DST_ALPHA : <span class="t">uint</span>
+<span class="k">let</span> RL_DST_COLOR : <span class="t">uint</span>
+<span class="k">let</span> RL_DYNAMIC_COPY : <span class="t">uint</span>
+<span class="k">let</span> RL_DYNAMIC_DRAW : <span class="t">uint</span>
+<span class="k">let</span> RL_DYNAMIC_READ : <span class="t">uint</span>
+<span class="k">let</span> RL_FLOAT : <span class="t">uint</span>
+<span class="k">let</span> RL_FRAGMENT_SHADER : <span class="t">uint</span>
+<span class="k">let</span> RL_FUNC_ADD : <span class="t">uint</span>
+<span class="k">let</span> RL_FUNC_REVERSE_SUBTRACT : <span class="t">uint</span>
+<span class="k">let</span> RL_FUNC_SUBTRACT : <span class="t">uint</span>
+<span class="k">let</span> RL_LINES : <span class="t">uint</span>
+<span class="k">let</span> RL_MAX : <span class="t">uint</span>
+<span class="k">let</span> RL_MAX_MATRIX_STACK_SIZE : <span class="t">int</span>
+<span class="k">let</span> RL_MAX_SHADER_LOCATIONS : <span class="t">int</span>
+<span class="k">let</span> RL_MIN : <span class="t">uint</span>
+<span class="k">let</span> RL_MODELVIEW : <span class="t">uint</span>
+<span class="k">let</span> RL_ONE : <span class="t">int</span>
+<span class="k">let</span> RL_ONE_MINUS_CONSTANT_ALPHA : <span class="t">uint</span>
+<span class="k">let</span> RL_ONE_MINUS_CONSTANT_COLOR : <span class="t">uint</span>
+<span class="k">let</span> RL_ONE_MINUS_DST_ALPHA : <span class="t">uint</span>
+<span class="k">let</span> RL_ONE_MINUS_DST_COLOR : <span class="t">uint</span>
+<span class="k">let</span> RL_ONE_MINUS_SRC_ALPHA : <span class="t">uint</span>
+<span class="k">let</span> RL_ONE_MINUS_SRC_COLOR : <span class="t">uint</span>
+<span class="k">let</span> RL_PROJECTION : <span class="t">uint</span>
+<span class="k">let</span> RL_QUADS : <span class="t">uint</span>
+<span class="k">let</span> RL_READ_FRAMEBUFFER : <span class="t">uint</span>
+<span class="k">let</span> RL_SRC_ALPHA : <span class="t">uint</span>
+<span class="k">let</span> RL_SRC_ALPHA_SATURATE : <span class="t">uint</span>
+<span class="k">let</span> RL_SRC_COLOR : <span class="t">uint</span>
+<span class="k">let</span> RL_STATIC_COPY : <span class="t">uint</span>
+<span class="k">let</span> RL_STATIC_DRAW : <span class="t">uint</span>
+<span class="k">let</span> RL_STATIC_READ : <span class="t">uint</span>
+<span class="k">let</span> RL_STREAM_COPY : <span class="t">uint</span>
+<span class="k">let</span> RL_STREAM_DRAW : <span class="t">uint</span>
+<span class="k">let</span> RL_STREAM_READ : <span class="t">uint</span>
+<span class="k">let</span> RL_TEXTURE : <span class="t">uint</span>
+<span class="k">let</span> RL_TEXTURE_FILTER_ANISOTROPIC : <span class="t">uint</span>
+<span class="k">let</span> RL_TEXTURE_FILTER_LINEAR : <span class="t">uint</span>
+<span class="k">let</span> RL_TEXTURE_FILTER_LINEAR_MIP_NEAREST : <span class="t">uint</span>
+<span class="k">let</span> RL_TEXTURE_FILTER_MIP_LINEAR : <span class="t">uint</span>
+<span class="k">let</span> RL_TEXTURE_FILTER_MIP_NEAREST : <span class="t">uint</span>
+<span class="k">let</span> RL_TEXTURE_FILTER_NEAREST : <span class="t">uint</span>
+<span class="k">let</span> RL_TEXTURE_FILTER_NEAREST_MIP_LINEAR : <span class="t">uint</span>
+<span class="k">let</span> RL_TEXTURE_MAG_FILTER : <span class="t">uint</span>
+<span class="k">let</span> RL_TEXTURE_MIN_FILTER : <span class="t">uint</span>
+<span class="k">let</span> RL_TEXTURE_MIPMAP_BIAS_RATIO : <span class="t">uint</span>
+<span class="k">let</span> RL_TEXTURE_WRAP_CLAMP : <span class="t">uint</span>
+<span class="k">let</span> RL_TEXTURE_WRAP_MIRROR_CLAMP : <span class="t">uint</span>
+<span class="k">let</span> RL_TEXTURE_WRAP_MIRROR_REPEAT : <span class="t">uint</span>
+<span class="k">let</span> RL_TEXTURE_WRAP_REPEAT : <span class="t">uint</span>
+<span class="k">let</span> RL_TEXTURE_WRAP_S : <span class="t">uint</span>
+<span class="k">let</span> RL_TEXTURE_WRAP_T : <span class="t">uint</span>
+<span class="k">let</span> RL_TRIANGLES : <span class="t">uint</span>
+<span class="k">let</span> RL_UNSIGNED_BYTE : <span class="t">uint</span>
+<span class="k">let</span> RL_VERTEX_SHADER : <span class="t">uint</span>
+<span class="k">let</span> RL_ZERO : <span class="t">int</span>
 </code></pre></div>
 <p id="punbound">not bound</p>
 <div id="unbound"><pre><code><span class="c">// Variadic: use daslang string formatting and print() instead</span>

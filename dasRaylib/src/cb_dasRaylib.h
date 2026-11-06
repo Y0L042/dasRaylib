@@ -8,6 +8,8 @@
 #include <raylib.h>
 #include <raymath.h>
 #include <rcamera.h>
+#include <rlgl.h>
+#include <raygui.h>
 
 // Everything below is C++ glue for the compiled module; libclang parses this
 // header too, so keep it out of the binder's view.

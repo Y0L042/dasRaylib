@@ -4,15 +4,16 @@ require daslib/fio
 require daslib/defer
 require daslib/strings_boost
 
-// Generates dasRaylib/src/* from raylib.h + raymath.h + rcamera.h.
+// Generates dasRaylib/src/* from raylib.h, raymath.h, rcamera.h, rlgl.h and raygui.h.
 //
 // Run with a daslang that has dasClangBind built:
 //   bash manage.sh gen
 // Environment:
 //   RAYLIB_DIR    raylib install root (must contain include/raylib.h)
+//   RAYGUI_DIR    directory holding raygui.h (raylib ships one in examples/shapes)
 //   LIBCLANG_DIR  LLVM/libclang root (default C:/Programs/libClang), used for clang resource headers
 
-let RAYLIB_HEADERS = fixed_array<string>("raylib.h", "raymath.h", "rcamera.h")
+let RAYLIB_HEADERS = fixed_array<string>("raylib.h", "raymath.h", "rcamera.h", "rlgl.h", "raygui.h")
 
 // raylib types whose names collide with types in daslang's C++ `namespace das`
 // (das::Matrix). Generated code lives inside `namespace das`, so spell them as ::Name.
@@ -74,11 +75,13 @@ class RaylibGen : CppGenBind {
     raylib_skip_func : table<string; bool>
     raylib_skip_const : table<string; bool>
     raylib_include_prefix : string  // stripped from "// from <file>:<line>" comments so output is machine-independent
+    raygui_include_prefix : string
     pending_arg_types : int     // getCursorArgType calls left that are for arguments (the next one is the result)
     wrap_file : FILE const?     // dasRaylib.wrap.inc: C++ wrappers converting Color <-> float4, Matrix <-> float4x4
     wrapper_func_count : int
-    def RaylibGen(module_dir, raylib_include, clang_resource : string) {
+    def RaylibGen(module_dir, raylib_include, raygui_include, clang_resource : string) {
         raylib_include_prefix = "{raylib_include}/"
+        raygui_include_prefix = "{raygui_include}/"
         bind_root = "{module_dir}/src"
         bind_module = "dasRaylib"
         bind_das_module = "raylib"
@@ -86,12 +89,14 @@ class RaylibGen : CppGenBind {
         let pfp = "{module_dir}/src/"
         CONST_FILE_NAMES <- array<string>(
             "{raylib_include}/raylib.h",
-            "{raylib_include}/raymath.h"
+            "{raylib_include}/raymath.h",
+            "{raylib_include}/rlgl.h"
         )
         let args <- array<string>(
             "-xc++-header",
             "-std=c++17",
             "-I{raylib_include}",
+            "-I{raygui_include}",
             "-isystem{clang_resource}",
             "-DDAS_RAYLIB_BINDER_PARSE=1",      // hide the C++ glue in cb_dasRaylib.h from libclang
             "-D_ALLOW_COMPILER_AND_STL_VERSION_MISMATCH=1"
@@ -143,6 +148,9 @@ class RaylibGen : CppGenBind {
     }
     def override clang_getCursorLocationDescription(var c : CXCursor) : string {
         let desc = AnyGenBind`clang_getCursorLocationDescription(self, c)
+        if (desc |> starts_with(raygui_include_prefix)) {
+            return desc |> slice(length(raygui_include_prefix))
+        }
         return desc |> starts_with(raylib_include_prefix) ? desc |> slice(length(raylib_include_prefix)) : desc
     }
     def override skip_file(fname : string) : bool {
@@ -346,6 +354,10 @@ def main {
         panic("RAYLIB_DIR is not set")
     }
     let raylib_include = "{raylib_dir}/include"
+    let raygui_include = env_or("RAYGUI_DIR", "")
+    if (empty(raygui_include)) {
+        panic("RAYGUI_DIR is not set")
+    }
     let libclang_dir = env_or("LIBCLANG_DIR", "C:/Programs/libClang")
     // clang resource headers (stdarg.h, stdbool.h, ...): pick the single version dir
     var clang_resource = ""
@@ -356,8 +368,9 @@ def main {
     }
     print("module dir     : {module_dir}\n")
     print("raylib include : {raylib_include}\n")
+    print("raygui include : {raygui_include}\n")
     print("clang resource : {clang_resource}\n")
-    var cgb = new RaylibGen(module_dir, raylib_include, clang_resource)
+    var cgb = new RaylibGen(module_dir, raylib_include, raygui_include, clang_resource)
     defer() {
         unsafe {
             delete cgb

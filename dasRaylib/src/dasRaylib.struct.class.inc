@@ -527,3 +527,72 @@ struct AutomationEventList_GeneratedAnnotation : ManagedStructureAnnotation<Auto
 	}
 };
 
+// from rlgl.h:386:16
+struct rlVertexBuffer_GeneratedAnnotation : ManagedStructureAnnotation<rlVertexBuffer> {
+	virtual bool isLocal() const override { return true; }
+	virtual bool canBePlacedInContainer() const override { return true; }
+	virtual bool hasNonTrivialCtor() const override { return false; }
+	virtual bool canCopy() const override { return true; }
+	rlVertexBuffer_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("rlVertexBuffer", ml, "rlVertexBuffer") {
+	}
+	void init () {
+		addField<DAS_BIND_MANAGED_FIELD(elementCount)>("elementCount","elementCount");
+		addField<DAS_BIND_MANAGED_FIELD(vertices)>("vertices","vertices");
+		addField<DAS_BIND_MANAGED_FIELD(texcoords)>("texcoords","texcoords");
+		addField<DAS_BIND_MANAGED_FIELD(normals)>("normals","normals");
+		addField<DAS_BIND_MANAGED_FIELD(colors)>("colors","colors");
+		addField<DAS_BIND_MANAGED_FIELD(indices)>("indices","indices");
+		addField<DAS_BIND_MANAGED_FIELD(vaoId)>("vaoId","vaoId");
+		addField<DAS_BIND_MANAGED_FIELD(vboId)>("vboId","vboId");
+	}
+};
+
+// from rlgl.h:407:16
+struct rlDrawCall_GeneratedAnnotation : ManagedStructureAnnotation<rlDrawCall> {
+	virtual bool isLocal() const override { return true; }
+	virtual bool canBePlacedInContainer() const override { return true; }
+	virtual bool hasNonTrivialCtor() const override { return false; }
+	virtual bool canCopy() const override { return true; }
+	rlDrawCall_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("rlDrawCall", ml, "rlDrawCall") {
+	}
+	void init () {
+		addField<DAS_BIND_MANAGED_FIELD(mode)>("mode","mode");
+		addField<DAS_BIND_MANAGED_FIELD(vertexCount)>("vertexCount","vertexCount");
+		addField<DAS_BIND_MANAGED_FIELD(vertexAlignment)>("vertexAlignment","vertexAlignment");
+		addField<DAS_BIND_MANAGED_FIELD(textureId)>("textureId","textureId");
+	}
+};
+
+// from rlgl.h:420:16
+struct rlRenderBatch_GeneratedAnnotation : ManagedStructureAnnotation<rlRenderBatch> {
+	virtual bool isLocal() const override { return true; }
+	virtual bool canBePlacedInContainer() const override { return true; }
+	virtual bool hasNonTrivialCtor() const override { return false; }
+	virtual bool canCopy() const override { return true; }
+	rlRenderBatch_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("rlRenderBatch", ml, "rlRenderBatch") {
+	}
+	void init () {
+		addField<DAS_BIND_MANAGED_FIELD(bufferCount)>("bufferCount","bufferCount");
+		addField<DAS_BIND_MANAGED_FIELD(currentBuffer)>("currentBuffer","currentBuffer");
+		addField<DAS_BIND_MANAGED_FIELD(vertexBuffer)>("vertexBuffer","vertexBuffer");
+		addField<DAS_BIND_MANAGED_FIELD(draws)>("draws","draws");
+		addField<DAS_BIND_MANAGED_FIELD(drawCounter)>("drawCounter","drawCounter");
+		addField<DAS_BIND_MANAGED_FIELD(currentDepth)>("currentDepth","currentDepth");
+	}
+};
+
+// from raygui.h:541:16
+struct GuiStyleProp_GeneratedAnnotation : ManagedStructureAnnotation<GuiStyleProp> {
+	virtual bool isLocal() const override { return true; }
+	virtual bool canBePlacedInContainer() const override { return true; }
+	virtual bool hasNonTrivialCtor() const override { return false; }
+	virtual bool canCopy() const override { return true; }
+	GuiStyleProp_GeneratedAnnotation(ModuleLibrary & ml) : ManagedStructureAnnotation ("GuiStyleProp", ml, "GuiStyleProp") {
+	}
+	void init () {
+		addField<DAS_BIND_MANAGED_FIELD(controlId)>("controlId","controlId");
+		addField<DAS_BIND_MANAGED_FIELD(propertyId)>("propertyId","propertyId");
+		addField<DAS_BIND_MANAGED_FIELD(propertyValue)>("propertyValue","propertyValue");
+	}
+};
+

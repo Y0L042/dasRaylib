@@ -17,3 +17,7 @@ void initFunctions_13();
 void initFunctions_14();
 void initFunctions_15();
 void initFunctions_16();
+void initFunctions_17();
+void initFunctions_18();
+void initFunctions_19();
+void initFunctions_20();

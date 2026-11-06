@@ -187,3 +187,27 @@ template <> struct cast_arg<AutomationEventList> {
 		return * cast<AutomationEventList *>::to(res);
 	}
 };
+template <> struct cast_arg<rlVertexBuffer> {
+	static __forceinline const rlVertexBuffer & to ( Context & ctx, SimNode * node ) {
+		vec4f res = node->eval(ctx);
+		return * cast<rlVertexBuffer *>::to(res);
+	}
+};
+template <> struct cast_arg<rlDrawCall> {
+	static __forceinline const rlDrawCall & to ( Context & ctx, SimNode * node ) {
+		vec4f res = node->eval(ctx);
+		return * cast<rlDrawCall *>::to(res);
+	}
+};
+template <> struct cast_arg<rlRenderBatch> {
+	static __forceinline const rlRenderBatch & to ( Context & ctx, SimNode * node ) {
+		vec4f res = node->eval(ctx);
+		return * cast<rlRenderBatch *>::to(res);
+	}
+};
+template <> struct cast_arg<GuiStyleProp> {
+	static __forceinline const GuiStyleProp & to ( Context & ctx, SimNode * node ) {
+		vec4f res = node->eval(ctx);
+		return * cast<GuiStyleProp *>::to(res);
+	}
+};

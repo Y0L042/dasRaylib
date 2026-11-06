@@ -71,8 +71,8 @@ pre code { display: block; overflow-x: auto; padding: 10px; font-family: "Courie
 #pmodels { color: var(--models-p); } #models code { border-color: var(--models-b); background: var(--models-c); }
 #paudio { color: var(--audio-p); } #audio code { border-color: var(--audio-b); background: var(--audio-c); }
 #praymath { color: var(--raymath-p); } #raymath code { border-color: var(--raymath-b); background: var(--raymath-c); }
-#pstructs, #penums, #pcolors, #pextras, #punbound, #legend > p { color: var(--plain-p); }
-#structs code, #enums code, #colors code, #extras code, #unbound code, #legend code { border-color: var(--plain-b); background: var(--plain-c); }
+#pstructs, #penums, #pcolors, #pextras, #punbound, #prlgl, #praygui, #legend > p { color: var(--plain-p); }
+#structs code, #enums code, #colors code, #extras code, #unbound code, #rlgl code, #raygui code, #legend code { border-color: var(--plain-b); background: var(--plain-c); }
 footer { margin-top: 20px; font-size: 11px; color: var(--muted); }
 @media (max-width: 1550px) { #fullgroup { grid-template-columns: minmax(0, 1fr); } }
 </style>
@@ -83,7 +83,7 @@ footer { margin-top: 20px; font-size: 11px; color: var(--muted); }
     <p class="links">raylib bindings for daslang. <a href="https://github.com/Y0L042/dasRaylib">GitHub</a> | <a href="https://www.raylib.com/cheatsheet/cheatsheet.html">raylib C cheatsheet</a> | <a href="https://daslang.io/">daslang</a></p>
     <p>raylib v@@VERSION@@ quick reference card <button id="theme" type="button">light / dark</button></p>
     <nav>
-        <a href="#pcore">rcore</a><a href="#pshapes">rshapes</a><a href="#ptextures">rtextures</a><a href="#ptext">rtext</a><a href="#pmodels">rmodels</a><a href="#paudio">raudio</a><a href="#praymath">raymath</a><a href="#pstructs">structs</a><a href="#penums">enums</a><a href="#pcolors">colors</a><a href="#pextras">converters</a><a href="#punbound">not bound</a>
+        <a href="#pcore">rcore</a><a href="#pshapes">rshapes</a><a href="#ptextures">rtextures</a><a href="#ptext">rtext</a><a href="#pmodels">rmodels</a><a href="#paudio">raudio</a><a href="#praymath">raymath</a><a href="#prlgl">rlgl</a><a href="#praygui">raygui</a><a href="#pstructs">structs</a><a href="#penums">enums</a><a href="#pcolors">colors</a><a href="#pextras">converters</a><a href="#punbound">not bound</a>
     </nav>
 </header>
 <div id="legend">
@@ -101,7 +101,8 @@ const char *                -&gt; <span class="t">string</span>
 T *                         -&gt; <span class="t">T?</span>
 
 <span class="c">// float4 is both Color and Rectangle: the parameter name tells you which.</span>
-<span class="c">// Enum parameters are plain int unless a raylib_boost overload is listed.</span></code></pre>
+<span class="c">// Enum parameters are plain int unless a raylib_boost overload is listed.</span>
+<span class="c">// raygui text boxes write to their text, so pass text_buffer(), not a string.</span></code></pre>
 </div>
 <div id="fullgroup">
 <div class="group">

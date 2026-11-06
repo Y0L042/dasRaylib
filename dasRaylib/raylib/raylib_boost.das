@@ -5,6 +5,7 @@ module raylib_boost shared public
 // Hand-written convenience layer over the generated `raylib` module.
 //   require raylib/raylib_boost   // re-exports raylib
 require raylib public
+require strings
 
 // ── raylib color macros (#define RED CLITERAL(Color){...}) — not visible to the binder ──
 // Colors are das float4 RGBA in 0..1; raylib functions convert them to bytes (exact round-trip).
@@ -48,3 +49,48 @@ def public IsMouseButtonReleased(button : MouseButton) : bool { return IsMouseBu
 def public IsMouseButtonUp(button : MouseButton) : bool { return IsMouseButtonUp(int(button)); }
 def public SetConfigFlags(flags : ConfigFlags) { SetConfigFlags(uint(flags)); }
 def public UpdateCamera(var camera : Camera3D?; mode : CameraMode) { UpdateCamera(camera, int(mode)); }
+
+// ── rlgl: its RL_* primitive constants are uint, but rlBegin takes int ──
+def public rlBegin(mode : uint) { rlBegin(int(mode)); }
+
+// ── raygui: these write into the text they are given, and a daslang string must never change ──
+// Pass a zero-terminated byte buffer instead. text_buffer() and text_of() convert to and from it.
+def public text_buffer(text : string; size : int) : array<uint8> {
+    var buffer : array<uint8>
+    buffer |> resize(size)
+    let count = length(text) < size ? length(text) : size - 1
+    for (i in range(count)) {
+        buffer[i] = uint8(character_at(text, i))
+    }
+    return <- buffer
+}
+
+def public text_of(buffer : array<uint8>) : string {
+    return build_string() $(var writer : StringBuilderWriter) {
+        for (b in buffer) {
+            if (b == uint8(0)) {
+                break
+            }
+            writer |> write_char(int(b))
+        }
+    }
+}
+
+def public GuiTextBox(bounds : float4; var text : array<uint8>; editMode : bool) : int {
+    unsafe {
+        return GuiTextBox(bounds, reinterpret<string>(addr(text[0])), length(text), editMode)
+    }
+}
+
+def public GuiTextInputBox(bounds : float4; title, message : string; var text : array<uint8>; btnText : string; var btnActive : int?; var secretViewActive : bool?) : int {
+    unsafe {
+        return GuiTextInputBox(bounds, title, message, reinterpret<string>(addr(text[0])), length(text), btnText, btnActive, secretViewActive)
+    }
+}
+
+// raygui reads the labels through a char ** and does not change them.
+def public GuiListViewEx(bounds : float4; var items : array<string>; var scrollIndex, active, focus : int?) : int {
+    unsafe {
+        return GuiListViewEx(bounds, addr(items[0]), length(items), scrollIndex, active, focus)
+    }
+}

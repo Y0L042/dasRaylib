@@ -7,8 +7,9 @@ options rtti
 //   bash manage.sh gen-docs --check   fail if the page on disk is out of date
 //
 // Signatures come from reflecting the built `raylib` and `raylib_boost` modules, so they always
-// match what scripts can call. Order, groups and comments come from raylib.h, raymath.h and
-// rcamera.h; enum and struct comments come from raylib_api.json. Functions are joined by name.
+// match what scripts can call. Order, groups and comments come from the raylib, raymath, rcamera,
+// rlgl and raygui headers; enum and struct comments come from raylib_api.json, which only covers
+// raylib.h. Functions are joined by name.
 //
 // Generation fails if a bound function has no header entry, so a raylib update can't leave the
 // page silently incomplete. Add new hand-written functions to `converter_comment`.
@@ -324,6 +325,26 @@ def parse_raymath_h(lines : array<string>) {
     }
 }
 
+// rlgl.h and raygui.h both declare their API with a prefix, ahead of an implementation section.
+def parse_declarations(section, prefix, implementation : string; lines : array<string>) {
+    var pending : array<string>
+    for (raw in lines) {
+        let line = strip(raw)
+        if (starts_with(line, "#if") && find(line, implementation) >= 0) {
+            break
+        }
+        if (empty(line)) {
+            pending |> clear()
+        } elif (starts_with(line, "//--")) {
+            continue
+        } elif (starts_with(line, "//")) {
+            pending |> push(line)
+        } elif (starts_with(line, "{prefix} ")) {
+            add_function(section, function_name(line), trailing_comment(line), line, pending)
+        }
+    }
+}
+
 def parse_rcamera_h(lines : array<string>) {
     // Declarations have no comments here. They sit on the definitions, further down.
     var comments : table<string; string>
@@ -377,13 +398,17 @@ def converter_comment(name : string) : string {
         return "Raw Matrix (as found in pointers and struct fields) to float4x4"
     } elif (name == "to_Matrix") {
         return "float4x4 to raw Matrix"
+    } elif (name == "text_buffer") {
+        return "Zero-terminated byte buffer for the raygui text boxes, which write to their text"
+    } elif (name == "text_of") {
+        return "Read a text_buffer back as a string"
     }
     return ""
 }
 
 def add_extras(mod : Module?) {
-    add_comment("extras", "// Converters for raw Color and Matrix values")
-    for (name in fixed_array("to_float4", "to_Color", "to_float4x4", "to_Matrix")) {
+    add_comment("extras", "// Converters for raw Color and Matrix values, and raygui text buffers")
+    for (name in fixed_array("to_float4", "to_Color", "to_float4x4", "to_Matrix", "text_buffer", "text_of")) {
         if (!key_exists(signatures, name)) {
             fail("converter {name} is no longer bound")
             continue
@@ -466,7 +491,7 @@ def add_structs(mod : Module?; var api : JsonValue?) : int {
         }
     }
     let total = length(reflected)
-    var listed = 0
+    var listed : table<string; bool>
     for (entry in api?["structs"].value as _array) {
         let name = json_text(entry, "name")
         if (key_exists(reflected, name)) {
@@ -475,11 +500,20 @@ def add_structs(mod : Module?; var api : JsonValue?) : int {
                 field_comments |> insert(json_text(field, "name"), json_text(field, "description"))
             }
             add_struct(name, json_text(entry, "description"), reflected[name], field_comments)
-            listed++
+            listed |> insert(name, true)
         }
     }
-    if (listed != total) {
-        fail("{total - listed} bound structs are missing from raylib_api.json")
+    // rlgl and raygui structs aren't in raylib_api.json, so they follow without comments.
+    var others : array<string>
+    for (name in keys(reflected)) {
+        if (!key_exists(listed, name)) {
+            others |> push(name)
+        }
+    }
+    sort(others)
+    var no_comments : table<string; string>
+    for (name in others) {
+        add_struct(name, "", reflected[name], no_comments)
     }
     return total
 }
@@ -512,7 +546,7 @@ def add_enums(mod : Module?; var api : JsonValue?) : int {
         }
         reflected |> emplace(string(value.name), entries)
     }
-    var listed = 0
+    var listed : table<string; bool>
     for (entry in api?["enums"].value as _array) {
         let name = json_text(entry, "name")
         if (!key_exists(reflected, name)) {
@@ -528,12 +562,24 @@ def add_enums(mod : Module?; var api : JsonValue?) : int {
             add_code("enums", "    {item._0} = {item._1}", "    {item._0} = {esc(item._1)}", comments?[item._0] ?? "")
         }
         add_blank("enums")
-        listed++
+        listed |> insert(name, true)
     }
-    if (listed != length(reflected)) {
-        fail("{length(reflected) - listed} bound enums are missing from raylib_api.json")
+    // rlgl and raygui enums aren't in raylib_api.json, so they follow without comments.
+    var others : array<string>
+    for (name in keys(reflected)) {
+        if (!key_exists(listed, name)) {
+            others |> push(name)
+        }
     }
-    return listed
+    sort(others)
+    for (name in others) {
+        add_code("enums", "enum {name}", "{keyword("enum")} <span class=\"f\">{name}</span>", "")
+        for (item in reflected[name]) {
+            add_code("enums", "    {item._0} = {item._1}", "    {item._0} = {esc(item._1)}", "")
+        }
+        add_blank("enums")
+    }
+    return length(reflected)
 }
 
 def add_unbound_group(reason, title : string) {
@@ -613,6 +659,8 @@ def main : int {
     parse_raylib_h(raylib_h)
     parse_rcamera_h(read_lines("{raylib_src}/src/rcamera.h"))
     parse_raymath_h(read_lines("{raylib_src}/src/raymath.h"))
+    parse_declarations("rlgl", "RLAPI", "RLGL_IMPLEMENTATION", read_lines("{raylib_src}/src/rlgl.h"))
+    parse_declarations("raygui", "RAYGUIAPI", "RAYGUI_IMPLEMENTATION", read_lines("{raylib_src}/examples/shapes/raygui.h"))
 
     let mod = find_module_named("raylib")
     add_extras(mod)
@@ -653,6 +701,8 @@ def main : int {
     right += section_html("textures", "module: rtextures")
     right += section_html("models", "module: rmodels")
     right += section_html("raymath", "module: raymath")
+    right += section_html("rlgl", "module: rlgl")
+    right += section_html("raygui", "module: raygui")
     right += section_html("structs", "structs")
     right += section_html("colors", "colors")
     right += section_html("extras", "converters and constants")

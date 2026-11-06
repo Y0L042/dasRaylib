@@ -32,3 +32,7 @@ initRecAnnotation(ann_VrStereoConfig,lib);
 initRecAnnotation(ann_FilePathList,lib);
 initRecAnnotation(ann_AutomationEvent,lib);
 initRecAnnotation(ann_AutomationEventList,lib);
+initRecAnnotation(ann_rlVertexBuffer,lib);
+initRecAnnotation(ann_rlDrawCall,lib);
+initRecAnnotation(ann_rlRenderBatch,lib);
+initRecAnnotation(ann_GuiStyleProp,lib);

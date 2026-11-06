@@ -16,7 +16,7 @@ usage() {
     echo "Usage: $0 <command> [args]"
     echo ""
     echo "Commands:"
-    echo "  gen                Regenerate dasRaylib/src/* with dasClangBind (raylib.h, raymath.h, rcamera.h)"
+    echo "  gen                Regenerate dasRaylib/src/* with dasClangBind (raylib, raymath, rcamera, rlgl, raygui)"
     echo "                     Uses \$DASLANG_REPO, \$LIBCLANG_DIR; \$RAYLIB_DIR is optional (default: the fetched raylib)"
     echo "  build              Fetch raylib and build _build/Release/dasModuleRaylibGen.shared_module"
     echo "                     Uses \$DASLANG_REPO"
@@ -50,8 +50,13 @@ cmd_gen() {
         echo "ERROR: $raylib_dir/include/raylib.h not found. Fix or unset RAYLIB_DIR."
         exit 1
     fi
+    local raygui_dir="${RAYGUI_DIR:-$BUILD_DIR/_deps/raylib-src/examples/shapes}"
+    if [[ ! -f "$raygui_dir/raygui.h" ]]; then
+        echo "ERROR: $raygui_dir/raygui.h not found. Run build first, or set RAYGUI_DIR."
+        exit 1
+    fi
     echo "==> Generating dasRaylib bindings (daslang: $DASLANG_REPO, raylib: $raylib_dir)"
-    RAYLIB_DIR="$raylib_dir" LIBCLANG_DIR="$LIBCLANG_DIR" \
+    RAYLIB_DIR="$raylib_dir" RAYGUI_DIR="$raygui_dir" LIBCLANG_DIR="$LIBCLANG_DIR" \
         "$DASLANG" "$DASRAYLIB_DIR/bind/bind_raylib.das" \
         | { grep -v '^\[I\]' || true; }
 }

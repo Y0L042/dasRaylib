@@ -394,4 +394,26 @@ inline void _rlw_MatrixDecompose(const float4x4 & mat, Vector3 * translation, Ve
 inline float4x4 _rlw_GetCameraViewMatrix(Camera3D * camera) { return das_rl_float4x4(::GetCameraViewMatrix(camera)); }
 // from rcamera.h:157:14
 inline float4x4 _rlw_GetCameraProjectionMatrix(Camera3D * camera, float aspect) { return das_rl_float4x4(::GetCameraProjectionMatrix(camera, aspect)); }
+// from rlgl.h:788:12
+inline void _rlw_rlSetUniformMatrix(int locIndex, const float4x4 & mat) { ::rlSetUniformMatrix(locIndex, das_rl_matrix(mat)); }
+// from rlgl.h:809:14
+inline float4x4 _rlw_rlGetMatrixModelview() { return das_rl_float4x4(::rlGetMatrixModelview()); }
+// from rlgl.h:810:14
+inline float4x4 _rlw_rlGetMatrixProjection() { return das_rl_float4x4(::rlGetMatrixProjection()); }
+// from rlgl.h:811:14
+inline float4x4 _rlw_rlGetMatrixTransform() { return das_rl_float4x4(::rlGetMatrixTransform()); }
+// from rlgl.h:812:14
+inline float4x4 _rlw_rlGetMatrixProjectionStereo(int eye) { return das_rl_float4x4(::rlGetMatrixProjectionStereo(eye)); }
+// from rlgl.h:813:14
+inline float4x4 _rlw_rlGetMatrixViewOffsetStereo(int eye) { return das_rl_float4x4(::rlGetMatrixViewOffsetStereo(eye)); }
+// from rlgl.h:814:12
+inline void _rlw_rlSetMatrixProjection(const float4x4 & proj) { ::rlSetMatrixProjection(das_rl_matrix(proj)); }
+// from rlgl.h:815:12
+inline void _rlw_rlSetMatrixModelview(const float4x4 & view) { ::rlSetMatrixModelview(das_rl_matrix(view)); }
+// from rlgl.h:816:12
+inline void _rlw_rlSetMatrixProjectionStereo(const float4x4 & right, const float4x4 & left) { ::rlSetMatrixProjectionStereo(das_rl_matrix(right), das_rl_matrix(left)); }
+// from rlgl.h:817:12
+inline void _rlw_rlSetMatrixViewOffsetStereo(const float4x4 & right, const float4x4 & left) { ::rlSetMatrixViewOffsetStereo(das_rl_matrix(right), das_rl_matrix(left)); }
+// from raygui.h:823:16
+inline void _rlw_GuiDrawIcon(int iconId, int posX, int posY, int pixelSize, float4 color) { ::GuiDrawIcon(iconId, posX, posY, pixelSize, das_rl_color(color)); }
 }
