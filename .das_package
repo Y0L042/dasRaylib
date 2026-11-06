@@ -5,6 +5,9 @@ require daslib/daspkg
 def package() {
     package_name("raylib")
     package_description("Raylib bindings for Daslang — full RLAPI, enums, and types")
+    package_author("Y0L042")
+    package_source("https://github.com/Y0L042/raylib-daslang")
+    package_license("Zlib")
 }
 
 [export]

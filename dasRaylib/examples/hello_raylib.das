@@ -2,7 +2,7 @@ options gen2
 
 // Smoke test for the generated dasRaylib module, using daslang math types:
 //   Vector2/3/4 -> float2/3/4, Rectangle -> float4, Color -> float4 (0..1), Matrix -> float4x4
-//   bash manage.sh run-dasraylib
+//   bash manage.sh run
 require raylib
 require raylib/raylib_boost
 require math

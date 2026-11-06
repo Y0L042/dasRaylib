@@ -1,17 +1,9 @@
 # Directories
 .usr
 .vs/
-generated_docs/
 
 bin/
 bin-int/
-vendor/bin/*
-!vendor/bin/premake/premake5.exe
-
-# Vendor repos (cloned on demand via --deps)
-flecs_das/vendor/flecs/
-flecs_das/vendor/daslang/
-!flecs_das/vendor/*.lua
 
 # Files
 *.user
@@ -40,8 +32,6 @@ flecs_das/vendor/daslang/
 
 # daspkg artifacts
 daspkg.lock
-dasModuleRaylib.shared_module
-dasModuleRaylib_debug.shared_module
 _build/
 
 # IDE and editor-specific files
@@ -77,8 +67,7 @@ enc_temp_folder/
 /.claude
 *.slnx
 /.github
-/.flecs_BAK
-/rl_das/tools/__pycache__
 /temp.txt
 *.dascache
 *.manifest
+.nvim.lua

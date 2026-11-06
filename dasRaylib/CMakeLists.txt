@@ -19,7 +19,7 @@ endif()
 message(STATUS "DASLANG_DIR: ${DASLANG_DIR}")
 
 # ── raylib ─────────────────────────────────────────────────────────────────────
-# Regenerate dasRaylib/src (manage.sh gen-dasraylib) when changing this tag.
+# Regenerate dasRaylib/src (manage.sh gen) when changing this tag.
 include(FetchContent)
 set(BUILD_SHARED_LIBS ON)
 set(BUILD_EXAMPLES OFF)
