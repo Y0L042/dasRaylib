@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.22)
-project(raylib_daslang CXX)
+project(dasRaylib CXX)
 
 # Package entry point: `daspkg install` configures this directory with -DDASLANG_DIR=...
 # dasRaylib fetches and builds raylib itself, so nothing else has to be installed.

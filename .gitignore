@@ -1,5 +1,4 @@
 # Directories
-.usr
 .vs/
 
 bin/
@@ -32,7 +31,6 @@ bin-int/
 
 # daspkg artifacts
 daspkg.lock
-_build/
 
 # IDE and editor-specific files
 .vscode/
@@ -55,14 +53,9 @@ _build/
 *~
 
 # Misc
-nuget.config
-imgui.ini
 logs
 temp
 tmp.txt
-TestResults
-enc_temp_folder/
-*.etl
 /artifacts
 /.claude
 *.slnx

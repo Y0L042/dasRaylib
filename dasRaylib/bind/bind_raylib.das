@@ -6,8 +6,8 @@ require daslib/strings_boost
 
 // Generates dasRaylib/src/* from raylib.h + raymath.h + rcamera.h.
 //
-// Run (from anywhere, with a daslang that has dasClangBind built):
-//   daslang dasRaylib/bind/bind_raylib.das
+// Run with a daslang that has dasClangBind built:
+//   bash manage.sh gen
 // Environment:
 //   RAYLIB_DIR    raylib install root (must contain include/raylib.h)
 //   LIBCLANG_DIR  LLVM/libclang root (default C:/Programs/libClang), used for clang resource headers

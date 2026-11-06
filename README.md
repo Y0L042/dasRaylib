@@ -1,4 +1,4 @@
-# raylib-daslang
+# dasRaylib
 
 [raylib](https://www.raylib.com/) 6.2 bindings for [daslang](https://daslang.io/), using daslang's own math types. Vectors are `float2`/`float3`/`float4`, matrices are `float4x4` and colors are `float4` in 0..1.
 
@@ -9,7 +9,7 @@ The bindings cover `raylib.h`, `raymath.h` and `rcamera.h`. `rlgl` and `raygui` 
 ## Install
 
 ```
-daspkg install github.com/Y0L042/raylib-daslang
+daspkg install github.com/Y0L042/dasRaylib
 ```
 
 CMake fetches and builds raylib itself, so nothing else needs installing.
