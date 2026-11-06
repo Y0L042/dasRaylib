@@ -94,3 +94,39 @@ def public GuiListViewEx(bounds : float4; var items : array<string>; var scrollI
         return GuiListViewEx(bounds, addr(items[0]), length(items), scrollIndex, active, focus)
     }
 }
+
+// ── shader uniforms from daslang values, with the uniform type picked for you ──
+def public SetShaderValue(shader : Shader; loc : int; value : float) {
+    var v = value
+    unsafe {
+        SetShaderValue(shader, loc, addr(v), int(ShaderUniformDataType.SHADER_UNIFORM_FLOAT))
+    }
+}
+
+def public SetShaderValue(shader : Shader; loc : int; value : int) {
+    var v = value
+    unsafe {
+        SetShaderValue(shader, loc, addr(v), int(ShaderUniformDataType.SHADER_UNIFORM_INT))
+    }
+}
+
+def public SetShaderValue(shader : Shader; loc : int; value : float2) {
+    var v = value
+    unsafe {
+        SetShaderValue(shader, loc, addr(v), int(ShaderUniformDataType.SHADER_UNIFORM_VEC2))
+    }
+}
+
+def public SetShaderValue(shader : Shader; loc : int; value : float3) {
+    var v = value
+    unsafe {
+        SetShaderValue(shader, loc, addr(v), int(ShaderUniformDataType.SHADER_UNIFORM_VEC3))
+    }
+}
+
+def public SetShaderValue(shader : Shader; loc : int; value : float4) {
+    var v = value
+    unsafe {
+        SetShaderValue(shader, loc, addr(v), int(ShaderUniformDataType.SHADER_UNIFORM_VEC4))
+    }
+}
