@@ -1,6 +1,9 @@
 options gen2
 require daslib/daspkg
 
+// Latest released version. Bump together with the git tag (vX.Y.Z) and CHANGELOG.md.
+let LATEST_VERSION = "1.0.0"
+
 [export]
 def package() {
     package_name("raylib")
@@ -8,6 +11,19 @@ def package() {
     package_author("Y0L042")
     package_source("https://github.com/Y0L042/dasRaylib")
     package_license("Zlib")
+    package_tag("graphics")
+    package_tag("gamedev")
+    // dasRaylib/src is generated against this SDK's headers.
+    package_min_sdk("0.6.4")
+}
+
+[export]
+def resolve(sdk_version, version : string) {
+    if (version == "" || version == "latest") {
+        download_tag("v{LATEST_VERSION}")
+    } else {
+        download_tag("v{version}")
+    }
 }
 
 [export]
@@ -21,8 +37,10 @@ def release() {
     if (p == "windows") {
         release_include("_build/Release/raylib.dll")
     } elif (p == "darwin") {
+        // untested: only Windows is supported for now
         release_include("_build/Release/libraylib.620.dylib")
     } else {
+        // untested: only Windows is supported for now
         release_include("_build/Release/libraylib.so.620")
     }
 }

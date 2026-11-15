@@ -1,8 +1,10 @@
 # Changelog
 
-## Unreleased
+## 1.0.0 - 2026-11-15
 
-First formal release of the bindings, based on raylib 6.2.
+First formal release of the bindings, based on raylib 6.2. Needs daslang SDK 0.6.4 or later.
+
+Windows with MSVC only. Linux and macOS are untested.
 
 ### Added
 
@@ -10,6 +12,8 @@ First formal release of the bindings, based on raylib 6.2.
 - `raylib_boost`: color constants, enum overloads, and safe text buffer overloads for raygui.
 - `docs/cheatsheet.html`: generated API reference.
 - `tests/`: headless test suites.
+- `manage.bat`: the `manage.sh` commands for cmd.exe.
+- `.das_package`: `resolve()`, so `daspkg install ...@1.0.0` installs a tagged release.
 
 ### Removed
 

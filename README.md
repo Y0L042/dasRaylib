@@ -9,10 +9,17 @@ The bindings cover `raylib.h`, `raymath.h`, `rcamera.h`, `rlgl.h` and `raygui.h`
 ## Install
 
 ```
-daspkg install github.com/Y0L042/dasRaylib
+daspkg install github.com/Y0L042/dasRaylib          # latest release
+daspkg install github.com/Y0L042/dasRaylib@1.0.0    # a specific release
 ```
 
 CMake fetches and builds raylib itself, so nothing else needs installing.
+
+Requirements:
+
+- Windows with MSVC (Visual Studio 2022 or later), CMake 3.22+, and git.
+- daslang SDK 0.6.4 or later. The bindings are generated against the SDK headers, so a newer SDK can need a newer dasRaylib.
+- A DLL build of daslang (the SDK's `daslang.exe` is one). On a static build, `require raylib` cannot find the module.
 
 ## Example
 
@@ -55,7 +62,7 @@ Two modules are available:
 
 ## Development
 
-`manage.sh` runs everything. It needs a daslang checkout built with dasClangBind. Set `DASLANG_REPO` to that checkout, and scripts must run with the same daslang the module was built against.
+`manage.sh` (Git Bash) and `manage.bat` (cmd.exe) run everything. They take the same commands, so `bash manage.sh build` and `manage.bat build` do the same thing. They need a daslang checkout built with dasClangBind. Set `DASLANG_REPO` to that checkout, and scripts must run with the same daslang the module was built against.
 
 | Command | What it does |
 |---|---|
@@ -79,7 +86,7 @@ Two modules are available:
 
 ## Status
 
-Developed and tested on Windows with MSVC. Linux and macOS are untested.
+Windows with MSVC is the only supported platform. Linux and macOS are untested and may not build.
 
 ## License
 

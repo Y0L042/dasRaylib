@@ -18,6 +18,8 @@ bin-int/
 *.o
 *.obj
 *.pdb
+# example assets (OBJ models), not compiler objects
+!dasRaylib/examples/**/*.obj
 
 # Build directories
 /build/
