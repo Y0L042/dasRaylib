@@ -3,6 +3,7 @@ require cbind/cbind_boost
 require daslib/fio
 require daslib/defer
 require daslib/strings_boost
+require strings
 
 // Generates dasRaylib/src/* from raylib.h, raymath.h, rcamera.h, rlgl.h and raygui.h.
 //
@@ -74,6 +75,8 @@ class RaylibGen : CppGenBind {
     override generate_constant_decl = true
     raylib_skip_func : table<string; bool>
     raylib_skip_const : table<string; bool>
+    raylib_noref_func : table<string; bool>   // pointer args that are arrays (or freed) though no count follows them
+    ref_func_count : int
     raylib_include_prefix : string  // stripped from "// from <file>:<line>" comments so output is machine-independent
     raygui_include_prefix : string
     pending_arg_types : int     // getCursorArgType calls left that are for arguments (the next one is the result)
@@ -108,6 +111,16 @@ class RaylibGen : CppGenBind {
             "Vector3ToFloatV" => true,
             "MatrixToFloatV" => true
         }
+        raylib_noref_func <- {
+            "rlMultMatrixf" => true,        // float[16]
+            "rlSetShader" => true,          // int locs[]
+            "GenImageFontAtlas" => true,    // GlyphInfo glyphs[]
+            "UnloadWaveSamples" => true,    // these free arrays raylib allocated
+            "UnloadImageColors" => true,
+            "UnloadImagePalette" => true,
+            "UnloadRandomSequence" => true,
+            "UnloadCodepoints" => true
+        }
         raylib_skip_const <- {
             "RAYLIB_H" => true,
             "RAYMATH_H" => true,
@@ -129,6 +142,7 @@ class RaylibGen : CppGenBind {
             "Vector2" => true,
             "Vector3" => true,
             "Vector4" => true,
+            "Quaternion" => true,   // typedef of Vector4; spelled out, so it needs its own entry
             "Rectangle" => true
         }
         openAllFiles()
@@ -136,7 +150,13 @@ class RaylibGen : CppGenBind {
         wrap_file |> fwrite("#pragma once\n\n")
         wrap_file |> fwrite("// Wrappers for raylib functions taking or returning Color / Matrix by value:\n")
         wrap_file |> fwrite("// das sees float4 (RGBA 0..1) and float4x4 instead. Helpers: src/cb_dasRaylib.h\n\n")
+        wrap_file |> fwrite("// _rlr_* wrappers take a reference where raylib takes a pointer to one value, so das code\n")
+        wrap_file |> fwrite("// passes `cam` instead of `unsafe(addr(cam))`. The pointer overloads are still registered.\n\n")
         wrap_file |> fwrite("namespace das \{\n\n")
+        wrap_file |> fwrite("static_assert(sizeof(float2) == sizeof(Vector2), \"float2 must match Vector2\");\n")
+        wrap_file |> fwrite("static_assert(sizeof(float3) == sizeof(Vector3), \"float3 must match Vector3\");\n")
+        wrap_file |> fwrite("static_assert(sizeof(float4) == sizeof(Vector4), \"float4 must match Vector4\");\n")
+        wrap_file |> fwrite("static_assert(sizeof(float4) == sizeof(Rectangle), \"float4 must match Rectangle\");\n\n")
     }
     def finishWrapFile {
         wrap_file |> fwrite("\}\n")
@@ -238,11 +258,90 @@ class RaylibGen : CppGenBind {
         }
         return !aot_alias |> key_exists(record_name(t))
     }
-    def emit_converting_wrapper(var c : CXCursor) {
+    // How a pointer argument maps to a das reference, or "" when it stays a pointer:
+    //   "struct" handled struct (Camera3D *, Image *, ...)   -> T &
+    //   "vec"    Vector2/3/4, Rectangle *                    -> float2/3/4 &
+    //   "color"  Color *                                     -> float4 & (converted in and out)
+    //   "scalar" int/unsigned int/float/bool *               -> T &
+    // A pointer followed by an int count/size/length is an array and stays a pointer.
+    def ref_kind(var c : CXCursor; ai : uint) : string {
+        if (raylib_noref_func |> key_exists(string(clang_getCursorSpelling(c)))) {
+            return ""
+        }
+        var carg = clang_Cursor_getArgument(c, ai)
+        var t = clang_getCanonicalType(clang_getCursorType(carg))
+        if (t.kind != CXTypeKind.Pointer) {
+            return ""
+        }
+        let narg = uint(clang_Cursor_getNumArguments(c))
+        if (ai + 1u < narg) {
+            var next_arg = clang_Cursor_getArgument(c, ai + 1u)
+            var next_type = clang_getCanonicalType(clang_getCursorType(next_arg))
+            let next_name = to_lower(string(clang_getCursorSpelling(next_arg)))
+            if (next_type.kind == CXTypeKind.Int && (find(next_name, "count") >= 0 || find(next_name, "size") >= 0 || find(next_name, "length") >= 0 || next_name == "instances")) {
+                return ""
+            }
+        }
+        var pt = clang_getCanonicalType(clang_getPointeeType(t))
+        if (pt.kind == CXTypeKind.Int || pt.kind == CXTypeKind.UInt || pt.kind == CXTypeKind.Float || pt.kind == CXTypeKind.Bool) {
+            return "scalar"
+        }
+        if (pt.kind == CXTypeKind.Record) {
+            let rn = record_name(pt)
+            if (rn == "Color") {
+                return "color"
+            } elif (rn == "Matrix") {
+                return ""   // raylib only passes Matrix * as arrays
+            } elif (aot_alias |> key_exists(rn)) {
+                return "vec"
+            }
+            return "struct"
+        }
+        return ""
+    }
+    def has_ref_args(var c : CXCursor) : bool {
+        let narg = clang_Cursor_getNumArguments(c)
+        for (ai in urange(narg)) {
+            if (!empty(ref_kind(c, ai))) {
+                return true
+            }
+        }
+        return false
+    }
+    // C++ spelling of the value a ref-able pointer points to, as das sees it
+    def ref_value_spelling(var c : CXCursor; ai : uint; kind : string) : string {
+        var carg = clang_Cursor_getArgument(c, ai)
+        var pt = clang_getPointeeType(clang_getCanonicalType(clang_getCursorType(carg)))
+        let is_const = clang_isConstQualifiedType(pt) != 0u
+        var cpt = clang_getCanonicalType(pt)
+        var base = ""
+        if (kind == "scalar") {
+            if (cpt.kind == CXTypeKind.Int) {
+                base = "int32_t"
+            } elif (cpt.kind == CXTypeKind.UInt) {
+                base = "uint32_t"
+            } elif (cpt.kind == CXTypeKind.Float) {
+                base = "float"
+            } else {
+                base = "bool"
+            }
+        } elif (kind == "color") {
+            base = "float4"
+        } elif (kind == "vec") {
+            let rn = record_name(cpt)
+            base = rn == "Vector2" ? "float2" : (rn == "Vector3" ? "float3" : "float4")
+        } else {
+            base = global_qualify(record_name(cpt))
+        }
+        return is_const ? "const {base}" : base
+    }
+    // Emits a C++ wrapper and registers it under the raylib name. Color / Matrix by value become
+    // float4 / float4x4. With use_refs, ref-able pointer args (see ref_kind) become references.
+    def emit_wrapper(var c : CXCursor; use_refs : bool) {
         step_Function()
         wrapper_func_count ++
         let function_name = string(clang_getCursorSpelling(c))
-        let wrapper_name = "_rlw_{function_name}"
+        let wrapper_name = use_refs ? "_rlr_{function_name}" : "_rlw_{function_name}"
         var fun_type = clang_getCursorType(c)
         var res_type = clang_getResultType(fun_type)
         let res_kind = converted_kind(res_type)
@@ -252,6 +351,8 @@ class RaylibGen : CppGenBind {
         var param_decls : array<string>
         var call_args : array<string>
         var arg_names : array<string>
+        var pre_call : array<string>
+        var post_call : array<string>
         for (ai in urange(narg)) {
             var carg = clang_Cursor_getArgument(c, ai)
             var arg_type = clang_getCursorType(carg)
@@ -260,6 +361,7 @@ class RaylibGen : CppGenBind {
                 arg_name = "_arg_{int(ai)}"
             }
             let kind = converted_kind(arg_type)
+            let rkind = use_refs ? ref_kind(c, ai) : ""
             var ptype = typeSpelling(arg_type)
             var call = arg_name
             if (kind == "Color") {
@@ -268,6 +370,18 @@ class RaylibGen : CppGenBind {
             } elif (kind == "Matrix") {
                 ptype = "const float4x4 &"
                 call = "das_rl_matrix({arg_name})"
+            } elif (!empty(rkind)) {
+                ptype = "{ref_value_spelling(c, ai, rkind)} &"
+                if (rkind == "color") {
+                    pre_call |> push("Color _c_{arg_name} = das_rl_color({arg_name}); ")
+                    call = "&_c_{arg_name}"
+                    post_call |> push("{arg_name} = das_rl_float4(_c_{arg_name}); ")
+                } elif (rkind == "vec") {
+                    var pt = clang_getPointeeType(clang_getCanonicalType(arg_type))
+                    call = "reinterpret_cast<{string(clang_getTypeSpelling(pt))} *>(&{arg_name})"
+                } else {
+                    call = "&{arg_name}"
+                }
             }
             param_types |> push(ptype)
             param_decls |> push("{ptype} {arg_name}")
@@ -276,15 +390,21 @@ class RaylibGen : CppGenBind {
         }
         // wrapper body
         let call_expr = "::{function_name}({join(call_args, ", ")})"
-        var body = ""
+        var result = call_expr
         if (res_kind == "Color") {
-            body = "return das_rl_float4({call_expr});"
+            result = "das_rl_float4({call_expr})"
         } elif (res_kind == "Matrix") {
-            body = "return das_rl_float4x4({call_expr});"
-        } elif (res_type.kind == CXTypeKind.Void) {
-            body = "{call_expr};"
+            result = "das_rl_float4x4({call_expr})"
+        }
+        let pre = join(pre_call, "")
+        let post = join(post_call, "")
+        var body = ""
+        if (res_type.kind == CXTypeKind.Void) {
+            body = "{pre}{call_expr}; {post}"
+        } elif (empty(post)) {
+            body = "{pre}return {result};"
         } else {
-            body = "return {call_expr};"
+            body = "{pre}auto _res = {result}; {post}return _res;"
         }
         wrap_file |> fwrite("{from_comment(c)}inline {res_spelling} {wrapper_name}({join(param_decls, ", ")}) \{ {body} \}\n")
         // registration
@@ -312,13 +432,18 @@ class RaylibGen : CppGenBind {
     }
     def override parse_anyFunctionDecl(var c : CXCursor; isMethod : bool) {
         if (!isMethod && needs_wrapper(c)) {
-            emit_converting_wrapper(c)
-            return
+            emit_wrapper(c, false)
+        } else {
+            // CppGenBind calls getCursorArgType once per argument, then once for the result
+            pending_arg_types = clang_Cursor_getNumArguments(c)
+            CppGenBind`parse_anyFunctionDecl(self, c, isMethod)
+            pending_arg_types = 0
         }
-        // CppGenBind calls getCursorArgType once per argument, then once for the result
-        pending_arg_types = clang_Cursor_getNumArguments(c)
-        CppGenBind`parse_anyFunctionDecl(self, c, isMethod)
-        pending_arg_types = 0
+        if (!isMethod && has_ref_args(c)) {
+            to_log(LOG_INFO, "reference overload for {string(clang_getCursorSpelling(c))}\n")
+            ref_func_count ++
+            emit_wrapper(c, true)
+        }
     }
     def override getCursorArgType(var t : CXType) {
         let base = CppGenBind`getCursorArgType(self, t)
@@ -378,6 +503,7 @@ def main {
     }
     cgb->generate()
     cgb->finishWrapFile()
-    print("{cgb.wrapper_func_count} function(s) wrapped for Color/Matrix conversion\n")
+    print("{cgb.wrapper_func_count - cgb.ref_func_count} function(s) wrapped for Color/Matrix conversion\n")
+    print("{cgb.ref_func_count} function(s) got a reference overload for their pointer arguments\n")
     print("generated {cgb.func_chunk_index} function chunk(s) into {module_dir}/src\n")
 }

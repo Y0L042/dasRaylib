@@ -11,20 +11,40 @@
 namespace das {
 #include "dasRaylib.func.aot.decl.inc"
 void Module_dasRaylib::initFunctions_4() {
+// from raylib.h:1175:20
+	makeExtern< unsigned int (*)(const char *,const char *,bool) , GetDirectoryFileCountEx , SimNode_ExtFuncCall >(lib,"GetDirectoryFileCountEx","GetDirectoryFileCountEx")
+		->args({"basePath","filter","scanSubdirs"})
+		->addToModule(*this, SideEffects::worstDefault);
 // from raylib.h:1178:22
 	makeExtern< unsigned char * (*)(const unsigned char *,int,int *) , CompressData , SimNode_ExtFuncCall >(lib,"CompressData","CompressData")
+		->args({"data","dataSize","compDataSize"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from raylib.h:1178:22
+	makeExtern< unsigned char * (*)(const unsigned char *,int,int32_t &) , _rlr_CompressData , SimNode_ExtFuncCall >(lib,"CompressData","das::_rlr_CompressData")
 		->args({"data","dataSize","compDataSize"})
 		->addToModule(*this, SideEffects::worstDefault);
 // from raylib.h:1179:22
 	makeExtern< unsigned char * (*)(const unsigned char *,int,int *) , DecompressData , SimNode_ExtFuncCall >(lib,"DecompressData","DecompressData")
 		->args({"compData","compDataSize","dataSize"})
 		->addToModule(*this, SideEffects::worstDefault);
+// from raylib.h:1179:22
+	makeExtern< unsigned char * (*)(const unsigned char *,int,int32_t &) , _rlr_DecompressData , SimNode_ExtFuncCall >(lib,"DecompressData","das::_rlr_DecompressData")
+		->args({"compData","compDataSize","dataSize"})
+		->addToModule(*this, SideEffects::worstDefault);
 // from raylib.h:1180:13
 	makeExtern< char * (*)(const unsigned char *,int,int *) , EncodeDataBase64 , SimNode_ExtFuncCall >(lib,"EncodeDataBase64","EncodeDataBase64")
 		->args({"data","dataSize","outputSize"})
 		->addToModule(*this, SideEffects::worstDefault);
+// from raylib.h:1180:13
+	makeExtern< char * (*)(const unsigned char *,int,int32_t &) , _rlr_EncodeDataBase64 , SimNode_ExtFuncCall >(lib,"EncodeDataBase64","das::_rlr_EncodeDataBase64")
+		->args({"data","dataSize","outputSize"})
+		->addToModule(*this, SideEffects::worstDefault);
 // from raylib.h:1181:22
 	makeExtern< unsigned char * (*)(const char *,int *) , DecodeDataBase64 , SimNode_ExtFuncCall >(lib,"DecodeDataBase64","DecodeDataBase64")
+		->args({"text","outputSize"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from raylib.h:1181:22
+	makeExtern< unsigned char * (*)(const char *,int32_t &) , _rlr_DecodeDataBase64 , SimNode_ExtFuncCall >(lib,"DecodeDataBase64","das::_rlr_DecodeDataBase64")
 		->args({"text","outputSize"})
 		->addToModule(*this, SideEffects::worstDefault);
 // from raylib.h:1182:20
@@ -59,6 +79,10 @@ void Module_dasRaylib::initFunctions_4() {
 		->addToModule(*this, SideEffects::worstDefault);
 // from raylib.h:1191:12
 	makeExtern< void (*)(AutomationEventList *) , SetAutomationEventList , SimNode_ExtFuncCall >(lib,"SetAutomationEventList","SetAutomationEventList")
+		->args({"list"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from raylib.h:1191:12
+	makeExtern< void (*)(AutomationEventList &) , _rlr_SetAutomationEventList , SimNode_ExtFuncCall >(lib,"SetAutomationEventList","das::_rlr_SetAutomationEventList")
 		->args({"list"})
 		->addToModule(*this, SideEffects::worstDefault);
 // from raylib.h:1192:12
@@ -180,28 +204,6 @@ void Module_dasRaylib::initFunctions_4() {
 		->addToModule(*this, SideEffects::worstDefault);
 // from raylib.h:1233:15
 	makeExtern< Vector2 (*)() , GetMouseDelta , SimNode_ExtFuncCall >(lib,"GetMouseDelta","GetMouseDelta")
-		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1234:12
-	makeExtern< void (*)(int,int) , SetMousePosition , SimNode_ExtFuncCall >(lib,"SetMousePosition","SetMousePosition")
-		->args({"x","y"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1235:12
-	makeExtern< void (*)(int,int) , SetMouseOffset , SimNode_ExtFuncCall >(lib,"SetMouseOffset","SetMouseOffset")
-		->args({"offsetX","offsetY"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1236:12
-	makeExtern< void (*)(float,float) , SetMouseScale , SimNode_ExtFuncCall >(lib,"SetMouseScale","SetMouseScale")
-		->args({"scaleX","scaleY"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1237:13
-	makeExtern< float (*)() , GetMouseWheelMove , SimNode_ExtFuncCall >(lib,"GetMouseWheelMove","GetMouseWheelMove")
-		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1238:15
-	makeExtern< Vector2 (*)() , GetMouseWheelMoveV , SimNode_ExtFuncCall >(lib,"GetMouseWheelMoveV","GetMouseWheelMoveV")
-		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1239:12
-	makeExtern< void (*)(int) , SetMouseCursor , SimNode_ExtFuncCall >(lib,"SetMouseCursor","SetMouseCursor")
-		->args({"cursor"})
 		->addToModule(*this, SideEffects::worstDefault);
 }
 }

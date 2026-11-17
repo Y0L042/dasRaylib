@@ -11,8 +11,60 @@
 namespace das {
 #include "dasRaylib.func.aot.decl.inc"
 void Module_dasRaylib::initFunctions_7() {
+// from raylib.h:1363:13
+	makeExtern< Image (*)(const char *,int,int,int,int) , LoadImageRaw , SimNode_ExtFuncCallAndCopyOrMove >(lib,"LoadImageRaw","LoadImageRaw")
+		->args({"fileName","width","height","format","headerSize"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from raylib.h:1364:13
+	makeExtern< Image (*)(const char *,int *) , LoadImageAnim , SimNode_ExtFuncCallAndCopyOrMove >(lib,"LoadImageAnim","LoadImageAnim")
+		->args({"fileName","frames"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from raylib.h:1364:13
+	makeExtern< Image (*)(const char *,int32_t &) , _rlr_LoadImageAnim , SimNode_ExtFuncCallAndCopyOrMove >(lib,"LoadImageAnim","das::_rlr_LoadImageAnim")
+		->args({"fileName","frames"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from raylib.h:1365:13
+	makeExtern< Image (*)(const char *,const unsigned char *,int,int *) , LoadImageAnimFromMemory , SimNode_ExtFuncCallAndCopyOrMove >(lib,"LoadImageAnimFromMemory","LoadImageAnimFromMemory")
+		->args({"fileType","fileData","dataSize","frames"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from raylib.h:1365:13
+	makeExtern< Image (*)(const char *,const unsigned char *,int,int32_t &) , _rlr_LoadImageAnimFromMemory , SimNode_ExtFuncCallAndCopyOrMove >(lib,"LoadImageAnimFromMemory","das::_rlr_LoadImageAnimFromMemory")
+		->args({"fileType","fileData","dataSize","frames"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from raylib.h:1366:13
+	makeExtern< Image (*)(const char *,const unsigned char *,int) , LoadImageFromMemory , SimNode_ExtFuncCallAndCopyOrMove >(lib,"LoadImageFromMemory","LoadImageFromMemory")
+		->args({"fileType","fileData","dataSize"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from raylib.h:1367:13
+	makeExtern< Image (*)(Texture) , LoadImageFromTexture , SimNode_ExtFuncCallAndCopyOrMove >(lib,"LoadImageFromTexture","LoadImageFromTexture")
+		->args({"texture"})
+		->arg_type(0,makeType<const Texture>(lib))
+		->addToModule(*this, SideEffects::worstDefault);
+// from raylib.h:1368:13
+	makeExtern< Image (*)() , LoadImageFromScreen , SimNode_ExtFuncCallAndCopyOrMove >(lib,"LoadImageFromScreen","LoadImageFromScreen")
+		->addToModule(*this, SideEffects::worstDefault);
+// from raylib.h:1369:12
+	makeExtern< bool (*)(Image) , IsImageValid , SimNode_ExtFuncCall >(lib,"IsImageValid","IsImageValid")
+		->args({"image"})
+		->arg_type(0,makeType<const Image>(lib))
+		->addToModule(*this, SideEffects::worstDefault);
+// from raylib.h:1370:12
+	makeExtern< void (*)(Image) , UnloadImage , SimNode_ExtFuncCall >(lib,"UnloadImage","UnloadImage")
+		->args({"image"})
+		->arg_type(0,makeType<const Image>(lib))
+		->addToModule(*this, SideEffects::worstDefault);
+// from raylib.h:1371:12
+	makeExtern< bool (*)(Image,const char *) , ExportImage , SimNode_ExtFuncCall >(lib,"ExportImage","ExportImage")
+		->args({"image","fileName"})
+		->arg_type(0,makeType<const Image>(lib))
+		->addToModule(*this, SideEffects::worstDefault);
 // from raylib.h:1372:22
 	makeExtern< unsigned char * (*)(Image,const char *,int *) , ExportImageToMemory , SimNode_ExtFuncCall >(lib,"ExportImageToMemory","ExportImageToMemory")
+		->args({"image","fileType","fileSize"})
+		->arg_type(0,makeType<const Image>(lib))
+		->addToModule(*this, SideEffects::worstDefault);
+// from raylib.h:1372:22
+	makeExtern< unsigned char * (*)(Image,const char *,int32_t &) , _rlr_ExportImageToMemory , SimNode_ExtFuncCall >(lib,"ExportImageToMemory","das::_rlr_ExportImageToMemory")
 		->args({"image","fileType","fileSize"})
 		->arg_type(0,makeType<const Image>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
@@ -85,20 +137,40 @@ void Module_dasRaylib::initFunctions_7() {
 	makeExtern< void (*)(Image *,int) , ImageFormat , SimNode_ExtFuncCall >(lib,"ImageFormat","ImageFormat")
 		->args({"image","newFormat"})
 		->addToModule(*this, SideEffects::worstDefault);
+// from raylib.h:1392:12
+	makeExtern< void (*)(Image &,int) , _rlr_ImageFormat , SimNode_ExtFuncCall >(lib,"ImageFormat","das::_rlr_ImageFormat")
+		->args({"image","newFormat"})
+		->addToModule(*this, SideEffects::worstDefault);
 // from raylib.h:1393:12
 	makeExtern< void (*)(Image *,float4) , _rlw_ImageToPOT , SimNode_ExtFuncCall >(lib,"ImageToPOT","das::_rlw_ImageToPOT")
+		->args({"image","fill"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from raylib.h:1393:12
+	makeExtern< void (*)(Image &,float4) , _rlr_ImageToPOT , SimNode_ExtFuncCall >(lib,"ImageToPOT","das::_rlr_ImageToPOT")
 		->args({"image","fill"})
 		->addToModule(*this, SideEffects::worstDefault);
 // from raylib.h:1394:12
 	makeExtern< void (*)(Image *,Rectangle) , ImageCrop , SimNode_ExtFuncCall >(lib,"ImageCrop","ImageCrop")
 		->args({"image","crop"})
 		->addToModule(*this, SideEffects::worstDefault);
+// from raylib.h:1394:12
+	makeExtern< void (*)(Image &,Rectangle) , _rlr_ImageCrop , SimNode_ExtFuncCall >(lib,"ImageCrop","das::_rlr_ImageCrop")
+		->args({"image","crop"})
+		->addToModule(*this, SideEffects::worstDefault);
 // from raylib.h:1395:12
 	makeExtern< void (*)(Image *,float) , ImageAlphaCrop , SimNode_ExtFuncCall >(lib,"ImageAlphaCrop","ImageAlphaCrop")
 		->args({"image","threshold"})
 		->addToModule(*this, SideEffects::worstDefault);
+// from raylib.h:1395:12
+	makeExtern< void (*)(Image &,float) , _rlr_ImageAlphaCrop , SimNode_ExtFuncCall >(lib,"ImageAlphaCrop","das::_rlr_ImageAlphaCrop")
+		->args({"image","threshold"})
+		->addToModule(*this, SideEffects::worstDefault);
 // from raylib.h:1396:12
 	makeExtern< void (*)(Image *,float4,float) , _rlw_ImageAlphaClear , SimNode_ExtFuncCall >(lib,"ImageAlphaClear","das::_rlw_ImageAlphaClear")
+		->args({"image","color","threshold"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from raylib.h:1396:12
+	makeExtern< void (*)(Image &,float4,float) , _rlr_ImageAlphaClear , SimNode_ExtFuncCall >(lib,"ImageAlphaClear","das::_rlr_ImageAlphaClear")
 		->args({"image","color","threshold"})
 		->addToModule(*this, SideEffects::worstDefault);
 // from raylib.h:1397:12
@@ -106,8 +178,17 @@ void Module_dasRaylib::initFunctions_7() {
 		->args({"image","alphaMask"})
 		->arg_type(1,makeType<const Image>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
+// from raylib.h:1397:12
+	makeExtern< void (*)(Image &,Image) , _rlr_ImageAlphaMask , SimNode_ExtFuncCall >(lib,"ImageAlphaMask","das::_rlr_ImageAlphaMask")
+		->args({"image","alphaMask"})
+		->arg_type(1,makeType<const Image>(lib))
+		->addToModule(*this, SideEffects::worstDefault);
 // from raylib.h:1398:12
 	makeExtern< void (*)(Image *) , ImageAlphaPremultiply , SimNode_ExtFuncCall >(lib,"ImageAlphaPremultiply","ImageAlphaPremultiply")
+		->args({"image"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from raylib.h:1398:12
+	makeExtern< void (*)(Image &) , _rlr_ImageAlphaPremultiply , SimNode_ExtFuncCall >(lib,"ImageAlphaPremultiply","das::_rlr_ImageAlphaPremultiply")
 		->args({"image"})
 		->addToModule(*this, SideEffects::worstDefault);
 // from raylib.h:1399:12
@@ -118,109 +199,29 @@ void Module_dasRaylib::initFunctions_7() {
 	makeExtern< void (*)(Image *,const float *,int) , ImageKernelConvolution , SimNode_ExtFuncCall >(lib,"ImageKernelConvolution","ImageKernelConvolution")
 		->args({"image","kernel","kernelSize"})
 		->addToModule(*this, SideEffects::worstDefault);
+// from raylib.h:1400:12
+	makeExtern< void (*)(Image &,const float *,int) , _rlr_ImageKernelConvolution , SimNode_ExtFuncCall >(lib,"ImageKernelConvolution","das::_rlr_ImageKernelConvolution")
+		->args({"image","kernel","kernelSize"})
+		->addToModule(*this, SideEffects::worstDefault);
 // from raylib.h:1401:12
 	makeExtern< void (*)(Image *,int,int) , ImageResize , SimNode_ExtFuncCall >(lib,"ImageResize","ImageResize")
+		->args({"image","newWidth","newHeight"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from raylib.h:1401:12
+	makeExtern< void (*)(Image &,int,int) , _rlr_ImageResize , SimNode_ExtFuncCall >(lib,"ImageResize","das::_rlr_ImageResize")
 		->args({"image","newWidth","newHeight"})
 		->addToModule(*this, SideEffects::worstDefault);
 // from raylib.h:1402:12
 	makeExtern< void (*)(Image *,int,int) , ImageResizeNN , SimNode_ExtFuncCall >(lib,"ImageResizeNN","ImageResizeNN")
 		->args({"image","newWidth","newHeight"})
 		->addToModule(*this, SideEffects::worstDefault);
+// from raylib.h:1402:12
+	makeExtern< void (*)(Image &,int,int) , _rlr_ImageResizeNN , SimNode_ExtFuncCall >(lib,"ImageResizeNN","das::_rlr_ImageResizeNN")
+		->args({"image","newWidth","newHeight"})
+		->addToModule(*this, SideEffects::worstDefault);
 // from raylib.h:1403:12
 	makeExtern< void (*)(Image *,int,int,int,int,float4) , _rlw_ImageResizeCanvas , SimNode_ExtFuncCall >(lib,"ImageResizeCanvas","das::_rlw_ImageResizeCanvas")
 		->args({"image","newWidth","newHeight","offsetX","offsetY","fill"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1404:12
-	makeExtern< void (*)(Image *) , ImageMipmaps , SimNode_ExtFuncCall >(lib,"ImageMipmaps","ImageMipmaps")
-		->args({"image"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1405:12
-	makeExtern< void (*)(Image *,int,int,int,int) , ImageDither , SimNode_ExtFuncCall >(lib,"ImageDither","ImageDither")
-		->args({"image","rBpp","gBpp","bBpp","aBpp"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1406:12
-	makeExtern< void (*)(Image *) , ImageFlipVertical , SimNode_ExtFuncCall >(lib,"ImageFlipVertical","ImageFlipVertical")
-		->args({"image"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1407:12
-	makeExtern< void (*)(Image *) , ImageFlipHorizontal , SimNode_ExtFuncCall >(lib,"ImageFlipHorizontal","ImageFlipHorizontal")
-		->args({"image"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1408:12
-	makeExtern< void (*)(Image *,int) , ImageRotate , SimNode_ExtFuncCall >(lib,"ImageRotate","ImageRotate")
-		->args({"image","degrees"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1409:12
-	makeExtern< void (*)(Image *) , ImageRotateCW , SimNode_ExtFuncCall >(lib,"ImageRotateCW","ImageRotateCW")
-		->args({"image"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1410:12
-	makeExtern< void (*)(Image *) , ImageRotateCCW , SimNode_ExtFuncCall >(lib,"ImageRotateCCW","ImageRotateCCW")
-		->args({"image"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1411:12
-	makeExtern< void (*)(Image *,float4) , _rlw_ImageColorTint , SimNode_ExtFuncCall >(lib,"ImageColorTint","das::_rlw_ImageColorTint")
-		->args({"image","color"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1412:12
-	makeExtern< void (*)(Image *) , ImageColorInvert , SimNode_ExtFuncCall >(lib,"ImageColorInvert","ImageColorInvert")
-		->args({"image"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1413:12
-	makeExtern< void (*)(Image *) , ImageColorGrayscale , SimNode_ExtFuncCall >(lib,"ImageColorGrayscale","ImageColorGrayscale")
-		->args({"image"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1414:12
-	makeExtern< void (*)(Image *,int) , ImageColorContrast , SimNode_ExtFuncCall >(lib,"ImageColorContrast","ImageColorContrast")
-		->args({"image","contrast"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1415:12
-	makeExtern< void (*)(Image *,int) , ImageColorBrightness , SimNode_ExtFuncCall >(lib,"ImageColorBrightness","ImageColorBrightness")
-		->args({"image","brightness"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1416:12
-	makeExtern< void (*)(Image *,float4,float4) , _rlw_ImageColorReplace , SimNode_ExtFuncCall >(lib,"ImageColorReplace","das::_rlw_ImageColorReplace")
-		->args({"image","color","replace"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1417:14
-	makeExtern< Color * (*)(Image) , LoadImageColors , SimNode_ExtFuncCall >(lib,"LoadImageColors","LoadImageColors")
-		->args({"image"})
-		->arg_type(0,makeType<const Image>(lib))
-		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1418:14
-	makeExtern< Color * (*)(Image,int,int *) , LoadImagePalette , SimNode_ExtFuncCall >(lib,"LoadImagePalette","LoadImagePalette")
-		->args({"image","maxPaletteSize","colorCount"})
-		->arg_type(0,makeType<const Image>(lib))
-		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1419:12
-	makeExtern< void (*)(Color *) , UnloadImageColors , SimNode_ExtFuncCall >(lib,"UnloadImageColors","UnloadImageColors")
-		->args({"colors"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1420:12
-	makeExtern< void (*)(Color *) , UnloadImagePalette , SimNode_ExtFuncCall >(lib,"UnloadImagePalette","UnloadImagePalette")
-		->args({"colors"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1421:17
-	makeExtern< Rectangle (*)(Image,float) , GetImageAlphaBorder , SimNode_ExtFuncCall >(lib,"GetImageAlphaBorder","GetImageAlphaBorder")
-		->args({"image","threshold"})
-		->arg_type(0,makeType<const Image>(lib))
-		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1422:13
-	makeExtern< float4 (*)(Image,int,int) , _rlw_GetImageColor , SimNode_ExtFuncCall >(lib,"GetImageColor","das::_rlw_GetImageColor")
-		->args({"image","x","y"})
-		->arg_type(0,makeType<const Image>(lib))
-		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1426:12
-	makeExtern< void (*)(Image *,float4) , _rlw_ImageClearBackground , SimNode_ExtFuncCall >(lib,"ImageClearBackground","das::_rlw_ImageClearBackground")
-		->args({"dst","color"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1427:12
-	makeExtern< void (*)(Image *,int,int,float4) , _rlw_ImageDrawPixel , SimNode_ExtFuncCall >(lib,"ImageDrawPixel","das::_rlw_ImageDrawPixel")
-		->args({"dst","posX","posY","color"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1428:12
-	makeExtern< void (*)(Image *,Vector2,float4) , _rlw_ImageDrawPixelV , SimNode_ExtFuncCall >(lib,"ImageDrawPixelV","das::_rlw_ImageDrawPixelV")
-		->args({"dst","position","color"})
 		->addToModule(*this, SideEffects::worstDefault);
 }
 }

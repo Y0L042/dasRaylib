@@ -21,3 +21,6 @@ void initFunctions_17();
 void initFunctions_18();
 void initFunctions_19();
 void initFunctions_20();
+void initFunctions_21();
+void initFunctions_22();
+void initFunctions_23();

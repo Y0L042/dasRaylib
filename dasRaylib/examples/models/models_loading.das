@@ -48,7 +48,7 @@ def main {
     SetTargetFPS(60)
 
     while (!WindowShouldClose()) {
-        UpdateCamera(unsafe(addr(camera)), CameraMode.CAMERA_ORBITAL)
+        camera |> UpdateCamera(CameraMode.CAMERA_ORBITAL)
 
         if (IsFileDropped()) {
             let dropped = LoadDroppedFiles()

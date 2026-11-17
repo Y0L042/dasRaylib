@@ -1,5 +1,17 @@
 # Changelog
 
+## Unreleased
+
+### Added
+
+- Reference overloads for 131 functions that take a pointer to one value. For example, `UpdateCamera(cam, mode)`, `ImageResize(img, w, h)`, `GuiSliderBar(..., value, ...)` and `Vector3OrthoNormalize(a, b)` now take the variable directly, without `unsafe(addr(...))`. The pointer overloads are still available.
+- `raylib_boost`: reference forms of `UpdateCamera(camera, CameraMode)`, `GuiTextInputBox` and `GuiListViewEx`.
+- `docs/cheatsheet.html` marks reference parameters with `var`, and labels each overload as the reference form or the pointer form.
+
+### Fixed
+
+- Calls to `Quaternion*` functions that return a quaternion, such as `QuaternionFromAxisAngle`, crashed. They are now bound as `float4` returns.
+
 ## 1.0.0 - 2026-11-15
 
 First formal release of the bindings, based on raylib 6.2. Needs daslang SDK 0.6.4 or later.

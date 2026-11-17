@@ -67,9 +67,9 @@ def main {
         up = float3(0, 1, 0),
         fovy = 45.0,
         projection = int(CameraProjection.CAMERA_PERSPECTIVE))
-    let fwd = GetCameraForward(unsafe(addr(cam)))
+    let fwd = GetCameraForward(cam)
     check("GetCameraForward = {fwd}", length(fwd - normalize(float3(-1.0))) < 1e-5)
-    let view = GetCameraViewMatrix(unsafe(addr(cam)))
+    let view = GetCameraViewMatrix(cam)
     check("GetCameraViewMatrix is float4x4 (eye -> origin)", length((view * float4(cam.position, 1.0)).xyz) < 1e-4)
 
     SetConfigFlags(ConfigFlags.FLAG_WINDOW_RESIZABLE)
@@ -77,7 +77,7 @@ def main {
     SetTargetFPS(60)
     var frame = 0
     while (!WindowShouldClose() && frame < 180) {
-        UpdateCamera(unsafe(addr(cam)), CameraMode.CAMERA_ORBITAL)
+        cam |> UpdateCamera(CameraMode.CAMERA_ORBITAL)
         BeginDrawing()
         ClearBackground(RAYWHITE)
         BeginMode3D(cam)

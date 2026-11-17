@@ -11,207 +11,235 @@
 namespace das {
 #include "dasRaylib.func.aot.decl.inc"
 void Module_dasRaylib::initFunctions_13() {
-// from raylib.h:1745:12
-	makeExtern< void (*)(AudioStream) , ResumeAudioStream , SimNode_ExtFuncCall >(lib,"ResumeAudioStream","ResumeAudioStream")
-		->args({"stream"})
-		->arg_type(0,makeType<const AudioStream>(lib))
+// from raylib.h:1644:12
+	makeExtern< Mesh (*)(float,int,int) , GenMeshHemiSphere , SimNode_ExtFuncCallAndCopyOrMove >(lib,"GenMeshHemiSphere","GenMeshHemiSphere")
+		->args({"radius","rings","slices"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1746:12
-	makeExtern< bool (*)(AudioStream) , IsAudioStreamPlaying , SimNode_ExtFuncCall >(lib,"IsAudioStreamPlaying","IsAudioStreamPlaying")
-		->args({"stream"})
-		->arg_type(0,makeType<const AudioStream>(lib))
+// from raylib.h:1645:12
+	makeExtern< Mesh (*)(float,float,int) , GenMeshCylinder , SimNode_ExtFuncCallAndCopyOrMove >(lib,"GenMeshCylinder","GenMeshCylinder")
+		->args({"radius","height","slices"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1747:12
-	makeExtern< void (*)(AudioStream) , StopAudioStream , SimNode_ExtFuncCall >(lib,"StopAudioStream","StopAudioStream")
-		->args({"stream"})
-		->arg_type(0,makeType<const AudioStream>(lib))
+// from raylib.h:1646:12
+	makeExtern< Mesh (*)(float,float,int) , GenMeshCone , SimNode_ExtFuncCallAndCopyOrMove >(lib,"GenMeshCone","GenMeshCone")
+		->args({"radius","height","slices"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1748:12
-	makeExtern< void (*)(AudioStream,float) , SetAudioStreamVolume , SimNode_ExtFuncCall >(lib,"SetAudioStreamVolume","SetAudioStreamVolume")
-		->args({"stream","volume"})
-		->arg_type(0,makeType<const AudioStream>(lib))
+// from raylib.h:1647:12
+	makeExtern< Mesh (*)(float,float,int,int) , GenMeshTorus , SimNode_ExtFuncCallAndCopyOrMove >(lib,"GenMeshTorus","GenMeshTorus")
+		->args({"radius","size","radSeg","sides"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1749:12
-	makeExtern< void (*)(AudioStream,float) , SetAudioStreamPitch , SimNode_ExtFuncCall >(lib,"SetAudioStreamPitch","SetAudioStreamPitch")
-		->args({"stream","pitch"})
-		->arg_type(0,makeType<const AudioStream>(lib))
+// from raylib.h:1648:12
+	makeExtern< Mesh (*)(float,float,int,int) , GenMeshKnot , SimNode_ExtFuncCallAndCopyOrMove >(lib,"GenMeshKnot","GenMeshKnot")
+		->args({"radius","size","radSeg","sides"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1750:12
-	makeExtern< void (*)(AudioStream,float) , SetAudioStreamPan , SimNode_ExtFuncCall >(lib,"SetAudioStreamPan","SetAudioStreamPan")
-		->args({"stream","pan"})
-		->arg_type(0,makeType<const AudioStream>(lib))
+// from raylib.h:1649:12
+	makeExtern< Mesh (*)(Image,Vector3) , GenMeshHeightmap , SimNode_ExtFuncCallAndCopyOrMove >(lib,"GenMeshHeightmap","GenMeshHeightmap")
+		->args({"heightmap","size"})
+		->arg_type(0,makeType<const Image>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1751:12
-	makeExtern< void (*)(int) , SetAudioStreamBufferSizeDefault , SimNode_ExtFuncCall >(lib,"SetAudioStreamBufferSizeDefault","SetAudioStreamBufferSizeDefault")
-		->args({"size"})
+// from raylib.h:1650:12
+	makeExtern< Mesh (*)(Image,Vector3) , GenMeshCubicmap , SimNode_ExtFuncCallAndCopyOrMove >(lib,"GenMeshCubicmap","GenMeshCubicmap")
+		->args({"cubicmap","cubeSize"})
+		->arg_type(0,makeType<const Image>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:217:13
-	makeExtern< float (*)(float,float,float) , Clamp , SimNode_ExtFuncCall >(lib,"Clamp","Clamp")
-		->args({"value","min","max"})
+// from raylib.h:1653:17
+	makeExtern< Material * (*)(const char *,int *) , LoadMaterials , SimNode_ExtFuncCall >(lib,"LoadMaterials","LoadMaterials")
+		->args({"fileName","materialCount"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:227:13
-	makeExtern< float (*)(float,float,float) , Lerp , SimNode_ExtFuncCall >(lib,"Lerp","Lerp")
-		->args({"start","end","amount"})
+// from raylib.h:1653:17
+	makeExtern< Material * (*)(const char *,int32_t &) , _rlr_LoadMaterials , SimNode_ExtFuncCall >(lib,"LoadMaterials","das::_rlr_LoadMaterials")
+		->args({"fileName","materialCount"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:235:13
-	makeExtern< float (*)(float,float,float) , Normalize , SimNode_ExtFuncCall >(lib,"Normalize","Normalize")
-		->args({"value","start","end"})
+// from raylib.h:1654:16
+	makeExtern< Material (*)() , LoadMaterialDefault , SimNode_ExtFuncCallAndCopyOrMove >(lib,"LoadMaterialDefault","LoadMaterialDefault")
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:243:13
-	makeExtern< float (*)(float,float,float,float,float) , Remap , SimNode_ExtFuncCall >(lib,"Remap","Remap")
-		->args({"value","inputStart","inputEnd","outputStart","outputEnd"})
+// from raylib.h:1655:12
+	makeExtern< bool (*)(Material) , IsMaterialValid , SimNode_ExtFuncCall >(lib,"IsMaterialValid","IsMaterialValid")
+		->args({"material"})
+		->arg_type(0,makeType<const Material>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:251:13
-	makeExtern< float (*)(float,float,float) , Wrap , SimNode_ExtFuncCall >(lib,"Wrap","Wrap")
-		->args({"value","min","max"})
+// from raylib.h:1656:12
+	makeExtern< void (*)(Material) , UnloadMaterial , SimNode_ExtFuncCall >(lib,"UnloadMaterial","UnloadMaterial")
+		->args({"material"})
+		->arg_type(0,makeType<const Material>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:259:11
-	makeExtern< int (*)(float,float) , FloatEquals , SimNode_ExtFuncCall >(lib,"FloatEquals","FloatEquals")
-		->args({"x","y"})
+// from raylib.h:1657:12
+	makeExtern< void (*)(Material *,int,Texture) , SetMaterialTexture , SimNode_ExtFuncCall >(lib,"SetMaterialTexture","SetMaterialTexture")
+		->args({"material","mapType","texture"})
+		->arg_type(2,makeType<const Texture>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:275:15
-	makeExtern< Vector2 (*)() , Vector2Zero , SimNode_ExtFuncCall >(lib,"Vector2Zero","Vector2Zero")
+// from raylib.h:1657:12
+	makeExtern< void (*)(Material &,int,Texture) , _rlr_SetMaterialTexture , SimNode_ExtFuncCall >(lib,"SetMaterialTexture","das::_rlr_SetMaterialTexture")
+		->args({"material","mapType","texture"})
+		->arg_type(2,makeType<const Texture>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:283:15
-	makeExtern< Vector2 (*)() , Vector2One , SimNode_ExtFuncCall >(lib,"Vector2One","Vector2One")
+// from raylib.h:1658:12
+	makeExtern< void (*)(Model *,int,int) , SetModelMeshMaterial , SimNode_ExtFuncCall >(lib,"SetModelMeshMaterial","SetModelMeshMaterial")
+		->args({"model","meshId","materialId"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:291:15
-	makeExtern< Vector2 (*)(Vector2,Vector2) , Vector2Add , SimNode_ExtFuncCall >(lib,"Vector2Add","Vector2Add")
-		->args({"v1","v2"})
+// from raylib.h:1658:12
+	makeExtern< void (*)(Model &,int,int) , _rlr_SetModelMeshMaterial , SimNode_ExtFuncCall >(lib,"SetModelMeshMaterial","das::_rlr_SetModelMeshMaterial")
+		->args({"model","meshId","materialId"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:299:15
-	makeExtern< Vector2 (*)(Vector2,float) , Vector2AddValue , SimNode_ExtFuncCall >(lib,"Vector2AddValue","Vector2AddValue")
-		->args({"v","add"})
+// from raylib.h:1661:23
+	makeExtern< ModelAnimation * (*)(const char *,int *) , LoadModelAnimations , SimNode_ExtFuncCall >(lib,"LoadModelAnimations","LoadModelAnimations")
+		->args({"fileName","animCount"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:307:15
-	makeExtern< Vector2 (*)(Vector2,Vector2) , Vector2Subtract , SimNode_ExtFuncCall >(lib,"Vector2Subtract","Vector2Subtract")
-		->args({"v1","v2"})
+// from raylib.h:1661:23
+	makeExtern< ModelAnimation * (*)(const char *,int32_t &) , _rlr_LoadModelAnimations , SimNode_ExtFuncCall >(lib,"LoadModelAnimations","das::_rlr_LoadModelAnimations")
+		->args({"fileName","animCount"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:315:15
-	makeExtern< Vector2 (*)(Vector2,float) , Vector2SubtractValue , SimNode_ExtFuncCall >(lib,"Vector2SubtractValue","Vector2SubtractValue")
-		->args({"v","sub"})
+// from raylib.h:1662:12
+	makeExtern< void (*)(Model,ModelAnimation,float) , UpdateModelAnimation , SimNode_ExtFuncCall >(lib,"UpdateModelAnimation","UpdateModelAnimation")
+		->args({"model","anim","frame"})
+		->arg_type(0,makeType<const Model>(lib))
+		->arg_type(1,makeType<const ModelAnimation>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:323:13
-	makeExtern< float (*)(Vector2) , Vector2Length , SimNode_ExtFuncCall >(lib,"Vector2Length","Vector2Length")
-		->args({"v"})
+// from raylib.h:1663:12
+	makeExtern< void (*)(Model,ModelAnimation,float,ModelAnimation,float,float) , UpdateModelAnimationEx , SimNode_ExtFuncCall >(lib,"UpdateModelAnimationEx","UpdateModelAnimationEx")
+		->args({"model","animA","frameA","animB","frameB","blend"})
+		->arg_type(0,makeType<const Model>(lib))
+		->arg_type(1,makeType<const ModelAnimation>(lib))
+		->arg_type(3,makeType<const ModelAnimation>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:331:13
-	makeExtern< float (*)(Vector2) , Vector2LengthSqr , SimNode_ExtFuncCall >(lib,"Vector2LengthSqr","Vector2LengthSqr")
-		->args({"v"})
+// from raylib.h:1664:12
+	makeExtern< void (*)(ModelAnimation *,int) , UnloadModelAnimations , SimNode_ExtFuncCall >(lib,"UnloadModelAnimations","UnloadModelAnimations")
+		->args({"animations","animCount"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:339:13
-	makeExtern< float (*)(Vector2,Vector2) , Vector2DotProduct , SimNode_ExtFuncCall >(lib,"Vector2DotProduct","Vector2DotProduct")
-		->args({"v1","v2"})
+// from raylib.h:1665:12
+	makeExtern< bool (*)(Model,ModelAnimation) , IsModelAnimationValid , SimNode_ExtFuncCall >(lib,"IsModelAnimationValid","IsModelAnimationValid")
+		->args({"model","anim"})
+		->arg_type(0,makeType<const Model>(lib))
+		->arg_type(1,makeType<const ModelAnimation>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:347:13
-	makeExtern< float (*)(Vector2,Vector2) , Vector2CrossProduct , SimNode_ExtFuncCall >(lib,"Vector2CrossProduct","Vector2CrossProduct")
-		->args({"v1","v2"})
+// from raylib.h:1668:12
+	makeExtern< bool (*)(Vector3,float,Vector3,float) , CheckCollisionSpheres , SimNode_ExtFuncCall >(lib,"CheckCollisionSpheres","CheckCollisionSpheres")
+		->args({"center1","radius1","center2","radius2"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:355:13
-	makeExtern< float (*)(Vector2,Vector2) , Vector2Distance , SimNode_ExtFuncCall >(lib,"Vector2Distance","Vector2Distance")
-		->args({"v1","v2"})
+// from raylib.h:1669:12
+	makeExtern< bool (*)(BoundingBox,BoundingBox) , CheckCollisionBoxes , SimNode_ExtFuncCall >(lib,"CheckCollisionBoxes","CheckCollisionBoxes")
+		->args({"box1","box2"})
+		->arg_type(0,makeType<const BoundingBox>(lib))
+		->arg_type(1,makeType<const BoundingBox>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:363:13
-	makeExtern< float (*)(Vector2,Vector2) , Vector2DistanceSqr , SimNode_ExtFuncCall >(lib,"Vector2DistanceSqr","Vector2DistanceSqr")
-		->args({"v1","v2"})
+// from raylib.h:1670:12
+	makeExtern< bool (*)(BoundingBox,Vector3,float) , CheckCollisionBoxSphere , SimNode_ExtFuncCall >(lib,"CheckCollisionBoxSphere","CheckCollisionBoxSphere")
+		->args({"box","center","radius"})
+		->arg_type(0,makeType<const BoundingBox>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:373:13
-	makeExtern< float (*)(Vector2,Vector2) , Vector2Angle , SimNode_ExtFuncCall >(lib,"Vector2Angle","Vector2Angle")
-		->args({"v1","v2"})
+// from raylib.h:1671:20
+	makeExtern< RayCollision (*)(Ray,Vector3,float) , GetRayCollisionSphere , SimNode_ExtFuncCallAndCopyOrMove >(lib,"GetRayCollisionSphere","GetRayCollisionSphere")
+		->args({"ray","center","radius"})
+		->arg_type(0,makeType<const Ray>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:388:13
-	makeExtern< float (*)(Vector2,Vector2) , Vector2LineAngle , SimNode_ExtFuncCall >(lib,"Vector2LineAngle","Vector2LineAngle")
-		->args({"start","end"})
+// from raylib.h:1672:20
+	makeExtern< RayCollision (*)(Ray,BoundingBox) , GetRayCollisionBox , SimNode_ExtFuncCallAndCopyOrMove >(lib,"GetRayCollisionBox","GetRayCollisionBox")
+		->args({"ray","box"})
+		->arg_type(0,makeType<const Ray>(lib))
+		->arg_type(1,makeType<const BoundingBox>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:398:15
-	makeExtern< Vector2 (*)(Vector2,float) , Vector2Scale , SimNode_ExtFuncCall >(lib,"Vector2Scale","Vector2Scale")
-		->args({"v","scale"})
+// from raylib.h:1673:20
+	makeExtern< RayCollision (*)(Ray,Mesh,const float4x4 &) , _rlw_GetRayCollisionMesh , SimNode_ExtFuncCallAndCopyOrMove >(lib,"GetRayCollisionMesh","das::_rlw_GetRayCollisionMesh")
+		->args({"ray","mesh","transform"})
+		->arg_type(0,makeType<const Ray>(lib))
+		->arg_type(1,makeType<const Mesh>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:406:15
-	makeExtern< Vector2 (*)(Vector2,Vector2) , Vector2Multiply , SimNode_ExtFuncCall >(lib,"Vector2Multiply","Vector2Multiply")
-		->args({"v1","v2"})
+// from raylib.h:1674:20
+	makeExtern< RayCollision (*)(Ray,Vector3,Vector3,Vector3) , GetRayCollisionTriangle , SimNode_ExtFuncCallAndCopyOrMove >(lib,"GetRayCollisionTriangle","GetRayCollisionTriangle")
+		->args({"ray","p1","p2","p3"})
+		->arg_type(0,makeType<const Ray>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:414:15
-	makeExtern< Vector2 (*)(Vector2) , Vector2Negate , SimNode_ExtFuncCall >(lib,"Vector2Negate","Vector2Negate")
-		->args({"v"})
+// from raylib.h:1675:20
+	makeExtern< RayCollision (*)(Ray,Vector3,Vector3,Vector3,Vector3) , GetRayCollisionQuad , SimNode_ExtFuncCallAndCopyOrMove >(lib,"GetRayCollisionQuad","GetRayCollisionQuad")
+		->args({"ray","p1","p2","p3","p4"})
+		->arg_type(0,makeType<const Ray>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:422:15
-	makeExtern< Vector2 (*)(Vector2,Vector2) , Vector2Divide , SimNode_ExtFuncCall >(lib,"Vector2Divide","Vector2Divide")
-		->args({"v1","v2"})
+// from raylib.h:1683:12
+	makeExtern< void (*)() , InitAudioDevice , SimNode_ExtFuncCall >(lib,"InitAudioDevice","InitAudioDevice")
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:430:15
-	makeExtern< Vector2 (*)(Vector2) , Vector2Normalize , SimNode_ExtFuncCall >(lib,"Vector2Normalize","Vector2Normalize")
-		->args({"v"})
+// from raylib.h:1684:12
+	makeExtern< void (*)() , CloseAudioDevice , SimNode_ExtFuncCall >(lib,"CloseAudioDevice","CloseAudioDevice")
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:446:15
-	makeExtern< Vector2 (*)(Vector2,const float4x4 &) , _rlw_Vector2Transform , SimNode_ExtFuncCall >(lib,"Vector2Transform","das::_rlw_Vector2Transform")
-		->args({"v","mat"})
+// from raylib.h:1685:12
+	makeExtern< bool (*)() , IsAudioDeviceReady , SimNode_ExtFuncCall >(lib,"IsAudioDeviceReady","IsAudioDeviceReady")
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:461:15
-	makeExtern< Vector2 (*)(Vector2,Vector2,float) , Vector2Lerp , SimNode_ExtFuncCall >(lib,"Vector2Lerp","Vector2Lerp")
-		->args({"v1","v2","amount"})
+// from raylib.h:1686:12
+	makeExtern< void (*)(float) , SetMasterVolume , SimNode_ExtFuncCall >(lib,"SetMasterVolume","SetMasterVolume")
+		->args({"volume"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:472:15
-	makeExtern< Vector2 (*)(Vector2,Vector2) , Vector2Reflect , SimNode_ExtFuncCall >(lib,"Vector2Reflect","Vector2Reflect")
-		->args({"v","normal"})
+// from raylib.h:1687:13
+	makeExtern< float (*)() , GetMasterVolume , SimNode_ExtFuncCall >(lib,"GetMasterVolume","GetMasterVolume")
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:485:15
-	makeExtern< Vector2 (*)(Vector2,Vector2) , Vector2Min , SimNode_ExtFuncCall >(lib,"Vector2Min","Vector2Min")
-		->args({"v1","v2"})
+// from raylib.h:1690:12
+	makeExtern< Wave (*)(const char *) , LoadWave , SimNode_ExtFuncCallAndCopyOrMove >(lib,"LoadWave","LoadWave")
+		->args({"fileName"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:496:15
-	makeExtern< Vector2 (*)(Vector2,Vector2) , Vector2Max , SimNode_ExtFuncCall >(lib,"Vector2Max","Vector2Max")
-		->args({"v1","v2"})
+// from raylib.h:1691:12
+	makeExtern< Wave (*)(const char *,const unsigned char *,int) , LoadWaveFromMemory , SimNode_ExtFuncCallAndCopyOrMove >(lib,"LoadWaveFromMemory","LoadWaveFromMemory")
+		->args({"fileType","fileData","dataSize"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:507:15
-	makeExtern< Vector2 (*)(Vector2,float) , Vector2Rotate , SimNode_ExtFuncCall >(lib,"Vector2Rotate","Vector2Rotate")
-		->args({"v","angle"})
+// from raylib.h:1692:12
+	makeExtern< bool (*)(Wave) , IsWaveValid , SimNode_ExtFuncCall >(lib,"IsWaveValid","IsWaveValid")
+		->args({"wave"})
+		->arg_type(0,makeType<const Wave>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:521:15
-	makeExtern< Vector2 (*)(Vector2,Vector2,float) , Vector2MoveTowards , SimNode_ExtFuncCall >(lib,"Vector2MoveTowards","Vector2MoveTowards")
-		->args({"v","target","maxDistance"})
+// from raylib.h:1693:13
+	makeExtern< Sound (*)(const char *) , LoadSound , SimNode_ExtFuncCallAndCopyOrMove >(lib,"LoadSound","LoadSound")
+		->args({"fileName"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:540:15
-	makeExtern< Vector2 (*)(Vector2) , Vector2Invert , SimNode_ExtFuncCall >(lib,"Vector2Invert","Vector2Invert")
-		->args({"v"})
+// from raylib.h:1694:13
+	makeExtern< Sound (*)(Wave) , LoadSoundFromWave , SimNode_ExtFuncCallAndCopyOrMove >(lib,"LoadSoundFromWave","LoadSoundFromWave")
+		->args({"wave"})
+		->arg_type(0,makeType<const Wave>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:549:15
-	makeExtern< Vector2 (*)(Vector2,Vector2,Vector2) , Vector2Clamp , SimNode_ExtFuncCall >(lib,"Vector2Clamp","Vector2Clamp")
-		->args({"v","min","max"})
+// from raylib.h:1695:13
+	makeExtern< Sound (*)(Sound) , LoadSoundAlias , SimNode_ExtFuncCallAndCopyOrMove >(lib,"LoadSoundAlias","LoadSoundAlias")
+		->args({"source"})
+		->arg_type(0,makeType<const Sound>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:560:15
-	makeExtern< Vector2 (*)(Vector2,float,float) , Vector2ClampValue , SimNode_ExtFuncCall >(lib,"Vector2ClampValue","Vector2ClampValue")
-		->args({"v","min","max"})
+// from raylib.h:1696:12
+	makeExtern< bool (*)(Sound) , IsSoundValid , SimNode_ExtFuncCall >(lib,"IsSoundValid","IsSoundValid")
+		->args({"sound"})
+		->arg_type(0,makeType<const Sound>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:581:11
-	makeExtern< int (*)(Vector2,Vector2) , Vector2Equals , SimNode_ExtFuncCall >(lib,"Vector2Equals","Vector2Equals")
-		->args({"p","q"})
+// from raylib.h:1697:12
+	makeExtern< void (*)(Sound,const void *,int) , UpdateSound , SimNode_ExtFuncCall >(lib,"UpdateSound","UpdateSound")
+		->args({"sound","data","frameCount"})
+		->arg_type(0,makeType<const Sound>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:598:15
-	makeExtern< Vector2 (*)(Vector2,Vector2,float) , Vector2Refract , SimNode_ExtFuncCall >(lib,"Vector2Refract","Vector2Refract")
-		->args({"v","n","r"})
+// from raylib.h:1698:12
+	makeExtern< void (*)(Wave) , UnloadWave , SimNode_ExtFuncCall >(lib,"UnloadWave","UnloadWave")
+		->args({"wave"})
+		->arg_type(0,makeType<const Wave>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:623:15
-	makeExtern< Vector3 (*)() , Vector3Zero , SimNode_ExtFuncCall >(lib,"Vector3Zero","Vector3Zero")
+// from raylib.h:1699:12
+	makeExtern< void (*)(Sound) , UnloadSound , SimNode_ExtFuncCall >(lib,"UnloadSound","UnloadSound")
+		->args({"sound"})
+		->arg_type(0,makeType<const Sound>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:631:15
-	makeExtern< Vector3 (*)() , Vector3One , SimNode_ExtFuncCall >(lib,"Vector3One","Vector3One")
+// from raylib.h:1700:12
+	makeExtern< void (*)(Sound) , UnloadSoundAlias , SimNode_ExtFuncCall >(lib,"UnloadSoundAlias","UnloadSoundAlias")
+		->args({"alias"})
+		->arg_type(0,makeType<const Sound>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:639:15
-	makeExtern< Vector3 (*)(Vector3,Vector3) , Vector3Add , SimNode_ExtFuncCall >(lib,"Vector3Add","Vector3Add")
-		->args({"v1","v2"})
+// from raylib.h:1701:12
+	makeExtern< bool (*)(Wave,const char *) , ExportWave , SimNode_ExtFuncCall >(lib,"ExportWave","ExportWave")
+		->args({"wave","fileName"})
+		->arg_type(0,makeType<const Wave>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:647:15
-	makeExtern< Vector3 (*)(Vector3,float) , Vector3AddValue , SimNode_ExtFuncCall >(lib,"Vector3AddValue","Vector3AddValue")
-		->args({"v","add"})
+// from raylib.h:1702:12
+	makeExtern< bool (*)(Wave,const char *) , ExportWaveAsCode , SimNode_ExtFuncCall >(lib,"ExportWaveAsCode","ExportWaveAsCode")
+		->args({"wave","fileName"})
+		->arg_type(0,makeType<const Wave>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:655:15
-	makeExtern< Vector3 (*)(Vector3,Vector3) , Vector3Subtract , SimNode_ExtFuncCall >(lib,"Vector3Subtract","Vector3Subtract")
-		->args({"v1","v2"})
+// from raylib.h:1705:12
+	makeExtern< void (*)(Sound) , PlaySound , SimNode_ExtFuncCall >(lib,"PlaySound","PlaySound")
+		->args({"sound"})
+		->arg_type(0,makeType<const Sound>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:663:15
-	makeExtern< Vector3 (*)(Vector3,float) , Vector3SubtractValue , SimNode_ExtFuncCall >(lib,"Vector3SubtractValue","Vector3SubtractValue")
-		->args({"v","sub"})
+// from raylib.h:1706:12
+	makeExtern< void (*)(Sound) , StopSound , SimNode_ExtFuncCall >(lib,"StopSound","StopSound")
+		->args({"sound"})
+		->arg_type(0,makeType<const Sound>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
 }
 }

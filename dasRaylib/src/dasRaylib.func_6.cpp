@@ -11,6 +11,38 @@
 namespace das {
 #include "dasRaylib.func.aot.decl.inc"
 void Module_dasRaylib::initFunctions_6() {
+// from raylib.h:1301:12
+	makeExtern< void (*)(Rectangle,float,int,float4) , _rlw_DrawRectangleRoundedLines , SimNode_ExtFuncCall >(lib,"DrawRectangleRoundedLines","das::_rlw_DrawRectangleRoundedLines")
+		->args({"rec","roundness","segments","color"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from raylib.h:1302:12
+	makeExtern< void (*)(Rectangle,float,int,float,float4) , _rlw_DrawRectangleRoundedLinesEx , SimNode_ExtFuncCall >(lib,"DrawRectangleRoundedLinesEx","das::_rlw_DrawRectangleRoundedLinesEx")
+		->args({"rec","roundness","segments","thick","color"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from raylib.h:1303:12
+	makeExtern< void (*)(Vector2,int,float,float,float4) , _rlw_DrawPoly , SimNode_ExtFuncCall >(lib,"DrawPoly","das::_rlw_DrawPoly")
+		->args({"center","sides","radius","rotation","color"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from raylib.h:1304:12
+	makeExtern< void (*)(Vector2,int,float,float,float4) , _rlw_DrawPolyLines , SimNode_ExtFuncCall >(lib,"DrawPolyLines","das::_rlw_DrawPolyLines")
+		->args({"center","sides","radius","rotation","color"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from raylib.h:1305:12
+	makeExtern< void (*)(Vector2,int,float,float,float,float4) , _rlw_DrawPolyLinesEx , SimNode_ExtFuncCall >(lib,"DrawPolyLinesEx","das::_rlw_DrawPolyLinesEx")
+		->args({"center","sides","radius","rotation","thick","color"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from raylib.h:1306:12
+	makeExtern< void (*)(int,int,float,float4) , _rlw_DrawCircle , SimNode_ExtFuncCall >(lib,"DrawCircle","das::_rlw_DrawCircle")
+		->args({"centerX","centerY","radius","color"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from raylib.h:1307:12
+	makeExtern< void (*)(Vector2,float,float4) , _rlw_DrawCircleV , SimNode_ExtFuncCall >(lib,"DrawCircleV","das::_rlw_DrawCircleV")
+		->args({"center","radius","color"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from raylib.h:1308:12
+	makeExtern< void (*)(Vector2,float,float4,float4) , _rlw_DrawCircleGradient , SimNode_ExtFuncCall >(lib,"DrawCircleGradient","das::_rlw_DrawCircleGradient")
+		->args({"center","radius","inner","outer"})
+		->addToModule(*this, SideEffects::worstDefault);
 // from raylib.h:1309:12
 	makeExtern< void (*)(Vector2,float,float,float,int,float4) , _rlw_DrawCircleSector , SimNode_ExtFuncCall >(lib,"DrawCircleSector","das::_rlw_DrawCircleSector")
 		->args({"center","radius","startAngle","endAngle","segments","color"})
@@ -167,6 +199,10 @@ void Module_dasRaylib::initFunctions_6() {
 	makeExtern< bool (*)(Vector2,Vector2,Vector2,Vector2,Vector2 *) , CheckCollisionLines , SimNode_ExtFuncCall >(lib,"CheckCollisionLines","CheckCollisionLines")
 		->args({"startPos1","endPos1","startPos2","endPos2","collisionPoint"})
 		->addToModule(*this, SideEffects::worstDefault);
+// from raylib.h:1353:12
+	makeExtern< bool (*)(Vector2,Vector2,Vector2,Vector2,float2 &) , _rlr_CheckCollisionLines , SimNode_ExtFuncCall >(lib,"CheckCollisionLines","das::_rlr_CheckCollisionLines")
+		->args({"startPos1","endPos1","startPos2","endPos2","collisionPoint"})
+		->addToModule(*this, SideEffects::worstDefault);
 // from raylib.h:1354:17
 	makeExtern< Rectangle (*)(Rectangle,Rectangle) , GetCollisionRec , SimNode_ExtFuncCall >(lib,"GetCollisionRec","GetCollisionRec")
 		->args({"rec1","rec2"})
@@ -174,45 +210,6 @@ void Module_dasRaylib::initFunctions_6() {
 // from raylib.h:1362:13
 	makeExtern< Image (*)(const char *) , LoadImage , SimNode_ExtFuncCallAndCopyOrMove >(lib,"LoadImage","LoadImage")
 		->args({"fileName"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1363:13
-	makeExtern< Image (*)(const char *,int,int,int,int) , LoadImageRaw , SimNode_ExtFuncCallAndCopyOrMove >(lib,"LoadImageRaw","LoadImageRaw")
-		->args({"fileName","width","height","format","headerSize"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1364:13
-	makeExtern< Image (*)(const char *,int *) , LoadImageAnim , SimNode_ExtFuncCallAndCopyOrMove >(lib,"LoadImageAnim","LoadImageAnim")
-		->args({"fileName","frames"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1365:13
-	makeExtern< Image (*)(const char *,const unsigned char *,int,int *) , LoadImageAnimFromMemory , SimNode_ExtFuncCallAndCopyOrMove >(lib,"LoadImageAnimFromMemory","LoadImageAnimFromMemory")
-		->args({"fileType","fileData","dataSize","frames"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1366:13
-	makeExtern< Image (*)(const char *,const unsigned char *,int) , LoadImageFromMemory , SimNode_ExtFuncCallAndCopyOrMove >(lib,"LoadImageFromMemory","LoadImageFromMemory")
-		->args({"fileType","fileData","dataSize"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1367:13
-	makeExtern< Image (*)(Texture) , LoadImageFromTexture , SimNode_ExtFuncCallAndCopyOrMove >(lib,"LoadImageFromTexture","LoadImageFromTexture")
-		->args({"texture"})
-		->arg_type(0,makeType<const Texture>(lib))
-		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1368:13
-	makeExtern< Image (*)() , LoadImageFromScreen , SimNode_ExtFuncCallAndCopyOrMove >(lib,"LoadImageFromScreen","LoadImageFromScreen")
-		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1369:12
-	makeExtern< bool (*)(Image) , IsImageValid , SimNode_ExtFuncCall >(lib,"IsImageValid","IsImageValid")
-		->args({"image"})
-		->arg_type(0,makeType<const Image>(lib))
-		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1370:12
-	makeExtern< void (*)(Image) , UnloadImage , SimNode_ExtFuncCall >(lib,"UnloadImage","UnloadImage")
-		->args({"image"})
-		->arg_type(0,makeType<const Image>(lib))
-		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1371:12
-	makeExtern< bool (*)(Image,const char *) , ExportImage , SimNode_ExtFuncCall >(lib,"ExportImage","ExportImage")
-		->args({"image","fileName"})
-		->arg_type(0,makeType<const Image>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
 }
 }

@@ -11,203 +11,202 @@
 namespace das {
 #include "dasRaylib.func.aot.decl.inc"
 void Module_dasRaylib::initFunctions_15() {
-// from raymath.h:1441:15
-	makeExtern< Vector4 (*)(Vector4,Vector4,float) , Vector4Lerp , SimNode_ExtFuncCall >(lib,"Vector4Lerp","Vector4Lerp")
-		->args({"v1","v2","amount"})
+// from raymath.h:283:15
+	makeExtern< Vector2 (*)() , Vector2One , SimNode_ExtFuncCall >(lib,"Vector2One","Vector2One")
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:1454:15
-	makeExtern< Vector4 (*)(Vector4,Vector4,float) , Vector4MoveTowards , SimNode_ExtFuncCall >(lib,"Vector4MoveTowards","Vector4MoveTowards")
-		->args({"v","target","maxDistance"})
+// from raymath.h:291:15
+	makeExtern< Vector2 (*)(Vector2,Vector2) , Vector2Add , SimNode_ExtFuncCall >(lib,"Vector2Add","Vector2Add")
+		->args({"v1","v2"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:1477:15
-	makeExtern< Vector4 (*)(Vector4) , Vector4Invert , SimNode_ExtFuncCall >(lib,"Vector4Invert","Vector4Invert")
+// from raymath.h:299:15
+	makeExtern< Vector2 (*)(Vector2,float) , Vector2AddValue , SimNode_ExtFuncCall >(lib,"Vector2AddValue","Vector2AddValue")
+		->args({"v","add"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from raymath.h:307:15
+	makeExtern< Vector2 (*)(Vector2,Vector2) , Vector2Subtract , SimNode_ExtFuncCall >(lib,"Vector2Subtract","Vector2Subtract")
+		->args({"v1","v2"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from raymath.h:315:15
+	makeExtern< Vector2 (*)(Vector2,float) , Vector2SubtractValue , SimNode_ExtFuncCall >(lib,"Vector2SubtractValue","Vector2SubtractValue")
+		->args({"v","sub"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from raymath.h:323:13
+	makeExtern< float (*)(Vector2) , Vector2Length , SimNode_ExtFuncCall >(lib,"Vector2Length","Vector2Length")
 		->args({"v"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:1484:11
-	makeExtern< int (*)(Vector4,Vector4) , Vector4Equals , SimNode_ExtFuncCall >(lib,"Vector4Equals","Vector4Equals")
+// from raymath.h:331:13
+	makeExtern< float (*)(Vector2) , Vector2LengthSqr , SimNode_ExtFuncCall >(lib,"Vector2LengthSqr","Vector2LengthSqr")
+		->args({"v"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from raymath.h:339:13
+	makeExtern< float (*)(Vector2,Vector2) , Vector2DotProduct , SimNode_ExtFuncCall >(lib,"Vector2DotProduct","Vector2DotProduct")
+		->args({"v1","v2"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from raymath.h:347:13
+	makeExtern< float (*)(Vector2,Vector2) , Vector2CrossProduct , SimNode_ExtFuncCall >(lib,"Vector2CrossProduct","Vector2CrossProduct")
+		->args({"v1","v2"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from raymath.h:355:13
+	makeExtern< float (*)(Vector2,Vector2) , Vector2Distance , SimNode_ExtFuncCall >(lib,"Vector2Distance","Vector2Distance")
+		->args({"v1","v2"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from raymath.h:363:13
+	makeExtern< float (*)(Vector2,Vector2) , Vector2DistanceSqr , SimNode_ExtFuncCall >(lib,"Vector2DistanceSqr","Vector2DistanceSqr")
+		->args({"v1","v2"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from raymath.h:373:13
+	makeExtern< float (*)(Vector2,Vector2) , Vector2Angle , SimNode_ExtFuncCall >(lib,"Vector2Angle","Vector2Angle")
+		->args({"v1","v2"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from raymath.h:388:13
+	makeExtern< float (*)(Vector2,Vector2) , Vector2LineAngle , SimNode_ExtFuncCall >(lib,"Vector2LineAngle","Vector2LineAngle")
+		->args({"start","end"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from raymath.h:398:15
+	makeExtern< Vector2 (*)(Vector2,float) , Vector2Scale , SimNode_ExtFuncCall >(lib,"Vector2Scale","Vector2Scale")
+		->args({"v","scale"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from raymath.h:406:15
+	makeExtern< Vector2 (*)(Vector2,Vector2) , Vector2Multiply , SimNode_ExtFuncCall >(lib,"Vector2Multiply","Vector2Multiply")
+		->args({"v1","v2"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from raymath.h:414:15
+	makeExtern< Vector2 (*)(Vector2) , Vector2Negate , SimNode_ExtFuncCall >(lib,"Vector2Negate","Vector2Negate")
+		->args({"v"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from raymath.h:422:15
+	makeExtern< Vector2 (*)(Vector2,Vector2) , Vector2Divide , SimNode_ExtFuncCall >(lib,"Vector2Divide","Vector2Divide")
+		->args({"v1","v2"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from raymath.h:430:15
+	makeExtern< Vector2 (*)(Vector2) , Vector2Normalize , SimNode_ExtFuncCall >(lib,"Vector2Normalize","Vector2Normalize")
+		->args({"v"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from raymath.h:446:15
+	makeExtern< Vector2 (*)(Vector2,const float4x4 &) , _rlw_Vector2Transform , SimNode_ExtFuncCall >(lib,"Vector2Transform","das::_rlw_Vector2Transform")
+		->args({"v","mat"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from raymath.h:461:15
+	makeExtern< Vector2 (*)(Vector2,Vector2,float) , Vector2Lerp , SimNode_ExtFuncCall >(lib,"Vector2Lerp","Vector2Lerp")
+		->args({"v1","v2","amount"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from raymath.h:472:15
+	makeExtern< Vector2 (*)(Vector2,Vector2) , Vector2Reflect , SimNode_ExtFuncCall >(lib,"Vector2Reflect","Vector2Reflect")
+		->args({"v","normal"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from raymath.h:485:15
+	makeExtern< Vector2 (*)(Vector2,Vector2) , Vector2Min , SimNode_ExtFuncCall >(lib,"Vector2Min","Vector2Min")
+		->args({"v1","v2"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from raymath.h:496:15
+	makeExtern< Vector2 (*)(Vector2,Vector2) , Vector2Max , SimNode_ExtFuncCall >(lib,"Vector2Max","Vector2Max")
+		->args({"v1","v2"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from raymath.h:507:15
+	makeExtern< Vector2 (*)(Vector2,float) , Vector2Rotate , SimNode_ExtFuncCall >(lib,"Vector2Rotate","Vector2Rotate")
+		->args({"v","angle"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from raymath.h:521:15
+	makeExtern< Vector2 (*)(Vector2,Vector2,float) , Vector2MoveTowards , SimNode_ExtFuncCall >(lib,"Vector2MoveTowards","Vector2MoveTowards")
+		->args({"v","target","maxDistance"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from raymath.h:540:15
+	makeExtern< Vector2 (*)(Vector2) , Vector2Invert , SimNode_ExtFuncCall >(lib,"Vector2Invert","Vector2Invert")
+		->args({"v"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from raymath.h:549:15
+	makeExtern< Vector2 (*)(Vector2,Vector2,Vector2) , Vector2Clamp , SimNode_ExtFuncCall >(lib,"Vector2Clamp","Vector2Clamp")
+		->args({"v","min","max"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from raymath.h:560:15
+	makeExtern< Vector2 (*)(Vector2,float,float) , Vector2ClampValue , SimNode_ExtFuncCall >(lib,"Vector2ClampValue","Vector2ClampValue")
+		->args({"v","min","max"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from raymath.h:581:11
+	makeExtern< int (*)(Vector2,Vector2) , Vector2Equals , SimNode_ExtFuncCall >(lib,"Vector2Equals","Vector2Equals")
 		->args({"p","q"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:1503:13
-	makeExtern< float (*)(const float4x4 &) , _rlw_MatrixDeterminant , SimNode_ExtFuncCall >(lib,"MatrixDeterminant","das::_rlw_MatrixDeterminant")
-		->args({"mat"})
+// from raymath.h:598:15
+	makeExtern< Vector2 (*)(Vector2,Vector2,float) , Vector2Refract , SimNode_ExtFuncCall >(lib,"Vector2Refract","Vector2Refract")
+		->args({"v","n","r"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:1540:13
-	makeExtern< float (*)(const float4x4 &) , _rlw_MatrixTrace , SimNode_ExtFuncCall >(lib,"MatrixTrace","das::_rlw_MatrixTrace")
-		->args({"mat"})
+// from raymath.h:623:15
+	makeExtern< Vector3 (*)() , Vector3Zero , SimNode_ExtFuncCall >(lib,"Vector3Zero","Vector3Zero")
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:1548:14
-	makeExtern< float4x4 (*)(const float4x4 &) , _rlw_MatrixTranspose , SimNode_ExtFuncCallAndCopyOrMove >(lib,"MatrixTranspose","das::_rlw_MatrixTranspose")
-		->args({"mat"})
+// from raymath.h:631:15
+	makeExtern< Vector3 (*)() , Vector3One , SimNode_ExtFuncCall >(lib,"Vector3One","Vector3One")
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:1573:14
-	makeExtern< float4x4 (*)(const float4x4 &) , _rlw_MatrixInvert , SimNode_ExtFuncCallAndCopyOrMove >(lib,"MatrixInvert","das::_rlw_MatrixInvert")
-		->args({"mat"})
+// from raymath.h:639:15
+	makeExtern< Vector3 (*)(Vector3,Vector3) , Vector3Add , SimNode_ExtFuncCall >(lib,"Vector3Add","Vector3Add")
+		->args({"v1","v2"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:1620:14
-	makeExtern< float4x4 (*)() , _rlw_MatrixIdentity , SimNode_ExtFuncCallAndCopyOrMove >(lib,"MatrixIdentity","das::_rlw_MatrixIdentity")
+// from raymath.h:647:15
+	makeExtern< Vector3 (*)(Vector3,float) , Vector3AddValue , SimNode_ExtFuncCall >(lib,"Vector3AddValue","Vector3AddValue")
+		->args({"v","add"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:1631:14
-	makeExtern< float4x4 (*)(const float4x4 &,const float4x4 &) , _rlw_MatrixAdd , SimNode_ExtFuncCallAndCopyOrMove >(lib,"MatrixAdd","das::_rlw_MatrixAdd")
-		->args({"left","right"})
+// from raymath.h:655:15
+	makeExtern< Vector3 (*)(Vector3,Vector3) , Vector3Subtract , SimNode_ExtFuncCall >(lib,"Vector3Subtract","Vector3Subtract")
+		->args({"v1","v2"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:1656:14
-	makeExtern< float4x4 (*)(const float4x4 &,const float4x4 &) , _rlw_MatrixSubtract , SimNode_ExtFuncCallAndCopyOrMove >(lib,"MatrixSubtract","das::_rlw_MatrixSubtract")
-		->args({"left","right"})
+// from raymath.h:663:15
+	makeExtern< Vector3 (*)(Vector3,float) , Vector3SubtractValue , SimNode_ExtFuncCall >(lib,"Vector3SubtractValue","Vector3SubtractValue")
+		->args({"v","sub"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:1682:14
-	makeExtern< float4x4 (*)(const float4x4 &,const float4x4 &) , _rlw_MatrixMultiply , SimNode_ExtFuncCallAndCopyOrMove >(lib,"MatrixMultiply","das::_rlw_MatrixMultiply")
-		->args({"left","right"})
+// from raymath.h:671:15
+	makeExtern< Vector3 (*)(Vector3,float) , Vector3Scale , SimNode_ExtFuncCall >(lib,"Vector3Scale","Vector3Scale")
+		->args({"v","scalar"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:1765:14
-	makeExtern< float4x4 (*)(const float4x4 &,float) , _rlw_MatrixMultiplyValue , SimNode_ExtFuncCallAndCopyOrMove >(lib,"MatrixMultiplyValue","das::_rlw_MatrixMultiplyValue")
-		->args({"left","value"})
+// from raymath.h:679:15
+	makeExtern< Vector3 (*)(Vector3,Vector3) , Vector3Multiply , SimNode_ExtFuncCall >(lib,"Vector3Multiply","Vector3Multiply")
+		->args({"v1","v2"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:1778:14
-	makeExtern< float4x4 (*)(float,float,float) , _rlw_MatrixTranslate , SimNode_ExtFuncCallAndCopyOrMove >(lib,"MatrixTranslate","das::_rlw_MatrixTranslate")
-		->args({"x","y","z"})
+// from raymath.h:687:15
+	makeExtern< Vector3 (*)(Vector3,Vector3) , Vector3CrossProduct , SimNode_ExtFuncCall >(lib,"Vector3CrossProduct","Vector3CrossProduct")
+		->args({"v1","v2"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:1790:14
-	makeExtern< float4x4 (*)(Vector3,float) , _rlw_MatrixRotate , SimNode_ExtFuncCallAndCopyOrMove >(lib,"MatrixRotate","das::_rlw_MatrixRotate")
-		->args({"axis","angle"})
+// from raymath.h:695:15
+	makeExtern< Vector3 (*)(Vector3) , Vector3Perpendicular , SimNode_ExtFuncCall >(lib,"Vector3Perpendicular","Vector3Perpendicular")
+		->args({"v"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:1835:14
-	makeExtern< float4x4 (*)(float) , _rlw_MatrixRotateX , SimNode_ExtFuncCallAndCopyOrMove >(lib,"MatrixRotateX","das::_rlw_MatrixRotateX")
-		->args({"angle"})
+// from raymath.h:724:13
+	makeExtern< float (*)(const Vector3) , Vector3Length , SimNode_ExtFuncCall >(lib,"Vector3Length","Vector3Length")
+		->args({"v"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:1855:14
-	makeExtern< float4x4 (*)(float) , _rlw_MatrixRotateY , SimNode_ExtFuncCallAndCopyOrMove >(lib,"MatrixRotateY","das::_rlw_MatrixRotateY")
-		->args({"angle"})
+// from raymath.h:732:13
+	makeExtern< float (*)(const Vector3) , Vector3LengthSqr , SimNode_ExtFuncCall >(lib,"Vector3LengthSqr","Vector3LengthSqr")
+		->args({"v"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:1875:14
-	makeExtern< float4x4 (*)(float) , _rlw_MatrixRotateZ , SimNode_ExtFuncCallAndCopyOrMove >(lib,"MatrixRotateZ","das::_rlw_MatrixRotateZ")
-		->args({"angle"})
+// from raymath.h:740:13
+	makeExtern< float (*)(Vector3,Vector3) , Vector3DotProduct , SimNode_ExtFuncCall >(lib,"Vector3DotProduct","Vector3DotProduct")
+		->args({"v1","v2"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:1896:14
-	makeExtern< float4x4 (*)(Vector3) , _rlw_MatrixRotateXYZ , SimNode_ExtFuncCallAndCopyOrMove >(lib,"MatrixRotateXYZ","das::_rlw_MatrixRotateXYZ")
-		->args({"angle"})
+// from raymath.h:748:13
+	makeExtern< float (*)(Vector3,Vector3) , Vector3Distance , SimNode_ExtFuncCall >(lib,"Vector3Distance","Vector3Distance")
+		->args({"v1","v2"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:1927:14
-	makeExtern< float4x4 (*)(Vector3) , _rlw_MatrixRotateZYX , SimNode_ExtFuncCallAndCopyOrMove >(lib,"MatrixRotateZYX","das::_rlw_MatrixRotateZYX")
-		->args({"angle"})
+// from raymath.h:761:13
+	makeExtern< float (*)(Vector3,Vector3) , Vector3DistanceSqr , SimNode_ExtFuncCall >(lib,"Vector3DistanceSqr","Vector3DistanceSqr")
+		->args({"v1","v2"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:1962:14
-	makeExtern< float4x4 (*)(float,float,float) , _rlw_MatrixScale , SimNode_ExtFuncCallAndCopyOrMove >(lib,"MatrixScale","das::_rlw_MatrixScale")
-		->args({"x","y","z"})
+// from raymath.h:774:13
+	makeExtern< float (*)(Vector3,Vector3) , Vector3Angle , SimNode_ExtFuncCall >(lib,"Vector3Angle","Vector3Angle")
+		->args({"v1","v2"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:1973:14
-	makeExtern< float4x4 (*)(double,double,double,double,double,double) , _rlw_MatrixFrustum , SimNode_ExtFuncCallAndCopyOrMove >(lib,"MatrixFrustum","das::_rlw_MatrixFrustum")
-		->args({"left","right","bottom","top","nearPlane","farPlane"})
+// from raymath.h:787:15
+	makeExtern< Vector3 (*)(Vector3) , Vector3Negate , SimNode_ExtFuncCall >(lib,"Vector3Negate","Vector3Negate")
+		->args({"v"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:2006:14
-	makeExtern< float4x4 (*)(double,double,double,double) , _rlw_MatrixPerspective , SimNode_ExtFuncCallAndCopyOrMove >(lib,"MatrixPerspective","das::_rlw_MatrixPerspective")
-		->args({"fovY","aspect","nearPlane","farPlane"})
+// from raymath.h:795:15
+	makeExtern< Vector3 (*)(Vector3,Vector3) , Vector3Divide , SimNode_ExtFuncCall >(lib,"Vector3Divide","Vector3Divide")
+		->args({"v1","v2"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:2032:14
-	makeExtern< float4x4 (*)(double,double,double,double,double,double) , _rlw_MatrixOrtho , SimNode_ExtFuncCallAndCopyOrMove >(lib,"MatrixOrtho","das::_rlw_MatrixOrtho")
-		->args({"left","right","bottom","top","nearPlane","farPlane"})
+// from raymath.h:803:15
+	makeExtern< Vector3 (*)(Vector3) , Vector3Normalize , SimNode_ExtFuncCall >(lib,"Vector3Normalize","Vector3Normalize")
+		->args({"v"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:2061:14
-	makeExtern< float4x4 (*)(Vector3,Vector3,Vector3) , _rlw_MatrixLookAt , SimNode_ExtFuncCallAndCopyOrMove >(lib,"MatrixLookAt","das::_rlw_MatrixLookAt")
-		->args({"eye","target","up"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:2145:18
-	makeExtern< Vector4 (*)(Vector4,Vector4) , QuaternionAdd , SimNode_ExtFuncCallAndCopyOrMove >(lib,"QuaternionAdd","QuaternionAdd")
-		->args({"q1","q2"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:2153:18
-	makeExtern< Vector4 (*)(Vector4,float) , QuaternionAddValue , SimNode_ExtFuncCallAndCopyOrMove >(lib,"QuaternionAddValue","QuaternionAddValue")
-		->args({"q","add"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:2161:18
-	makeExtern< Vector4 (*)(Vector4,Vector4) , QuaternionSubtract , SimNode_ExtFuncCallAndCopyOrMove >(lib,"QuaternionSubtract","QuaternionSubtract")
-		->args({"q1","q2"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:2169:18
-	makeExtern< Vector4 (*)(Vector4,float) , QuaternionSubtractValue , SimNode_ExtFuncCallAndCopyOrMove >(lib,"QuaternionSubtractValue","QuaternionSubtractValue")
-		->args({"q","sub"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:2177:18
-	makeExtern< Vector4 (*)() , QuaternionIdentity , SimNode_ExtFuncCallAndCopyOrMove >(lib,"QuaternionIdentity","QuaternionIdentity")
-		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:2185:13
-	makeExtern< float (*)(Vector4) , QuaternionLength , SimNode_ExtFuncCall >(lib,"QuaternionLength","QuaternionLength")
-		->args({"q"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:2193:18
-	makeExtern< Vector4 (*)(Vector4) , QuaternionNormalize , SimNode_ExtFuncCallAndCopyOrMove >(lib,"QuaternionNormalize","QuaternionNormalize")
-		->args({"q"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:2210:18
-	makeExtern< Vector4 (*)(Vector4) , QuaternionInvert , SimNode_ExtFuncCallAndCopyOrMove >(lib,"QuaternionInvert","QuaternionInvert")
-		->args({"q"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:2230:18
-	makeExtern< Vector4 (*)(Vector4,Vector4) , QuaternionMultiply , SimNode_ExtFuncCallAndCopyOrMove >(lib,"QuaternionMultiply","QuaternionMultiply")
-		->args({"q1","q2"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:2246:18
-	makeExtern< Vector4 (*)(Vector4,float) , QuaternionScale , SimNode_ExtFuncCallAndCopyOrMove >(lib,"QuaternionScale","QuaternionScale")
-		->args({"q","mul"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:2259:18
-	makeExtern< Vector4 (*)(Vector4,Vector4) , QuaternionDivide , SimNode_ExtFuncCallAndCopyOrMove >(lib,"QuaternionDivide","QuaternionDivide")
-		->args({"q1","q2"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:2267:18
-	makeExtern< Vector4 (*)(Vector4,Vector4,float) , QuaternionLerp , SimNode_ExtFuncCallAndCopyOrMove >(lib,"QuaternionLerp","QuaternionLerp")
-		->args({"q1","q2","amount"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:2280:18
-	makeExtern< Vector4 (*)(Vector4,Vector4,float) , QuaternionNlerp , SimNode_ExtFuncCallAndCopyOrMove >(lib,"QuaternionNlerp","QuaternionNlerp")
-		->args({"q1","q2","amount"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:2305:18
-	makeExtern< Vector4 (*)(Vector4,Vector4,float) , QuaternionSlerp , SimNode_ExtFuncCallAndCopyOrMove >(lib,"QuaternionSlerp","QuaternionSlerp")
-		->args({"q1","q2","amount"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:2352:18
-	makeExtern< Vector4 (*)(Vector4,Vector4,Vector4,Vector4,float) , QuaternionCubicHermiteSpline , SimNode_ExtFuncCallAndCopyOrMove >(lib,"QuaternionCubicHermiteSpline","QuaternionCubicHermiteSpline")
-		->args({"q1","outTangent1","q2","inTangent2","t"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:2377:18
-	makeExtern< Vector4 (*)(Vector3,Vector3) , QuaternionFromVector3ToVector3 , SimNode_ExtFuncCallAndCopyOrMove >(lib,"QuaternionFromVector3ToVector3","QuaternionFromVector3ToVector3")
-		->args({"from","to"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:2426:18
-	makeExtern< Vector4 (*)(const float4x4 &) , _rlw_QuaternionFromMatrix , SimNode_ExtFuncCall >(lib,"QuaternionFromMatrix","das::_rlw_QuaternionFromMatrix")
-		->args({"mat"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:2490:14
-	makeExtern< float4x4 (*)(Vector4) , _rlw_QuaternionToMatrix , SimNode_ExtFuncCallAndCopyOrMove >(lib,"QuaternionToMatrix","das::_rlw_QuaternionToMatrix")
-		->args({"q"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:2524:18
-	makeExtern< Vector4 (*)(Vector3,float) , QuaternionFromAxisAngle , SimNode_ExtFuncCallAndCopyOrMove >(lib,"QuaternionFromAxisAngle","QuaternionFromAxisAngle")
-		->args({"axis","angle"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:2563:12
-	makeExtern< void (*)(Vector4,Vector3 *,float *) , QuaternionToAxisAngle , SimNode_ExtFuncCall >(lib,"QuaternionToAxisAngle","QuaternionToAxisAngle")
-		->args({"q","outAxis","outAngle"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:2601:18
-	makeExtern< Vector4 (*)(float,float,float) , QuaternionFromEuler , SimNode_ExtFuncCallAndCopyOrMove >(lib,"QuaternionFromEuler","QuaternionFromEuler")
-		->args({"pitch","yaw","roll"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:2622:15
-	makeExtern< Vector3 (*)(Vector4) , QuaternionToEuler , SimNode_ExtFuncCall >(lib,"QuaternionToEuler","QuaternionToEuler")
-		->args({"q"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:2646:18
-	makeExtern< Vector4 (*)(Vector4,const float4x4 &) , _rlw_QuaternionTransform , SimNode_ExtFuncCall >(lib,"QuaternionTransform","das::_rlw_QuaternionTransform")
-		->args({"q","mat"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:2659:11
-	makeExtern< int (*)(Vector4,Vector4) , QuaternionEquals , SimNode_ExtFuncCall >(lib,"QuaternionEquals","QuaternionEquals")
-		->args({"p","q"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:2678:14
-	makeExtern< float4x4 (*)(Vector3,Vector4,Vector3) , _rlw_MatrixCompose , SimNode_ExtFuncCallAndCopyOrMove >(lib,"MatrixCompose","das::_rlw_MatrixCompose")
-		->args({"translation","rotation","scale"})
+// from raymath.h:821:15
+	makeExtern< Vector3 (*)(Vector3,Vector3) , Vector3Project , SimNode_ExtFuncCall >(lib,"Vector3Project","Vector3Project")
+		->args({"v1","v2"})
 		->addToModule(*this, SideEffects::worstDefault);
 }
 }

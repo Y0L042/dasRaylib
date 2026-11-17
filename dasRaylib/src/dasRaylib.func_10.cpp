@@ -11,211 +11,225 @@
 namespace das {
 #include "dasRaylib.func.aot.decl.inc"
 void Module_dasRaylib::initFunctions_10() {
-// from raylib.h:1555:11
-	makeExtern< int (*)(char *,const char *) , TextCopy , SimNode_ExtFuncCall >(lib,"TextCopy","TextCopy")
-		->args({"dst","src"})
+// from raylib.h:1465:23
+	makeExtern< RenderTexture (*)(int,int,int) , LoadRenderTextureEx , SimNode_ExtFuncCallAndCopyOrMove >(lib,"LoadRenderTextureEx","LoadRenderTextureEx")
+		->args({"width","height","format"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1556:12
-	makeExtern< bool (*)(const char *,const char *) , TextIsEqual , SimNode_ExtFuncCall >(lib,"TextIsEqual","TextIsEqual")
-		->args({"text1","text2"})
+// from raylib.h:1466:12
+	makeExtern< bool (*)(Texture) , IsTextureValid , SimNode_ExtFuncCall >(lib,"IsTextureValid","IsTextureValid")
+		->args({"texture"})
+		->arg_type(0,makeType<const Texture>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1557:20
-	makeExtern< unsigned int (*)(const char *) , TextLength , SimNode_ExtFuncCall >(lib,"TextLength","TextLength")
-		->args({"text"})
+// from raylib.h:1467:12
+	makeExtern< void (*)(Texture) , UnloadTexture , SimNode_ExtFuncCall >(lib,"UnloadTexture","UnloadTexture")
+		->args({"texture"})
+		->arg_type(0,makeType<const Texture>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1559:19
-	makeExtern< const char * (*)(const char *,int,int) , TextSubtext , SimNode_ExtFuncCall >(lib,"TextSubtext","TextSubtext")
-		->args({"text","position","length"})
+// from raylib.h:1468:12
+	makeExtern< bool (*)(RenderTexture) , IsRenderTextureValid , SimNode_ExtFuncCall >(lib,"IsRenderTextureValid","IsRenderTextureValid")
+		->args({"target"})
+		->arg_type(0,makeType<const RenderTexture>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1560:19
-	makeExtern< const char * (*)(const char *) , TextRemoveSpaces , SimNode_ExtFuncCall >(lib,"TextRemoveSpaces","TextRemoveSpaces")
-		->args({"text"})
+// from raylib.h:1469:12
+	makeExtern< void (*)(RenderTexture) , UnloadRenderTexture , SimNode_ExtFuncCall >(lib,"UnloadRenderTexture","UnloadRenderTexture")
+		->args({"target"})
+		->arg_type(0,makeType<const RenderTexture>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1561:13
-	makeExtern< char * (*)(const char *,const char *,const char *) , GetTextBetween , SimNode_ExtFuncCall >(lib,"GetTextBetween","GetTextBetween")
-		->args({"text","begin","end"})
+// from raylib.h:1470:12
+	makeExtern< void (*)(Texture,const void *) , UpdateTexture , SimNode_ExtFuncCall >(lib,"UpdateTexture","UpdateTexture")
+		->args({"texture","pixels"})
+		->arg_type(0,makeType<const Texture>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1562:13
-	makeExtern< char * (*)(const char *,const char *,const char *) , TextReplace , SimNode_ExtFuncCall >(lib,"TextReplace","TextReplace")
-		->args({"text","search","replacement"})
+// from raylib.h:1471:12
+	makeExtern< void (*)(Texture,Rectangle,const void *) , UpdateTextureRec , SimNode_ExtFuncCall >(lib,"UpdateTextureRec","UpdateTextureRec")
+		->args({"texture","rec","pixels"})
+		->arg_type(0,makeType<const Texture>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1563:13
-	makeExtern< char * (*)(const char *,const char *,const char *) , TextReplaceAlloc , SimNode_ExtFuncCall >(lib,"TextReplaceAlloc","TextReplaceAlloc")
-		->args({"text","search","replacement"})
+// from raylib.h:1474:12
+	makeExtern< void (*)(Texture *) , GenTextureMipmaps , SimNode_ExtFuncCall >(lib,"GenTextureMipmaps","GenTextureMipmaps")
+		->args({"texture"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1564:13
-	makeExtern< char * (*)(const char *,const char *,const char *,const char *) , TextReplaceBetween , SimNode_ExtFuncCall >(lib,"TextReplaceBetween","TextReplaceBetween")
-		->args({"text","begin","end","replacement"})
+// from raylib.h:1474:12
+	makeExtern< void (*)(Texture &) , _rlr_GenTextureMipmaps , SimNode_ExtFuncCall >(lib,"GenTextureMipmaps","das::_rlr_GenTextureMipmaps")
+		->args({"texture"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1565:13
-	makeExtern< char * (*)(const char *,const char *,const char *,const char *) , TextReplaceBetweenAlloc , SimNode_ExtFuncCall >(lib,"TextReplaceBetweenAlloc","TextReplaceBetweenAlloc")
-		->args({"text","begin","end","replacement"})
+// from raylib.h:1475:12
+	makeExtern< void (*)(Texture,int) , SetTextureFilter , SimNode_ExtFuncCall >(lib,"SetTextureFilter","SetTextureFilter")
+		->args({"texture","filter"})
+		->arg_type(0,makeType<const Texture>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1566:13
-	makeExtern< char * (*)(const char *,const char *,int) , TextInsert , SimNode_ExtFuncCall >(lib,"TextInsert","TextInsert")
-		->args({"text","insert","position"})
+// from raylib.h:1476:12
+	makeExtern< void (*)(Texture,int) , SetTextureWrap , SimNode_ExtFuncCall >(lib,"SetTextureWrap","SetTextureWrap")
+		->args({"texture","wrap"})
+		->arg_type(0,makeType<const Texture>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1567:13
-	makeExtern< char * (*)(const char *,const char *,int) , TextInsertAlloc , SimNode_ExtFuncCall >(lib,"TextInsertAlloc","TextInsertAlloc")
-		->args({"text","insert","position"})
+// from raylib.h:1479:12
+	makeExtern< void (*)(Texture,int,int,float4) , _rlw_DrawTexture , SimNode_ExtFuncCall >(lib,"DrawTexture","das::_rlw_DrawTexture")
+		->args({"texture","posX","posY","tint"})
+		->arg_type(0,makeType<const Texture>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1568:13
-	makeExtern< char * (*)(char **,int,const char *) , TextJoin , SimNode_ExtFuncCall >(lib,"TextJoin","TextJoin")
-		->args({"textList","count","delimiter"})
+// from raylib.h:1480:12
+	makeExtern< void (*)(Texture,Vector2,float4) , _rlw_DrawTextureV , SimNode_ExtFuncCall >(lib,"DrawTextureV","das::_rlw_DrawTextureV")
+		->args({"texture","position","tint"})
+		->arg_type(0,makeType<const Texture>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1569:14
-	makeExtern< char ** (*)(const char *,char,int *) , TextSplit , SimNode_ExtFuncCall >(lib,"TextSplit","TextSplit")
-		->args({"text","delimiter","count"})
+// from raylib.h:1481:12
+	makeExtern< void (*)(Texture,Vector2,float,float,float4) , _rlw_DrawTextureEx , SimNode_ExtFuncCall >(lib,"DrawTextureEx","das::_rlw_DrawTextureEx")
+		->args({"texture","position","rotation","scale","tint"})
+		->arg_type(0,makeType<const Texture>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1570:12
-	makeExtern< void (*)(char *,const char *,int *) , TextAppend , SimNode_ExtFuncCall >(lib,"TextAppend","TextAppend")
-		->args({"text","append","position"})
+// from raylib.h:1482:12
+	makeExtern< void (*)(Texture,Rectangle,Vector2,float4) , _rlw_DrawTextureRec , SimNode_ExtFuncCall >(lib,"DrawTextureRec","das::_rlw_DrawTextureRec")
+		->args({"texture","rec","position","tint"})
+		->arg_type(0,makeType<const Texture>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1571:11
-	makeExtern< int (*)(const char *,const char *) , TextFindIndex , SimNode_ExtFuncCall >(lib,"TextFindIndex","TextFindIndex")
-		->args({"text","search"})
+// from raylib.h:1483:12
+	makeExtern< void (*)(Texture,Rectangle,Rectangle,Vector2,float,float4) , _rlw_DrawTexturePro , SimNode_ExtFuncCall >(lib,"DrawTexturePro","das::_rlw_DrawTexturePro")
+		->args({"texture","srcrec","dstrec","origin","rotation","tint"})
+		->arg_type(0,makeType<const Texture>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1572:13
-	makeExtern< char * (*)(const char *) , TextToUpper , SimNode_ExtFuncCall >(lib,"TextToUpper","TextToUpper")
-		->args({"text"})
+// from raylib.h:1484:12
+	makeExtern< void (*)(Texture,NPatchInfo,Rectangle,Vector2,float,float4) , _rlw_DrawTextureNPatch , SimNode_ExtFuncCall >(lib,"DrawTextureNPatch","das::_rlw_DrawTextureNPatch")
+		->args({"texture","nPatchInfo","dstrec","origin","rotation","tint"})
+		->arg_type(0,makeType<const Texture>(lib))
+		->arg_type(1,makeType<const NPatchInfo>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1573:13
-	makeExtern< char * (*)(const char *) , TextToLower , SimNode_ExtFuncCall >(lib,"TextToLower","TextToLower")
-		->args({"text"})
+// from raylib.h:1487:12
+	makeExtern< bool (*)(float4,float4) , _rlw_ColorIsEqual , SimNode_ExtFuncCall >(lib,"ColorIsEqual","das::_rlw_ColorIsEqual")
+		->args({"col1","col2"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1574:13
-	makeExtern< char * (*)(const char *) , TextToPascal , SimNode_ExtFuncCall >(lib,"TextToPascal","TextToPascal")
-		->args({"text"})
+// from raylib.h:1488:13
+	makeExtern< float4 (*)(float4,float) , _rlw_Fade , SimNode_ExtFuncCall >(lib,"Fade","das::_rlw_Fade")
+		->args({"color","alpha"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1575:13
-	makeExtern< char * (*)(const char *) , TextToSnake , SimNode_ExtFuncCall >(lib,"TextToSnake","TextToSnake")
-		->args({"text"})
+// from raylib.h:1489:11
+	makeExtern< int (*)(float4) , _rlw_ColorToInt , SimNode_ExtFuncCall >(lib,"ColorToInt","das::_rlw_ColorToInt")
+		->args({"color"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1576:13
-	makeExtern< char * (*)(const char *) , TextToCamel , SimNode_ExtFuncCall >(lib,"TextToCamel","TextToCamel")
-		->args({"text"})
+// from raylib.h:1490:15
+	makeExtern< Vector4 (*)(float4) , _rlw_ColorNormalize , SimNode_ExtFuncCall >(lib,"ColorNormalize","das::_rlw_ColorNormalize")
+		->args({"color"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1577:11
-	makeExtern< int (*)(const char *) , TextToInteger , SimNode_ExtFuncCall >(lib,"TextToInteger","TextToInteger")
-		->args({"text"})
+// from raylib.h:1491:13
+	makeExtern< float4 (*)(Vector4) , _rlw_ColorFromNormalized , SimNode_ExtFuncCall >(lib,"ColorFromNormalized","das::_rlw_ColorFromNormalized")
+		->args({"normalized"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1578:13
-	makeExtern< float (*)(const char *) , TextToFloat , SimNode_ExtFuncCall >(lib,"TextToFloat","TextToFloat")
-		->args({"text"})
+// from raylib.h:1492:15
+	makeExtern< Vector3 (*)(float4) , _rlw_ColorToHSV , SimNode_ExtFuncCall >(lib,"ColorToHSV","das::_rlw_ColorToHSV")
+		->args({"color"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1585:12
-	makeExtern< void (*)(Vector3,Vector3,float4) , _rlw_DrawLine3D , SimNode_ExtFuncCall >(lib,"DrawLine3D","das::_rlw_DrawLine3D")
-		->args({"startPos","endPos","color"})
+// from raylib.h:1493:13
+	makeExtern< float4 (*)(float,float,float) , _rlw_ColorFromHSV , SimNode_ExtFuncCall >(lib,"ColorFromHSV","das::_rlw_ColorFromHSV")
+		->args({"hue","saturation","value"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1586:12
-	makeExtern< void (*)(Vector3,float4) , _rlw_DrawPoint3D , SimNode_ExtFuncCall >(lib,"DrawPoint3D","das::_rlw_DrawPoint3D")
-		->args({"position","color"})
+// from raylib.h:1494:13
+	makeExtern< float4 (*)(float4,float4) , _rlw_ColorTint , SimNode_ExtFuncCall >(lib,"ColorTint","das::_rlw_ColorTint")
+		->args({"color","tint"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1587:12
-	makeExtern< void (*)(Vector3,float,Vector3,float,float4) , _rlw_DrawCircle3D , SimNode_ExtFuncCall >(lib,"DrawCircle3D","das::_rlw_DrawCircle3D")
-		->args({"center","radius","rotationAxis","rotationAngle","color"})
+// from raylib.h:1495:13
+	makeExtern< float4 (*)(float4,float) , _rlw_ColorBrightness , SimNode_ExtFuncCall >(lib,"ColorBrightness","das::_rlw_ColorBrightness")
+		->args({"color","factor"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1588:12
-	makeExtern< void (*)(Vector3,Vector3,Vector3,float4) , _rlw_DrawTriangle3D , SimNode_ExtFuncCall >(lib,"DrawTriangle3D","das::_rlw_DrawTriangle3D")
-		->args({"v1","v2","v3","color"})
+// from raylib.h:1496:13
+	makeExtern< float4 (*)(float4,float) , _rlw_ColorContrast , SimNode_ExtFuncCall >(lib,"ColorContrast","das::_rlw_ColorContrast")
+		->args({"color","contrast"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1589:12
-	makeExtern< void (*)(const Vector3 *,int,float4) , _rlw_DrawTriangleStrip3D , SimNode_ExtFuncCall >(lib,"DrawTriangleStrip3D","das::_rlw_DrawTriangleStrip3D")
-		->args({"points","pointCount","color"})
+// from raylib.h:1497:13
+	makeExtern< float4 (*)(float4,float) , _rlw_ColorAlpha , SimNode_ExtFuncCall >(lib,"ColorAlpha","das::_rlw_ColorAlpha")
+		->args({"color","alpha"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1590:12
-	makeExtern< void (*)(Vector3,float,float,float,float4) , _rlw_DrawCube , SimNode_ExtFuncCall >(lib,"DrawCube","das::_rlw_DrawCube")
-		->args({"position","width","height","length","color"})
+// from raylib.h:1498:13
+	makeExtern< float4 (*)(float4,float4,float4) , _rlw_ColorAlphaBlend , SimNode_ExtFuncCall >(lib,"ColorAlphaBlend","das::_rlw_ColorAlphaBlend")
+		->args({"dst","src","tint"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1591:12
-	makeExtern< void (*)(Vector3,Vector3,float4) , _rlw_DrawCubeV , SimNode_ExtFuncCall >(lib,"DrawCubeV","das::_rlw_DrawCubeV")
-		->args({"position","size","color"})
+// from raylib.h:1499:13
+	makeExtern< float4 (*)(float4,float4,float) , _rlw_ColorLerp , SimNode_ExtFuncCall >(lib,"ColorLerp","das::_rlw_ColorLerp")
+		->args({"color1","color2","factor"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1592:12
-	makeExtern< void (*)(Vector3,float,float,float,float4) , _rlw_DrawCubeWires , SimNode_ExtFuncCall >(lib,"DrawCubeWires","das::_rlw_DrawCubeWires")
-		->args({"position","width","height","length","color"})
+// from raylib.h:1500:13
+	makeExtern< float4 (*)(unsigned int) , _rlw_GetColor , SimNode_ExtFuncCall >(lib,"GetColor","das::_rlw_GetColor")
+		->args({"hexValue"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1593:12
-	makeExtern< void (*)(Vector3,Vector3,float4) , _rlw_DrawCubeWiresV , SimNode_ExtFuncCall >(lib,"DrawCubeWiresV","das::_rlw_DrawCubeWiresV")
-		->args({"position","size","color"})
+// from raylib.h:1501:13
+	makeExtern< float4 (*)(const void *,int) , _rlw_GetPixelColor , SimNode_ExtFuncCall >(lib,"GetPixelColor","das::_rlw_GetPixelColor")
+		->args({"srcPtr","format"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1594:12
-	makeExtern< void (*)(Vector3,float,float4) , _rlw_DrawSphere , SimNode_ExtFuncCall >(lib,"DrawSphere","das::_rlw_DrawSphere")
-		->args({"centerPos","radius","color"})
+// from raylib.h:1502:12
+	makeExtern< void (*)(void *,float4,int) , _rlw_SetPixelColor , SimNode_ExtFuncCall >(lib,"SetPixelColor","das::_rlw_SetPixelColor")
+		->args({"dstPtr","color","format"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1595:12
-	makeExtern< void (*)(Vector3,float,int,int,float4) , _rlw_DrawSphereEx , SimNode_ExtFuncCall >(lib,"DrawSphereEx","das::_rlw_DrawSphereEx")
-		->args({"centerPos","radius","rings","slices","color"})
+// from raylib.h:1503:11
+	makeExtern< int (*)(int,int,int) , GetPixelDataSize , SimNode_ExtFuncCall >(lib,"GetPixelDataSize","GetPixelDataSize")
+		->args({"width","height","format"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1596:12
-	makeExtern< void (*)(Vector3,float,int,int,float4) , _rlw_DrawSphereWires , SimNode_ExtFuncCall >(lib,"DrawSphereWires","das::_rlw_DrawSphereWires")
-		->args({"centerPos","radius","rings","slices","color"})
+// from raylib.h:1510:12
+	makeExtern< Font (*)() , GetFontDefault , SimNode_ExtFuncCallAndCopyOrMove >(lib,"GetFontDefault","GetFontDefault")
 		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1597:12
-	makeExtern< void (*)(Vector3,float,float,float,int,float4) , _rlw_DrawCylinder , SimNode_ExtFuncCall >(lib,"DrawCylinder","das::_rlw_DrawCylinder")
-		->args({"position","radiusTop","radiusBottom","height","sides","color"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1598:12
-	makeExtern< void (*)(Vector3,Vector3,float,float,int,float4) , _rlw_DrawCylinderEx , SimNode_ExtFuncCall >(lib,"DrawCylinderEx","das::_rlw_DrawCylinderEx")
-		->args({"startPos","endPos","startRadius","endRadius","sides","color"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1599:12
-	makeExtern< void (*)(Vector3,float,float,float,int,float4) , _rlw_DrawCylinderWires , SimNode_ExtFuncCall >(lib,"DrawCylinderWires","das::_rlw_DrawCylinderWires")
-		->args({"position","radiusTop","radiusBottom","height","sides","color"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1600:12
-	makeExtern< void (*)(Vector3,Vector3,float,float,int,float4) , _rlw_DrawCylinderWiresEx , SimNode_ExtFuncCall >(lib,"DrawCylinderWiresEx","das::_rlw_DrawCylinderWiresEx")
-		->args({"startPos","endPos","startRadius","endRadius","sides","color"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1601:12
-	makeExtern< void (*)(Vector3,Vector3,float,int,int,float4) , _rlw_DrawCapsule , SimNode_ExtFuncCall >(lib,"DrawCapsule","das::_rlw_DrawCapsule")
-		->args({"startPos","endPos","radius","rings","slices","color"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1602:12
-	makeExtern< void (*)(Vector3,Vector3,float,int,int,float4) , _rlw_DrawCapsuleWires , SimNode_ExtFuncCall >(lib,"DrawCapsuleWires","das::_rlw_DrawCapsuleWires")
-		->args({"startPos","endPos","radius","rings","slices","color"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1603:12
-	makeExtern< void (*)(Vector3,Vector2,float4) , _rlw_DrawPlane , SimNode_ExtFuncCall >(lib,"DrawPlane","das::_rlw_DrawPlane")
-		->args({"centerPos","size","color"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1604:12
-	makeExtern< void (*)(Ray,float4) , _rlw_DrawRay , SimNode_ExtFuncCall >(lib,"DrawRay","das::_rlw_DrawRay")
-		->args({"ray","color"})
-		->arg_type(0,makeType<const Ray>(lib))
-		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1605:12
-	makeExtern< void (*)(int,float) , DrawGrid , SimNode_ExtFuncCall >(lib,"DrawGrid","DrawGrid")
-		->args({"slices","spacing"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1612:13
-	makeExtern< Model (*)(const char *) , LoadModel , SimNode_ExtFuncCallAndCopyOrMove >(lib,"LoadModel","LoadModel")
+// from raylib.h:1511:12
+	makeExtern< Font (*)(const char *) , LoadFont , SimNode_ExtFuncCallAndCopyOrMove >(lib,"LoadFont","LoadFont")
 		->args({"fileName"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1613:13
-	makeExtern< Model (*)(Mesh) , LoadModelFromMesh , SimNode_ExtFuncCallAndCopyOrMove >(lib,"LoadModelFromMesh","LoadModelFromMesh")
-		->args({"mesh"})
-		->arg_type(0,makeType<const Mesh>(lib))
+// from raylib.h:1512:12
+	makeExtern< Font (*)(const char *,int,const int *,int) , LoadFontEx , SimNode_ExtFuncCallAndCopyOrMove >(lib,"LoadFontEx","LoadFontEx")
+		->args({"fileName","fontSize","codepoints","codepointCount"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1614:12
-	makeExtern< bool (*)(Model) , IsModelValid , SimNode_ExtFuncCall >(lib,"IsModelValid","IsModelValid")
-		->args({"model"})
-		->arg_type(0,makeType<const Model>(lib))
+// from raylib.h:1513:12
+	makeExtern< Font (*)(Image,float4,int) , _rlw_LoadFontFromImage , SimNode_ExtFuncCallAndCopyOrMove >(lib,"LoadFontFromImage","das::_rlw_LoadFontFromImage")
+		->args({"image","key","firstChar"})
+		->arg_type(0,makeType<const Image>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1615:12
-	makeExtern< void (*)(Model) , UnloadModel , SimNode_ExtFuncCall >(lib,"UnloadModel","UnloadModel")
-		->args({"model"})
-		->arg_type(0,makeType<const Model>(lib))
+// from raylib.h:1514:12
+	makeExtern< Font (*)(const char *,const unsigned char *,int,int,const int *,int) , LoadFontFromMemory , SimNode_ExtFuncCallAndCopyOrMove >(lib,"LoadFontFromMemory","LoadFontFromMemory")
+		->args({"fileType","fileData","dataSize","fontSize","codepoints","codepointCount"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1616:19
-	makeExtern< BoundingBox (*)(Model) , GetModelBoundingBox , SimNode_ExtFuncCallAndCopyOrMove >(lib,"GetModelBoundingBox","GetModelBoundingBox")
-		->args({"model"})
-		->arg_type(0,makeType<const Model>(lib))
+// from raylib.h:1515:12
+	makeExtern< bool (*)(Font) , IsFontValid , SimNode_ExtFuncCall >(lib,"IsFontValid","IsFontValid")
+		->args({"font"})
+		->arg_type(0,makeType<const Font>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1619:12
-	makeExtern< void (*)(Model,Vector3,float,float4) , _rlw_DrawModel , SimNode_ExtFuncCall >(lib,"DrawModel","das::_rlw_DrawModel")
-		->args({"model","position","scale","tint"})
-		->arg_type(0,makeType<const Model>(lib))
+// from raylib.h:1516:18
+	makeExtern< GlyphInfo * (*)(const unsigned char *,int,int,const int *,int,int,int *) , LoadFontData , SimNode_ExtFuncCall >(lib,"LoadFontData","LoadFontData")
+		->args({"fileData","dataSize","fontSize","codepoints","codepointCount","type","glyphCount"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from raylib.h:1516:18
+	makeExtern< GlyphInfo * (*)(const unsigned char *,int,int,const int *,int,int,int32_t &) , _rlr_LoadFontData , SimNode_ExtFuncCall >(lib,"LoadFontData","das::_rlr_LoadFontData")
+		->args({"fileData","dataSize","fontSize","codepoints","codepointCount","type","glyphCount"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from raylib.h:1517:13
+	makeExtern< Image (*)(const GlyphInfo *,Rectangle **,int,int,int,int) , GenImageFontAtlas , SimNode_ExtFuncCallAndCopyOrMove >(lib,"GenImageFontAtlas","GenImageFontAtlas")
+		->args({"glyphs","glyphRecs","glyphCount","fontSize","padding","packMethod"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from raylib.h:1518:12
+	makeExtern< void (*)(GlyphInfo *,int) , UnloadFontData , SimNode_ExtFuncCall >(lib,"UnloadFontData","UnloadFontData")
+		->args({"glyphs","glyphCount"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from raylib.h:1519:12
+	makeExtern< void (*)(Font) , UnloadFont , SimNode_ExtFuncCall >(lib,"UnloadFont","UnloadFont")
+		->args({"font"})
+		->arg_type(0,makeType<const Font>(lib))
+		->addToModule(*this, SideEffects::worstDefault);
+// from raylib.h:1520:12
+	makeExtern< bool (*)(Font,const char *) , ExportFontAsCode , SimNode_ExtFuncCall >(lib,"ExportFontAsCode","ExportFontAsCode")
+		->args({"font","fileName"})
+		->arg_type(0,makeType<const Font>(lib))
+		->addToModule(*this, SideEffects::worstDefault);
+// from raylib.h:1523:12
+	makeExtern< void (*)(int,int) , DrawFPS , SimNode_ExtFuncCall >(lib,"DrawFPS","DrawFPS")
+		->args({"posX","posY"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from raylib.h:1524:12
+	makeExtern< void (*)(const char *,int,int,int,float4) , _rlw_DrawText , SimNode_ExtFuncCall >(lib,"DrawText","das::_rlw_DrawText")
+		->args({"text","posX","posY","fontSize","color"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from raylib.h:1525:12
+	makeExtern< void (*)(Font,const char *,Vector2,float,float,float4) , _rlw_DrawTextEx , SimNode_ExtFuncCall >(lib,"DrawTextEx","das::_rlw_DrawTextEx")
+		->args({"font","text","position","fontSize","spacing","tint"})
+		->arg_type(0,makeType<const Font>(lib))
+		->addToModule(*this, SideEffects::worstDefault);
+// from raylib.h:1526:12
+	makeExtern< void (*)(Font,const char *,Vector2,Vector2,float,float,float,float4) , _rlw_DrawTextPro , SimNode_ExtFuncCall >(lib,"DrawTextPro","das::_rlw_DrawTextPro")
+		->args({"font","text","position","origin","rotation","fontSize","spacing","tint"})
+		->arg_type(0,makeType<const Font>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
 }
 }

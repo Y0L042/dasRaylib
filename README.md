@@ -54,6 +54,34 @@ def main {
 | `Color` by value | `float4` | RGBA in 0..1, converted to bytes for you |
 | `Matrix` by value | `float4x4` | Converted for you |
 | `Color`, `Matrix` in pointers and struct fields | Raw `Color`, `Matrix` | Use `to_float4`, `to_Color`, `to_float4x4`, `to_Matrix` |
+| `T *` to one value (`Camera *`, `Image *`, `float *`, ...) | `var x : T` (reference) | Also bound as a `T?` pointer, see below |
+
+### Pointer parameters
+
+When a raylib function takes a pointer to one value, you can pass a `var` variable or struct field directly. You do not need `unsafe(addr(...))`:
+
+```das
+var cam = Camera3D(position = float3(15.0), target = float3(0.0), up = float3(0, 1, 0), fovy = 45.0)
+cam |> UpdateCamera(CameraMode.CAMERA_ORBITAL)
+let fwd = GetCameraForward(cam)
+
+var img = GenImageColor(64, 64, RED)
+img |> ImageResize(128, 128)
+
+var radius = 80.0
+GuiSliderBar(float4(600, 140, 120, 20), "Radius", "{radius:.2f}", radius, 0.0, 200.0)
+
+var a = float3(1, 0, 0)
+var b = float3(1, 1, 0)
+Vector3OrthoNormalize(a, b)     // changes a and b
+
+var col = RED
+GuiColorPicker(float4(10, 10, 200, 200), "", col)     // col stays a float4 in 0..1
+```
+
+The function can change the value, so it must be a `var`. If you pass a `let` value, compilation fails.
+
+The pointer form is still bound. Use it to pass `null` to an optional raygui argument. Arrays stay pointers, for example `DrawLineStrip(points, pointCount, color)`. A pointer stays a pointer when an int count, size or length follows it. Returned pointers are also not changed.
 
 Two modules are available:
 

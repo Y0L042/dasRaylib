@@ -58,10 +58,13 @@ def test_camera(t : T?) {
     var cam = Camera3D(position = float3(10.0), target = float3(0.0), up = float3(0, 1, 0), fovy = 45.0,
         projection = int(CameraProjection.CAMERA_PERSPECTIVE))
     t |> run("GetCameraForward points at the target") @(t : T?) {
+        t |> success(length(GetCameraForward(cam) - normalize(float3(-1.0))) < 1e-5)
+    }
+    t |> run("the pointer overload gives the same answer") @(t : T?) {
         t |> success(length(GetCameraForward(unsafe(addr(cam))) - normalize(float3(-1.0))) < 1e-5)
     }
     t |> run("GetCameraViewMatrix moves the eye to the origin") @(t : T?) {
-        let view = GetCameraViewMatrix(unsafe(addr(cam)))
+        let view = GetCameraViewMatrix(cam)
         t |> success(length((view * float4(cam.position, 1.0)).xyz) < 1e-4)
     }
 }

@@ -38,7 +38,7 @@ def main {
     SetTargetFPS(60)
 
     while (!WindowShouldClose()) {
-        UpdateCamera(unsafe(addr(camera)), CameraMode.CAMERA_ORBITAL)
+        camera |> UpdateCamera(CameraMode.CAMERA_ORBITAL)
         SetShaderValue(shader, view_loc, camera.position)
 
         for (i in range(MAX_LIGHTS)) {

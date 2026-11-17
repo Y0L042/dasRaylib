@@ -11,6 +11,28 @@
 namespace das {
 #include "dasRaylib.func.aot.decl.inc"
 void Module_dasRaylib::initFunctions_5() {
+// from raylib.h:1234:12
+	makeExtern< void (*)(int,int) , SetMousePosition , SimNode_ExtFuncCall >(lib,"SetMousePosition","SetMousePosition")
+		->args({"x","y"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from raylib.h:1235:12
+	makeExtern< void (*)(int,int) , SetMouseOffset , SimNode_ExtFuncCall >(lib,"SetMouseOffset","SetMouseOffset")
+		->args({"offsetX","offsetY"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from raylib.h:1236:12
+	makeExtern< void (*)(float,float) , SetMouseScale , SimNode_ExtFuncCall >(lib,"SetMouseScale","SetMouseScale")
+		->args({"scaleX","scaleY"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from raylib.h:1237:13
+	makeExtern< float (*)() , GetMouseWheelMove , SimNode_ExtFuncCall >(lib,"GetMouseWheelMove","GetMouseWheelMove")
+		->addToModule(*this, SideEffects::worstDefault);
+// from raylib.h:1238:15
+	makeExtern< Vector2 (*)() , GetMouseWheelMoveV , SimNode_ExtFuncCall >(lib,"GetMouseWheelMoveV","GetMouseWheelMoveV")
+		->addToModule(*this, SideEffects::worstDefault);
+// from raylib.h:1239:12
+	makeExtern< void (*)(int) , SetMouseCursor , SimNode_ExtFuncCall >(lib,"SetMouseCursor","SetMouseCursor")
+		->args({"cursor"})
+		->addToModule(*this, SideEffects::worstDefault);
 // from raylib.h:1242:11
 	makeExtern< int (*)() , GetTouchX , SimNode_ExtFuncCall >(lib,"GetTouchX","GetTouchX")
 		->addToModule(*this, SideEffects::worstDefault);
@@ -58,8 +80,16 @@ void Module_dasRaylib::initFunctions_5() {
 	makeExtern< void (*)(Camera3D *,int) , UpdateCamera , SimNode_ExtFuncCall >(lib,"UpdateCamera","UpdateCamera")
 		->args({"camera","mode"})
 		->addToModule(*this, SideEffects::worstDefault);
+// from raylib.h:1263:12
+	makeExtern< void (*)(Camera3D &,int) , _rlr_UpdateCamera , SimNode_ExtFuncCall >(lib,"UpdateCamera","das::_rlr_UpdateCamera")
+		->args({"camera","mode"})
+		->addToModule(*this, SideEffects::worstDefault);
 // from raylib.h:1264:12
 	makeExtern< void (*)(Camera3D *,Vector3,Vector3,float) , UpdateCameraPro , SimNode_ExtFuncCall >(lib,"UpdateCameraPro","UpdateCameraPro")
+		->args({"camera","movement","rotation","zoom"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from raylib.h:1264:12
+	makeExtern< void (*)(Camera3D &,Vector3,Vector3,float) , _rlr_UpdateCameraPro , SimNode_ExtFuncCall >(lib,"UpdateCameraPro","das::_rlr_UpdateCameraPro")
 		->args({"camera","movement","rotation","zoom"})
 		->addToModule(*this, SideEffects::worstDefault);
 // from raylib.h:1272:12
@@ -168,38 +198,6 @@ void Module_dasRaylib::initFunctions_5() {
 // from raylib.h:1300:12
 	makeExtern< void (*)(Rectangle,float,int,float4) , _rlw_DrawRectangleRounded , SimNode_ExtFuncCall >(lib,"DrawRectangleRounded","das::_rlw_DrawRectangleRounded")
 		->args({"rec","roundness","segments","color"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1301:12
-	makeExtern< void (*)(Rectangle,float,int,float4) , _rlw_DrawRectangleRoundedLines , SimNode_ExtFuncCall >(lib,"DrawRectangleRoundedLines","das::_rlw_DrawRectangleRoundedLines")
-		->args({"rec","roundness","segments","color"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1302:12
-	makeExtern< void (*)(Rectangle,float,int,float,float4) , _rlw_DrawRectangleRoundedLinesEx , SimNode_ExtFuncCall >(lib,"DrawRectangleRoundedLinesEx","das::_rlw_DrawRectangleRoundedLinesEx")
-		->args({"rec","roundness","segments","thick","color"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1303:12
-	makeExtern< void (*)(Vector2,int,float,float,float4) , _rlw_DrawPoly , SimNode_ExtFuncCall >(lib,"DrawPoly","das::_rlw_DrawPoly")
-		->args({"center","sides","radius","rotation","color"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1304:12
-	makeExtern< void (*)(Vector2,int,float,float,float4) , _rlw_DrawPolyLines , SimNode_ExtFuncCall >(lib,"DrawPolyLines","das::_rlw_DrawPolyLines")
-		->args({"center","sides","radius","rotation","color"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1305:12
-	makeExtern< void (*)(Vector2,int,float,float,float,float4) , _rlw_DrawPolyLinesEx , SimNode_ExtFuncCall >(lib,"DrawPolyLinesEx","das::_rlw_DrawPolyLinesEx")
-		->args({"center","sides","radius","rotation","thick","color"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1306:12
-	makeExtern< void (*)(int,int,float,float4) , _rlw_DrawCircle , SimNode_ExtFuncCall >(lib,"DrawCircle","das::_rlw_DrawCircle")
-		->args({"centerX","centerY","radius","color"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1307:12
-	makeExtern< void (*)(Vector2,float,float4) , _rlw_DrawCircleV , SimNode_ExtFuncCall >(lib,"DrawCircleV","das::_rlw_DrawCircleV")
-		->args({"center","radius","color"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1308:12
-	makeExtern< void (*)(Vector2,float,float4,float4) , _rlw_DrawCircleGradient , SimNode_ExtFuncCall >(lib,"DrawCircleGradient","das::_rlw_DrawCircleGradient")
-		->args({"center","radius","inner","outer"})
 		->addToModule(*this, SideEffects::worstDefault);
 }
 }

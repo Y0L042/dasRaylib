@@ -27,12 +27,10 @@ def main {
         DrawCircleSector(center, outer_radius, start_angle, end_angle, int(segments), Fade(MAROON, 0.3))
         DrawCircleSectorLines(center, outer_radius, start_angle, end_angle, int(segments), Fade(MAROON, 0.6))
 
-        unsafe {
-            GuiSliderBar(float4(600, 40, 120, 20), "StartAngle", "{start_angle:.2f}", addr(start_angle), 0.0, 720.0)
-            GuiSliderBar(float4(600, 70, 120, 20), "EndAngle", "{end_angle:.2f}", addr(end_angle), 0.0, 720.0)
-            GuiSliderBar(float4(600, 140, 120, 20), "Radius", "{outer_radius:.2f}", addr(outer_radius), 0.0, 200.0)
-            GuiSliderBar(float4(600, 170, 120, 20), "Segments", "{segments:.2f}", addr(segments), 0.0, 100.0)
-        }
+        GuiSliderBar(float4(600, 40, 120, 20), "StartAngle", "{start_angle:.2f}", start_angle, 0.0, 720.0)
+        GuiSliderBar(float4(600, 70, 120, 20), "EndAngle", "{end_angle:.2f}", end_angle, 0.0, 720.0)
+        GuiSliderBar(float4(600, 140, 120, 20), "Radius", "{outer_radius:.2f}", outer_radius, 0.0, 200.0)
+        GuiSliderBar(float4(600, 170, 120, 20), "Segments", "{segments:.2f}", segments, 0.0, 100.0)
 
         let min_segments = trunc(ceil((end_angle - start_angle) / 90.0))
         let manual = segments >= min_segments

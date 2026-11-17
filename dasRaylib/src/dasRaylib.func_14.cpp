@@ -11,203 +11,238 @@
 namespace das {
 #include "dasRaylib.func.aot.decl.inc"
 void Module_dasRaylib::initFunctions_14() {
-// from raymath.h:671:15
-	makeExtern< Vector3 (*)(Vector3,float) , Vector3Scale , SimNode_ExtFuncCall >(lib,"Vector3Scale","Vector3Scale")
-		->args({"v","scalar"})
+// from raylib.h:1707:12
+	makeExtern< void (*)(Sound) , PauseSound , SimNode_ExtFuncCall >(lib,"PauseSound","PauseSound")
+		->args({"sound"})
+		->arg_type(0,makeType<const Sound>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:679:15
-	makeExtern< Vector3 (*)(Vector3,Vector3) , Vector3Multiply , SimNode_ExtFuncCall >(lib,"Vector3Multiply","Vector3Multiply")
-		->args({"v1","v2"})
+// from raylib.h:1708:12
+	makeExtern< void (*)(Sound) , ResumeSound , SimNode_ExtFuncCall >(lib,"ResumeSound","ResumeSound")
+		->args({"sound"})
+		->arg_type(0,makeType<const Sound>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:687:15
-	makeExtern< Vector3 (*)(Vector3,Vector3) , Vector3CrossProduct , SimNode_ExtFuncCall >(lib,"Vector3CrossProduct","Vector3CrossProduct")
-		->args({"v1","v2"})
+// from raylib.h:1709:12
+	makeExtern< bool (*)(Sound) , IsSoundPlaying , SimNode_ExtFuncCall >(lib,"IsSoundPlaying","IsSoundPlaying")
+		->args({"sound"})
+		->arg_type(0,makeType<const Sound>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:695:15
-	makeExtern< Vector3 (*)(Vector3) , Vector3Perpendicular , SimNode_ExtFuncCall >(lib,"Vector3Perpendicular","Vector3Perpendicular")
-		->args({"v"})
+// from raylib.h:1710:12
+	makeExtern< void (*)(Sound,float) , SetSoundVolume , SimNode_ExtFuncCall >(lib,"SetSoundVolume","SetSoundVolume")
+		->args({"sound","volume"})
+		->arg_type(0,makeType<const Sound>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:724:13
-	makeExtern< float (*)(const Vector3) , Vector3Length , SimNode_ExtFuncCall >(lib,"Vector3Length","Vector3Length")
-		->args({"v"})
+// from raylib.h:1711:12
+	makeExtern< void (*)(Sound,float) , SetSoundPitch , SimNode_ExtFuncCall >(lib,"SetSoundPitch","SetSoundPitch")
+		->args({"sound","pitch"})
+		->arg_type(0,makeType<const Sound>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:732:13
-	makeExtern< float (*)(const Vector3) , Vector3LengthSqr , SimNode_ExtFuncCall >(lib,"Vector3LengthSqr","Vector3LengthSqr")
-		->args({"v"})
+// from raylib.h:1712:12
+	makeExtern< void (*)(Sound,float) , SetSoundPan , SimNode_ExtFuncCall >(lib,"SetSoundPan","SetSoundPan")
+		->args({"sound","pan"})
+		->arg_type(0,makeType<const Sound>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:740:13
-	makeExtern< float (*)(Vector3,Vector3) , Vector3DotProduct , SimNode_ExtFuncCall >(lib,"Vector3DotProduct","Vector3DotProduct")
-		->args({"v1","v2"})
+// from raylib.h:1713:12
+	makeExtern< Wave (*)(Wave) , WaveCopy , SimNode_ExtFuncCallAndCopyOrMove >(lib,"WaveCopy","WaveCopy")
+		->args({"wave"})
+		->arg_type(0,makeType<const Wave>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:748:13
-	makeExtern< float (*)(Vector3,Vector3) , Vector3Distance , SimNode_ExtFuncCall >(lib,"Vector3Distance","Vector3Distance")
-		->args({"v1","v2"})
+// from raylib.h:1714:12
+	makeExtern< void (*)(Wave *,int,int) , WaveCrop , SimNode_ExtFuncCall >(lib,"WaveCrop","WaveCrop")
+		->args({"wave","initFrame","finalFrame"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:761:13
-	makeExtern< float (*)(Vector3,Vector3) , Vector3DistanceSqr , SimNode_ExtFuncCall >(lib,"Vector3DistanceSqr","Vector3DistanceSqr")
-		->args({"v1","v2"})
+// from raylib.h:1714:12
+	makeExtern< void (*)(Wave &,int,int) , _rlr_WaveCrop , SimNode_ExtFuncCall >(lib,"WaveCrop","das::_rlr_WaveCrop")
+		->args({"wave","initFrame","finalFrame"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:774:13
-	makeExtern< float (*)(Vector3,Vector3) , Vector3Angle , SimNode_ExtFuncCall >(lib,"Vector3Angle","Vector3Angle")
-		->args({"v1","v2"})
+// from raylib.h:1715:12
+	makeExtern< void (*)(Wave *,int,int,int) , WaveFormat , SimNode_ExtFuncCall >(lib,"WaveFormat","WaveFormat")
+		->args({"wave","sampleRate","sampleSize","channels"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:787:15
-	makeExtern< Vector3 (*)(Vector3) , Vector3Negate , SimNode_ExtFuncCall >(lib,"Vector3Negate","Vector3Negate")
-		->args({"v"})
+// from raylib.h:1715:12
+	makeExtern< void (*)(Wave &,int,int,int) , _rlr_WaveFormat , SimNode_ExtFuncCall >(lib,"WaveFormat","das::_rlr_WaveFormat")
+		->args({"wave","sampleRate","sampleSize","channels"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:795:15
-	makeExtern< Vector3 (*)(Vector3,Vector3) , Vector3Divide , SimNode_ExtFuncCall >(lib,"Vector3Divide","Vector3Divide")
-		->args({"v1","v2"})
+// from raylib.h:1716:14
+	makeExtern< float * (*)(Wave) , LoadWaveSamples , SimNode_ExtFuncCall >(lib,"LoadWaveSamples","LoadWaveSamples")
+		->args({"wave"})
+		->arg_type(0,makeType<const Wave>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:803:15
-	makeExtern< Vector3 (*)(Vector3) , Vector3Normalize , SimNode_ExtFuncCall >(lib,"Vector3Normalize","Vector3Normalize")
-		->args({"v"})
+// from raylib.h:1717:12
+	makeExtern< void (*)(float *) , UnloadWaveSamples , SimNode_ExtFuncCall >(lib,"UnloadWaveSamples","UnloadWaveSamples")
+		->args({"samples"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:821:15
-	makeExtern< Vector3 (*)(Vector3,Vector3) , Vector3Project , SimNode_ExtFuncCall >(lib,"Vector3Project","Vector3Project")
-		->args({"v1","v2"})
+// from raylib.h:1720:13
+	makeExtern< Music (*)(const char *) , LoadMusicStream , SimNode_ExtFuncCallAndCopyOrMove >(lib,"LoadMusicStream","LoadMusicStream")
+		->args({"fileName"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:838:15
-	makeExtern< Vector3 (*)(Vector3,Vector3) , Vector3Reject , SimNode_ExtFuncCall >(lib,"Vector3Reject","Vector3Reject")
-		->args({"v1","v2"})
+// from raylib.h:1721:13
+	makeExtern< Music (*)(const char *,const unsigned char *,int) , LoadMusicStreamFromMemory , SimNode_ExtFuncCallAndCopyOrMove >(lib,"LoadMusicStreamFromMemory","LoadMusicStreamFromMemory")
+		->args({"fileType","data","dataSize"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:857:12
-	makeExtern< void (*)(Vector3 *,Vector3 *) , Vector3OrthoNormalize , SimNode_ExtFuncCall >(lib,"Vector3OrthoNormalize","Vector3OrthoNormalize")
-		->args({"v1","v2"})
+// from raylib.h:1722:12
+	makeExtern< bool (*)(Music) , IsMusicValid , SimNode_ExtFuncCall >(lib,"IsMusicValid","IsMusicValid")
+		->args({"music"})
+		->arg_type(0,makeType<const Music>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:890:15
-	makeExtern< Vector3 (*)(Vector3,const float4x4 &) , _rlw_Vector3Transform , SimNode_ExtFuncCall >(lib,"Vector3Transform","das::_rlw_Vector3Transform")
-		->args({"v","mat"})
+// from raylib.h:1723:12
+	makeExtern< void (*)(Music) , UnloadMusicStream , SimNode_ExtFuncCall >(lib,"UnloadMusicStream","UnloadMusicStream")
+		->args({"music"})
+		->arg_type(0,makeType<const Music>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:906:15
-	makeExtern< Vector3 (*)(Vector3,Vector4) , Vector3RotateByQuaternion , SimNode_ExtFuncCall >(lib,"Vector3RotateByQuaternion","Vector3RotateByQuaternion")
-		->args({"v","q"})
+// from raylib.h:1724:12
+	makeExtern< void (*)(Music) , PlayMusicStream , SimNode_ExtFuncCall >(lib,"PlayMusicStream","PlayMusicStream")
+		->args({"music"})
+		->arg_type(0,makeType<const Music>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:918:15
-	makeExtern< Vector3 (*)(Vector3,Vector3,float) , Vector3RotateByAxisAngle , SimNode_ExtFuncCall >(lib,"Vector3RotateByAxisAngle","Vector3RotateByAxisAngle")
-		->args({"v","axis","angle"})
+// from raylib.h:1725:12
+	makeExtern< bool (*)(Music) , IsMusicStreamPlaying , SimNode_ExtFuncCall >(lib,"IsMusicStreamPlaying","IsMusicStreamPlaying")
+		->args({"music"})
+		->arg_type(0,makeType<const Music>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:970:15
-	makeExtern< Vector3 (*)(Vector3,Vector3,float) , Vector3MoveTowards , SimNode_ExtFuncCall >(lib,"Vector3MoveTowards","Vector3MoveTowards")
-		->args({"v","target","maxDistance"})
+// from raylib.h:1726:12
+	makeExtern< void (*)(Music) , UpdateMusicStream , SimNode_ExtFuncCall >(lib,"UpdateMusicStream","UpdateMusicStream")
+		->args({"music"})
+		->arg_type(0,makeType<const Music>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:991:15
-	makeExtern< Vector3 (*)(Vector3,Vector3,float) , Vector3Lerp , SimNode_ExtFuncCall >(lib,"Vector3Lerp","Vector3Lerp")
-		->args({"v1","v2","amount"})
+// from raylib.h:1727:12
+	makeExtern< void (*)(Music) , StopMusicStream , SimNode_ExtFuncCall >(lib,"StopMusicStream","StopMusicStream")
+		->args({"music"})
+		->arg_type(0,makeType<const Music>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:1004:15
-	makeExtern< Vector3 (*)(Vector3,Vector3,Vector3,Vector3,float) , Vector3CubicHermite , SimNode_ExtFuncCall >(lib,"Vector3CubicHermite","Vector3CubicHermite")
-		->args({"v1","tangent1","v2","tangent2","amount"})
+// from raylib.h:1728:12
+	makeExtern< void (*)(Music) , PauseMusicStream , SimNode_ExtFuncCall >(lib,"PauseMusicStream","PauseMusicStream")
+		->args({"music"})
+		->arg_type(0,makeType<const Music>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:1019:15
-	makeExtern< Vector3 (*)(Vector3,Vector3) , Vector3Reflect , SimNode_ExtFuncCall >(lib,"Vector3Reflect","Vector3Reflect")
-		->args({"v","normal"})
+// from raylib.h:1729:12
+	makeExtern< void (*)(Music) , ResumeMusicStream , SimNode_ExtFuncCall >(lib,"ResumeMusicStream","ResumeMusicStream")
+		->args({"music"})
+		->arg_type(0,makeType<const Music>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:1037:15
-	makeExtern< Vector3 (*)(Vector3,Vector3) , Vector3Min , SimNode_ExtFuncCall >(lib,"Vector3Min","Vector3Min")
-		->args({"v1","v2"})
+// from raylib.h:1730:12
+	makeExtern< void (*)(Music,float) , SeekMusicStream , SimNode_ExtFuncCall >(lib,"SeekMusicStream","SeekMusicStream")
+		->args({"music","position"})
+		->arg_type(0,makeType<const Music>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:1049:15
-	makeExtern< Vector3 (*)(Vector3,Vector3) , Vector3Max , SimNode_ExtFuncCall >(lib,"Vector3Max","Vector3Max")
-		->args({"v1","v2"})
+// from raylib.h:1731:12
+	makeExtern< void (*)(Music,float) , SetMusicVolume , SimNode_ExtFuncCall >(lib,"SetMusicVolume","SetMusicVolume")
+		->args({"music","volume"})
+		->arg_type(0,makeType<const Music>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:1062:15
-	makeExtern< Vector3 (*)(Vector3,Vector3,Vector3,Vector3) , Vector3Barycenter , SimNode_ExtFuncCall >(lib,"Vector3Barycenter","Vector3Barycenter")
-		->args({"p","a","b","c"})
+// from raylib.h:1732:12
+	makeExtern< void (*)(Music,float) , SetMusicPitch , SimNode_ExtFuncCall >(lib,"SetMusicPitch","SetMusicPitch")
+		->args({"music","pitch"})
+		->arg_type(0,makeType<const Music>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:1086:15
-	makeExtern< Vector3 (*)(Vector3,const float4x4 &,const float4x4 &) , _rlw_Vector3Unproject , SimNode_ExtFuncCall >(lib,"Vector3Unproject","das::_rlw_Vector3Unproject")
-		->args({"source","projection","view"})
+// from raylib.h:1733:12
+	makeExtern< void (*)(Music,float) , SetMusicPan , SimNode_ExtFuncCall >(lib,"SetMusicPan","SetMusicPan")
+		->args({"music","pan"})
+		->arg_type(0,makeType<const Music>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:1181:15
-	makeExtern< Vector3 (*)(Vector3) , Vector3Invert , SimNode_ExtFuncCall >(lib,"Vector3Invert","Vector3Invert")
-		->args({"v"})
+// from raylib.h:1734:13
+	makeExtern< float (*)(Music) , GetMusicTimeLength , SimNode_ExtFuncCall >(lib,"GetMusicTimeLength","GetMusicTimeLength")
+		->args({"music"})
+		->arg_type(0,makeType<const Music>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:1190:15
-	makeExtern< Vector3 (*)(Vector3,Vector3,Vector3) , Vector3Clamp , SimNode_ExtFuncCall >(lib,"Vector3Clamp","Vector3Clamp")
-		->args({"v","min","max"})
+// from raylib.h:1735:13
+	makeExtern< float (*)(Music) , GetMusicTimePlayed , SimNode_ExtFuncCall >(lib,"GetMusicTimePlayed","GetMusicTimePlayed")
+		->args({"music"})
+		->arg_type(0,makeType<const Music>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:1202:15
-	makeExtern< Vector3 (*)(Vector3,float,float) , Vector3ClampValue , SimNode_ExtFuncCall >(lib,"Vector3ClampValue","Vector3ClampValue")
-		->args({"v","min","max"})
+// from raylib.h:1738:19
+	makeExtern< AudioStream (*)(unsigned int,unsigned int,unsigned int) , LoadAudioStream , SimNode_ExtFuncCallAndCopyOrMove >(lib,"LoadAudioStream","LoadAudioStream")
+		->args({"sampleRate","sampleSize","channels"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:1224:11
-	makeExtern< int (*)(Vector3,Vector3) , Vector3Equals , SimNode_ExtFuncCall >(lib,"Vector3Equals","Vector3Equals")
-		->args({"p","q"})
+// from raylib.h:1739:12
+	makeExtern< bool (*)(AudioStream) , IsAudioStreamValid , SimNode_ExtFuncCall >(lib,"IsAudioStreamValid","IsAudioStreamValid")
+		->args({"stream"})
+		->arg_type(0,makeType<const AudioStream>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:1242:15
-	makeExtern< Vector3 (*)(Vector3,Vector3,float) , Vector3Refract , SimNode_ExtFuncCall >(lib,"Vector3Refract","Vector3Refract")
-		->args({"v","n","r"})
+// from raylib.h:1740:12
+	makeExtern< void (*)(AudioStream) , UnloadAudioStream , SimNode_ExtFuncCall >(lib,"UnloadAudioStream","UnloadAudioStream")
+		->args({"stream"})
+		->arg_type(0,makeType<const AudioStream>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:1267:15
-	makeExtern< Vector4 (*)() , Vector4Zero , SimNode_ExtFuncCall >(lib,"Vector4Zero","Vector4Zero")
+// from raylib.h:1741:12
+	makeExtern< void (*)(AudioStream,const void *,int) , UpdateAudioStream , SimNode_ExtFuncCall >(lib,"UpdateAudioStream","UpdateAudioStream")
+		->args({"stream","data","frameCount"})
+		->arg_type(0,makeType<const AudioStream>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:1274:15
-	makeExtern< Vector4 (*)() , Vector4One , SimNode_ExtFuncCall >(lib,"Vector4One","Vector4One")
+// from raylib.h:1742:12
+	makeExtern< bool (*)(AudioStream) , IsAudioStreamProcessed , SimNode_ExtFuncCall >(lib,"IsAudioStreamProcessed","IsAudioStreamProcessed")
+		->args({"stream"})
+		->arg_type(0,makeType<const AudioStream>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:1281:15
-	makeExtern< Vector4 (*)(Vector4,Vector4) , Vector4Add , SimNode_ExtFuncCall >(lib,"Vector4Add","Vector4Add")
-		->args({"v1","v2"})
+// from raylib.h:1743:12
+	makeExtern< void (*)(AudioStream) , PlayAudioStream , SimNode_ExtFuncCall >(lib,"PlayAudioStream","PlayAudioStream")
+		->args({"stream"})
+		->arg_type(0,makeType<const AudioStream>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:1293:15
-	makeExtern< Vector4 (*)(Vector4,float) , Vector4AddValue , SimNode_ExtFuncCall >(lib,"Vector4AddValue","Vector4AddValue")
-		->args({"v","add"})
+// from raylib.h:1744:12
+	makeExtern< void (*)(AudioStream) , PauseAudioStream , SimNode_ExtFuncCall >(lib,"PauseAudioStream","PauseAudioStream")
+		->args({"stream"})
+		->arg_type(0,makeType<const AudioStream>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:1305:15
-	makeExtern< Vector4 (*)(Vector4,Vector4) , Vector4Subtract , SimNode_ExtFuncCall >(lib,"Vector4Subtract","Vector4Subtract")
-		->args({"v1","v2"})
+// from raylib.h:1745:12
+	makeExtern< void (*)(AudioStream) , ResumeAudioStream , SimNode_ExtFuncCall >(lib,"ResumeAudioStream","ResumeAudioStream")
+		->args({"stream"})
+		->arg_type(0,makeType<const AudioStream>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:1317:15
-	makeExtern< Vector4 (*)(Vector4,float) , Vector4SubtractValue , SimNode_ExtFuncCall >(lib,"Vector4SubtractValue","Vector4SubtractValue")
-		->args({"v","add"})
+// from raylib.h:1746:12
+	makeExtern< bool (*)(AudioStream) , IsAudioStreamPlaying , SimNode_ExtFuncCall >(lib,"IsAudioStreamPlaying","IsAudioStreamPlaying")
+		->args({"stream"})
+		->arg_type(0,makeType<const AudioStream>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:1329:13
-	makeExtern< float (*)(Vector4) , Vector4Length , SimNode_ExtFuncCall >(lib,"Vector4Length","Vector4Length")
-		->args({"v"})
+// from raylib.h:1747:12
+	makeExtern< void (*)(AudioStream) , StopAudioStream , SimNode_ExtFuncCall >(lib,"StopAudioStream","StopAudioStream")
+		->args({"stream"})
+		->arg_type(0,makeType<const AudioStream>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:1336:13
-	makeExtern< float (*)(Vector4) , Vector4LengthSqr , SimNode_ExtFuncCall >(lib,"Vector4LengthSqr","Vector4LengthSqr")
-		->args({"v"})
+// from raylib.h:1748:12
+	makeExtern< void (*)(AudioStream,float) , SetAudioStreamVolume , SimNode_ExtFuncCall >(lib,"SetAudioStreamVolume","SetAudioStreamVolume")
+		->args({"stream","volume"})
+		->arg_type(0,makeType<const AudioStream>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:1343:13
-	makeExtern< float (*)(Vector4,Vector4) , Vector4DotProduct , SimNode_ExtFuncCall >(lib,"Vector4DotProduct","Vector4DotProduct")
-		->args({"v1","v2"})
+// from raylib.h:1749:12
+	makeExtern< void (*)(AudioStream,float) , SetAudioStreamPitch , SimNode_ExtFuncCall >(lib,"SetAudioStreamPitch","SetAudioStreamPitch")
+		->args({"stream","pitch"})
+		->arg_type(0,makeType<const AudioStream>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:1350:13
-	makeExtern< float (*)(Vector4,Vector4) , Vector4Distance , SimNode_ExtFuncCall >(lib,"Vector4Distance","Vector4Distance")
-		->args({"v1","v2"})
+// from raylib.h:1750:12
+	makeExtern< void (*)(AudioStream,float) , SetAudioStreamPan , SimNode_ExtFuncCall >(lib,"SetAudioStreamPan","SetAudioStreamPan")
+		->args({"stream","pan"})
+		->arg_type(0,makeType<const AudioStream>(lib))
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:1359:13
-	makeExtern< float (*)(Vector4,Vector4) , Vector4DistanceSqr , SimNode_ExtFuncCall >(lib,"Vector4DistanceSqr","Vector4DistanceSqr")
-		->args({"v1","v2"})
+// from raylib.h:1751:12
+	makeExtern< void (*)(int) , SetAudioStreamBufferSizeDefault , SimNode_ExtFuncCall >(lib,"SetAudioStreamBufferSizeDefault","SetAudioStreamBufferSizeDefault")
+		->args({"size"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:1369:15
-	makeExtern< Vector4 (*)(Vector4,float) , Vector4Scale , SimNode_ExtFuncCall >(lib,"Vector4Scale","Vector4Scale")
-		->args({"v","scale"})
+// from raymath.h:217:13
+	makeExtern< float (*)(float,float,float) , Clamp , SimNode_ExtFuncCall >(lib,"Clamp","Clamp")
+		->args({"value","min","max"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:1376:15
-	makeExtern< Vector4 (*)(Vector4,Vector4) , Vector4Multiply , SimNode_ExtFuncCall >(lib,"Vector4Multiply","Vector4Multiply")
-		->args({"v1","v2"})
+// from raymath.h:227:13
+	makeExtern< float (*)(float,float,float) , Lerp , SimNode_ExtFuncCall >(lib,"Lerp","Lerp")
+		->args({"start","end","amount"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:1383:15
-	makeExtern< Vector4 (*)(Vector4) , Vector4Negate , SimNode_ExtFuncCall >(lib,"Vector4Negate","Vector4Negate")
-		->args({"v"})
+// from raymath.h:235:13
+	makeExtern< float (*)(float,float,float) , Normalize , SimNode_ExtFuncCall >(lib,"Normalize","Normalize")
+		->args({"value","start","end"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:1390:15
-	makeExtern< Vector4 (*)(Vector4,Vector4) , Vector4Divide , SimNode_ExtFuncCall >(lib,"Vector4Divide","Vector4Divide")
-		->args({"v1","v2"})
+// from raymath.h:243:13
+	makeExtern< float (*)(float,float,float,float,float) , Remap , SimNode_ExtFuncCall >(lib,"Remap","Remap")
+		->args({"value","inputStart","inputEnd","outputStart","outputEnd"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:1397:15
-	makeExtern< Vector4 (*)(Vector4) , Vector4Normalize , SimNode_ExtFuncCall >(lib,"Vector4Normalize","Vector4Normalize")
-		->args({"v"})
+// from raymath.h:251:13
+	makeExtern< float (*)(float,float,float) , Wrap , SimNode_ExtFuncCall >(lib,"Wrap","Wrap")
+		->args({"value","min","max"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:1415:15
-	makeExtern< Vector4 (*)(Vector4,Vector4) , Vector4Min , SimNode_ExtFuncCall >(lib,"Vector4Min","Vector4Min")
-		->args({"v1","v2"})
+// from raymath.h:259:11
+	makeExtern< int (*)(float,float) , FloatEquals , SimNode_ExtFuncCall >(lib,"FloatEquals","FloatEquals")
+		->args({"x","y"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raymath.h:1428:15
-	makeExtern< Vector4 (*)(Vector4,Vector4) , Vector4Max , SimNode_ExtFuncCall >(lib,"Vector4Max","Vector4Max")
-		->args({"v1","v2"})
+// from raymath.h:275:15
+	makeExtern< Vector2 (*)() , Vector2Zero , SimNode_ExtFuncCall >(lib,"Vector2Zero","Vector2Zero")
 		->addToModule(*this, SideEffects::worstDefault);
 }
 }

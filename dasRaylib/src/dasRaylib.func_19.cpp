@@ -11,190 +11,175 @@
 namespace das {
 #include "dasRaylib.func.aot.decl.inc"
 void Module_dasRaylib::initFunctions_19() {
-// from rlgl.h:786:11
-	makeExtern< int (*)(unsigned int,const char *) , rlGetLocationAttrib , SimNode_ExtFuncCall >(lib,"rlGetLocationAttrib","rlGetLocationAttrib")
-		->args({"id","attribName"})
+// from rlgl.h:656:12
+	makeExtern< void (*)() , rlDisableTexture , SimNode_ExtFuncCall >(lib,"rlDisableTexture","rlDisableTexture")
 		->addToModule(*this, SideEffects::worstDefault);
-// from rlgl.h:787:12
-	makeExtern< void (*)(int,const void *,int,int) , rlSetUniform , SimNode_ExtFuncCall >(lib,"rlSetUniform","rlSetUniform")
-		->args({"locIndex","value","uniformType","count"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from rlgl.h:788:12
-	makeExtern< void (*)(int,const float4x4 &) , _rlw_rlSetUniformMatrix , SimNode_ExtFuncCall >(lib,"rlSetUniformMatrix","das::_rlw_rlSetUniformMatrix")
-		->args({"locIndex","mat"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from rlgl.h:789:12
-	makeExtern< void (*)(int,const ::Matrix *,int) , rlSetUniformMatrices , SimNode_ExtFuncCall >(lib,"rlSetUniformMatrices","rlSetUniformMatrices")
-		->args({"locIndex","mat","count"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from rlgl.h:790:12
-	makeExtern< void (*)(int,unsigned int) , rlSetUniformSampler , SimNode_ExtFuncCall >(lib,"rlSetUniformSampler","rlSetUniformSampler")
-		->args({"locIndex","textureId"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from rlgl.h:791:12
-	makeExtern< void (*)(unsigned int,int *) , rlSetShader , SimNode_ExtFuncCall >(lib,"rlSetShader","rlSetShader")
-		->args({"id","locs"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from rlgl.h:794:12
-	makeExtern< void (*)(unsigned int,unsigned int,unsigned int) , rlComputeShaderDispatch , SimNode_ExtFuncCall >(lib,"rlComputeShaderDispatch","rlComputeShaderDispatch")
-		->args({"groupX","groupY","groupZ"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from rlgl.h:797:20
-	makeExtern< unsigned int (*)(unsigned int,const void *,int) , rlLoadShaderBuffer , SimNode_ExtFuncCall >(lib,"rlLoadShaderBuffer","rlLoadShaderBuffer")
-		->args({"size","data","usageHint"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from rlgl.h:798:12
-	makeExtern< void (*)(unsigned int) , rlUnloadShaderBuffer , SimNode_ExtFuncCall >(lib,"rlUnloadShaderBuffer","rlUnloadShaderBuffer")
-		->args({"ssboId"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from rlgl.h:799:12
-	makeExtern< void (*)(unsigned int,const void *,unsigned int,unsigned int) , rlUpdateShaderBuffer , SimNode_ExtFuncCall >(lib,"rlUpdateShaderBuffer","rlUpdateShaderBuffer")
-		->args({"id","data","dataSize","offset"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from rlgl.h:800:12
-	makeExtern< void (*)(unsigned int,unsigned int) , rlBindShaderBuffer , SimNode_ExtFuncCall >(lib,"rlBindShaderBuffer","rlBindShaderBuffer")
-		->args({"id","index"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from rlgl.h:801:12
-	makeExtern< void (*)(unsigned int,void *,unsigned int,unsigned int) , rlReadShaderBuffer , SimNode_ExtFuncCall >(lib,"rlReadShaderBuffer","rlReadShaderBuffer")
-		->args({"id","dest","count","offset"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from rlgl.h:802:12
-	makeExtern< void (*)(unsigned int,unsigned int,unsigned int,unsigned int,unsigned int) , rlCopyShaderBuffer , SimNode_ExtFuncCall >(lib,"rlCopyShaderBuffer","rlCopyShaderBuffer")
-		->args({"destId","srcId","destOffset","srcOffset","count"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from rlgl.h:803:20
-	makeExtern< unsigned int (*)(unsigned int) , rlGetShaderBufferSize , SimNode_ExtFuncCall >(lib,"rlGetShaderBufferSize","rlGetShaderBufferSize")
+// from rlgl.h:657:12
+	makeExtern< void (*)(unsigned int) , rlEnableTextureCubemap , SimNode_ExtFuncCall >(lib,"rlEnableTextureCubemap","rlEnableTextureCubemap")
 		->args({"id"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from rlgl.h:806:12
-	makeExtern< void (*)(unsigned int,unsigned int,int,bool) , rlBindImageTexture , SimNode_ExtFuncCall >(lib,"rlBindImageTexture","rlBindImageTexture")
-		->args({"id","index","format","readonly"})
+// from rlgl.h:658:12
+	makeExtern< void (*)() , rlDisableTextureCubemap , SimNode_ExtFuncCall >(lib,"rlDisableTextureCubemap","rlDisableTextureCubemap")
 		->addToModule(*this, SideEffects::worstDefault);
-// from rlgl.h:809:14
-	makeExtern< float4x4 (*)() , _rlw_rlGetMatrixModelview , SimNode_ExtFuncCallAndCopyOrMove >(lib,"rlGetMatrixModelview","das::_rlw_rlGetMatrixModelview")
+// from rlgl.h:659:12
+	makeExtern< void (*)(unsigned int,int,int) , rlTextureParameters , SimNode_ExtFuncCall >(lib,"rlTextureParameters","rlTextureParameters")
+		->args({"id","param","value"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from rlgl.h:810:14
-	makeExtern< float4x4 (*)() , _rlw_rlGetMatrixProjection , SimNode_ExtFuncCallAndCopyOrMove >(lib,"rlGetMatrixProjection","das::_rlw_rlGetMatrixProjection")
+// from rlgl.h:660:12
+	makeExtern< void (*)(unsigned int,int,int) , rlCubemapParameters , SimNode_ExtFuncCall >(lib,"rlCubemapParameters","rlCubemapParameters")
+		->args({"id","param","value"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from rlgl.h:811:14
-	makeExtern< float4x4 (*)() , _rlw_rlGetMatrixTransform , SimNode_ExtFuncCallAndCopyOrMove >(lib,"rlGetMatrixTransform","das::_rlw_rlGetMatrixTransform")
+// from rlgl.h:663:12
+	makeExtern< void (*)(unsigned int) , rlEnableShader , SimNode_ExtFuncCall >(lib,"rlEnableShader","rlEnableShader")
+		->args({"id"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from rlgl.h:812:14
-	makeExtern< float4x4 (*)(int) , _rlw_rlGetMatrixProjectionStereo , SimNode_ExtFuncCallAndCopyOrMove >(lib,"rlGetMatrixProjectionStereo","das::_rlw_rlGetMatrixProjectionStereo")
-		->args({"eye"})
+// from rlgl.h:664:12
+	makeExtern< void (*)() , rlDisableShader , SimNode_ExtFuncCall >(lib,"rlDisableShader","rlDisableShader")
 		->addToModule(*this, SideEffects::worstDefault);
-// from rlgl.h:813:14
-	makeExtern< float4x4 (*)(int) , _rlw_rlGetMatrixViewOffsetStereo , SimNode_ExtFuncCallAndCopyOrMove >(lib,"rlGetMatrixViewOffsetStereo","das::_rlw_rlGetMatrixViewOffsetStereo")
-		->args({"eye"})
+// from rlgl.h:667:12
+	makeExtern< void (*)(unsigned int) , rlEnableFramebuffer , SimNode_ExtFuncCall >(lib,"rlEnableFramebuffer","rlEnableFramebuffer")
+		->args({"id"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from rlgl.h:814:12
-	makeExtern< void (*)(const float4x4 &) , _rlw_rlSetMatrixProjection , SimNode_ExtFuncCall >(lib,"rlSetMatrixProjection","das::_rlw_rlSetMatrixProjection")
-		->args({"proj"})
+// from rlgl.h:668:12
+	makeExtern< void (*)() , rlDisableFramebuffer , SimNode_ExtFuncCall >(lib,"rlDisableFramebuffer","rlDisableFramebuffer")
 		->addToModule(*this, SideEffects::worstDefault);
-// from rlgl.h:815:12
-	makeExtern< void (*)(const float4x4 &) , _rlw_rlSetMatrixModelview , SimNode_ExtFuncCall >(lib,"rlSetMatrixModelview","das::_rlw_rlSetMatrixModelview")
-		->args({"view"})
+// from rlgl.h:669:20
+	makeExtern< unsigned int (*)() , rlGetActiveFramebuffer , SimNode_ExtFuncCall >(lib,"rlGetActiveFramebuffer","rlGetActiveFramebuffer")
 		->addToModule(*this, SideEffects::worstDefault);
-// from rlgl.h:816:12
-	makeExtern< void (*)(const float4x4 &,const float4x4 &) , _rlw_rlSetMatrixProjectionStereo , SimNode_ExtFuncCall >(lib,"rlSetMatrixProjectionStereo","das::_rlw_rlSetMatrixProjectionStereo")
-		->args({"right","left"})
+// from rlgl.h:670:12
+	makeExtern< void (*)(int) , rlActiveDrawBuffers , SimNode_ExtFuncCall >(lib,"rlActiveDrawBuffers","rlActiveDrawBuffers")
+		->args({"count"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from rlgl.h:817:12
-	makeExtern< void (*)(const float4x4 &,const float4x4 &) , _rlw_rlSetMatrixViewOffsetStereo , SimNode_ExtFuncCall >(lib,"rlSetMatrixViewOffsetStereo","das::_rlw_rlSetMatrixViewOffsetStereo")
-		->args({"right","left"})
+// from rlgl.h:671:12
+	makeExtern< void (*)(int,int,int,int,int,int,int,int,int) , rlBlitFramebuffer , SimNode_ExtFuncCall >(lib,"rlBlitFramebuffer","rlBlitFramebuffer")
+		->args({"srcX","srcY","srcWidth","srcHeight","dstX","dstY","dstWidth","dstHeight","bufferMask"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from rlgl.h:820:12
-	makeExtern< void (*)() , rlLoadDrawCube , SimNode_ExtFuncCall >(lib,"rlLoadDrawCube","rlLoadDrawCube")
+// from rlgl.h:672:12
+	makeExtern< void (*)(unsigned int,unsigned int) , rlBindFramebuffer , SimNode_ExtFuncCall >(lib,"rlBindFramebuffer","rlBindFramebuffer")
+		->args({"target","framebuffer"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from rlgl.h:821:12
-	makeExtern< void (*)() , rlLoadDrawQuad , SimNode_ExtFuncCall >(lib,"rlLoadDrawQuad","rlLoadDrawQuad")
+// from rlgl.h:675:12
+	makeExtern< void (*)() , rlEnableColorBlend , SimNode_ExtFuncCall >(lib,"rlEnableColorBlend","rlEnableColorBlend")
 		->addToModule(*this, SideEffects::worstDefault);
-// from raygui.h:789:16
-	makeExtern< void (*)() , GuiEnable , SimNode_ExtFuncCall >(lib,"GuiEnable","GuiEnable")
+// from rlgl.h:676:12
+	makeExtern< void (*)() , rlDisableColorBlend , SimNode_ExtFuncCall >(lib,"rlDisableColorBlend","rlDisableColorBlend")
 		->addToModule(*this, SideEffects::worstDefault);
-// from raygui.h:790:16
-	makeExtern< void (*)() , GuiDisable , SimNode_ExtFuncCall >(lib,"GuiDisable","GuiDisable")
+// from rlgl.h:677:12
+	makeExtern< void (*)() , rlEnableDepthTest , SimNode_ExtFuncCall >(lib,"rlEnableDepthTest","rlEnableDepthTest")
 		->addToModule(*this, SideEffects::worstDefault);
-// from raygui.h:791:16
-	makeExtern< void (*)() , GuiLock , SimNode_ExtFuncCall >(lib,"GuiLock","GuiLock")
+// from rlgl.h:678:12
+	makeExtern< void (*)() , rlDisableDepthTest , SimNode_ExtFuncCall >(lib,"rlDisableDepthTest","rlDisableDepthTest")
 		->addToModule(*this, SideEffects::worstDefault);
-// from raygui.h:792:16
-	makeExtern< void (*)() , GuiUnlock , SimNode_ExtFuncCall >(lib,"GuiUnlock","GuiUnlock")
+// from rlgl.h:679:12
+	makeExtern< void (*)() , rlEnableDepthMask , SimNode_ExtFuncCall >(lib,"rlEnableDepthMask","rlEnableDepthMask")
 		->addToModule(*this, SideEffects::worstDefault);
-// from raygui.h:793:16
-	makeExtern< bool (*)() , GuiIsLocked , SimNode_ExtFuncCall >(lib,"GuiIsLocked","GuiIsLocked")
+// from rlgl.h:680:12
+	makeExtern< void (*)() , rlDisableDepthMask , SimNode_ExtFuncCall >(lib,"rlDisableDepthMask","rlDisableDepthMask")
 		->addToModule(*this, SideEffects::worstDefault);
-// from raygui.h:794:16
-	makeExtern< void (*)(float) , GuiSetAlpha , SimNode_ExtFuncCall >(lib,"GuiSetAlpha","GuiSetAlpha")
-		->args({"alpha"})
+// from rlgl.h:681:12
+	makeExtern< void (*)() , rlEnableBackfaceCulling , SimNode_ExtFuncCall >(lib,"rlEnableBackfaceCulling","rlEnableBackfaceCulling")
 		->addToModule(*this, SideEffects::worstDefault);
-// from raygui.h:795:16
-	makeExtern< void (*)(int) , GuiSetState , SimNode_ExtFuncCall >(lib,"GuiSetState","GuiSetState")
-		->args({"state"})
+// from rlgl.h:682:12
+	makeExtern< void (*)() , rlDisableBackfaceCulling , SimNode_ExtFuncCall >(lib,"rlDisableBackfaceCulling","rlDisableBackfaceCulling")
 		->addToModule(*this, SideEffects::worstDefault);
-// from raygui.h:796:15
-	makeExtern< int (*)() , GuiGetState , SimNode_ExtFuncCall >(lib,"GuiGetState","GuiGetState")
+// from rlgl.h:683:12
+	makeExtern< void (*)(bool,bool,bool,bool) , rlColorMask , SimNode_ExtFuncCall >(lib,"rlColorMask","rlColorMask")
+		->args({"r","g","b","a"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raygui.h:799:16
-	makeExtern< void (*)(Font) , GuiSetFont , SimNode_ExtFuncCall >(lib,"GuiSetFont","GuiSetFont")
-		->args({"font"})
-		->arg_type(0,makeType<const Font>(lib))
+// from rlgl.h:684:12
+	makeExtern< void (*)(int) , rlSetCullFace , SimNode_ExtFuncCall >(lib,"rlSetCullFace","rlSetCullFace")
+		->args({"mode"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raygui.h:800:16
-	makeExtern< Font (*)() , GuiGetFont , SimNode_ExtFuncCallAndCopyOrMove >(lib,"GuiGetFont","GuiGetFont")
+// from rlgl.h:685:12
+	makeExtern< void (*)() , rlEnableScissorTest , SimNode_ExtFuncCall >(lib,"rlEnableScissorTest","rlEnableScissorTest")
 		->addToModule(*this, SideEffects::worstDefault);
-// from raygui.h:803:16
-	makeExtern< void (*)(int,int,int) , GuiSetStyle , SimNode_ExtFuncCall >(lib,"GuiSetStyle","GuiSetStyle")
-		->args({"control","property","value"})
+// from rlgl.h:686:12
+	makeExtern< void (*)() , rlDisableScissorTest , SimNode_ExtFuncCall >(lib,"rlDisableScissorTest","rlDisableScissorTest")
 		->addToModule(*this, SideEffects::worstDefault);
-// from raygui.h:804:15
-	makeExtern< int (*)(int,int) , GuiGetStyle , SimNode_ExtFuncCall >(lib,"GuiGetStyle","GuiGetStyle")
-		->args({"control","property"})
+// from rlgl.h:687:12
+	makeExtern< void (*)(int,int,int,int) , rlScissor , SimNode_ExtFuncCall >(lib,"rlScissor","rlScissor")
+		->args({"x","y","width","height"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raygui.h:807:16
-	makeExtern< void (*)(const char *) , GuiLoadStyle , SimNode_ExtFuncCall >(lib,"GuiLoadStyle","GuiLoadStyle")
-		->args({"fileName"})
+// from rlgl.h:688:12
+	makeExtern< void (*)() , rlEnablePointMode , SimNode_ExtFuncCall >(lib,"rlEnablePointMode","rlEnablePointMode")
 		->addToModule(*this, SideEffects::worstDefault);
-// from raygui.h:808:16
-	makeExtern< void (*)(const unsigned char *,int) , GuiLoadStyleFromMemory , SimNode_ExtFuncCall >(lib,"GuiLoadStyleFromMemory","GuiLoadStyleFromMemory")
-		->args({"fileData","dataSize"})
+// from rlgl.h:689:12
+	makeExtern< void (*)() , rlDisablePointMode , SimNode_ExtFuncCall >(lib,"rlDisablePointMode","rlDisablePointMode")
 		->addToModule(*this, SideEffects::worstDefault);
-// from raygui.h:809:16
-	makeExtern< void (*)() , GuiLoadStyleDefault , SimNode_ExtFuncCall >(lib,"GuiLoadStyleDefault","GuiLoadStyleDefault")
+// from rlgl.h:690:12
+	makeExtern< void (*)(float) , rlSetPointSize , SimNode_ExtFuncCall >(lib,"rlSetPointSize","rlSetPointSize")
+		->args({"size"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raygui.h:812:16
-	makeExtern< void (*)() , GuiEnableTooltip , SimNode_ExtFuncCall >(lib,"GuiEnableTooltip","GuiEnableTooltip")
+// from rlgl.h:691:13
+	makeExtern< float (*)() , rlGetPointSize , SimNode_ExtFuncCall >(lib,"rlGetPointSize","rlGetPointSize")
 		->addToModule(*this, SideEffects::worstDefault);
-// from raygui.h:813:16
-	makeExtern< void (*)() , GuiDisableTooltip , SimNode_ExtFuncCall >(lib,"GuiDisableTooltip","GuiDisableTooltip")
+// from rlgl.h:692:12
+	makeExtern< void (*)() , rlEnableWireMode , SimNode_ExtFuncCall >(lib,"rlEnableWireMode","rlEnableWireMode")
 		->addToModule(*this, SideEffects::worstDefault);
-// from raygui.h:814:16
-	makeExtern< void (*)(const char *) , GuiSetTooltip , SimNode_ExtFuncCall >(lib,"GuiSetTooltip","GuiSetTooltip")
-		->args({"tooltip"})
+// from rlgl.h:693:12
+	makeExtern< void (*)() , rlDisableWireMode , SimNode_ExtFuncCall >(lib,"rlDisableWireMode","rlDisableWireMode")
 		->addToModule(*this, SideEffects::worstDefault);
-// from raygui.h:817:23
-	makeExtern< const char * (*)(int,const char *) , GuiIconText , SimNode_ExtFuncCall >(lib,"GuiIconText","GuiIconText")
-		->args({"iconId","text"})
+// from rlgl.h:694:12
+	makeExtern< void (*)(float) , rlSetLineWidth , SimNode_ExtFuncCall >(lib,"rlSetLineWidth","rlSetLineWidth")
+		->args({"width"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from raygui.h:819:16
-	makeExtern< void (*)(int) , GuiSetIconScale , SimNode_ExtFuncCall >(lib,"GuiSetIconScale","GuiSetIconScale")
-		->args({"scale"})
+// from rlgl.h:695:13
+	makeExtern< float (*)() , rlGetLineWidth , SimNode_ExtFuncCall >(lib,"rlGetLineWidth","rlGetLineWidth")
 		->addToModule(*this, SideEffects::worstDefault);
-// from raygui.h:820:25
-	makeExtern< unsigned int * (*)() , GuiGetIcons , SimNode_ExtFuncCall >(lib,"GuiGetIcons","GuiGetIcons")
+// from rlgl.h:696:12
+	makeExtern< void (*)() , rlEnableSmoothLines , SimNode_ExtFuncCall >(lib,"rlEnableSmoothLines","rlEnableSmoothLines")
 		->addToModule(*this, SideEffects::worstDefault);
-// from raygui.h:821:18
-	makeExtern< char ** (*)(const char *,bool) , GuiLoadIcons , SimNode_ExtFuncCall >(lib,"GuiLoadIcons","GuiLoadIcons")
-		->args({"fileName","loadIconsName"})
+// from rlgl.h:697:12
+	makeExtern< void (*)() , rlDisableSmoothLines , SimNode_ExtFuncCall >(lib,"rlDisableSmoothLines","rlDisableSmoothLines")
 		->addToModule(*this, SideEffects::worstDefault);
-// from raygui.h:822:18
-	makeExtern< char ** (*)(const unsigned char *,int,bool) , GuiLoadIconsFromMemory , SimNode_ExtFuncCall >(lib,"GuiLoadIconsFromMemory","GuiLoadIconsFromMemory")
-		->args({"fileData","dataSize","loadIconsName"})
+// from rlgl.h:698:12
+	makeExtern< void (*)() , rlEnableStereoRender , SimNode_ExtFuncCall >(lib,"rlEnableStereoRender","rlEnableStereoRender")
 		->addToModule(*this, SideEffects::worstDefault);
-// from raygui.h:823:16
-	makeExtern< void (*)(int,int,int,int,float4) , _rlw_GuiDrawIcon , SimNode_ExtFuncCall >(lib,"GuiDrawIcon","das::_rlw_GuiDrawIcon")
-		->args({"iconId","posX","posY","pixelSize","color"})
+// from rlgl.h:699:12
+	makeExtern< void (*)() , rlDisableStereoRender , SimNode_ExtFuncCall >(lib,"rlDisableStereoRender","rlDisableStereoRender")
+		->addToModule(*this, SideEffects::worstDefault);
+// from rlgl.h:700:12
+	makeExtern< bool (*)() , rlIsStereoRenderEnabled , SimNode_ExtFuncCall >(lib,"rlIsStereoRenderEnabled","rlIsStereoRenderEnabled")
+		->addToModule(*this, SideEffects::worstDefault);
+// from rlgl.h:702:12
+	makeExtern< void (*)(unsigned char,unsigned char,unsigned char,unsigned char) , rlClearColor , SimNode_ExtFuncCall >(lib,"rlClearColor","rlClearColor")
+		->args({"r","g","b","a"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from rlgl.h:703:12
+	makeExtern< void (*)() , rlClearScreenBuffers , SimNode_ExtFuncCall >(lib,"rlClearScreenBuffers","rlClearScreenBuffers")
+		->addToModule(*this, SideEffects::worstDefault);
+// from rlgl.h:704:12
+	makeExtern< void (*)() , rlCheckErrors , SimNode_ExtFuncCall >(lib,"rlCheckErrors","rlCheckErrors")
+		->addToModule(*this, SideEffects::worstDefault);
+// from rlgl.h:705:12
+	makeExtern< void (*)(int) , rlSetBlendMode , SimNode_ExtFuncCall >(lib,"rlSetBlendMode","rlSetBlendMode")
+		->args({"mode"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from rlgl.h:706:12
+	makeExtern< void (*)(int,int,int) , rlSetBlendFactors , SimNode_ExtFuncCall >(lib,"rlSetBlendFactors","rlSetBlendFactors")
+		->args({"glSrcFactor","glDstFactor","glEquation"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from rlgl.h:707:12
+	makeExtern< void (*)(int,int,int,int,int,int) , rlSetBlendFactorsSeparate , SimNode_ExtFuncCall >(lib,"rlSetBlendFactorsSeparate","rlSetBlendFactorsSeparate")
+		->args({"glSrcRGB","glDstRGB","glSrcAlpha","glDstAlpha","glEqRGB","glEqAlpha"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from rlgl.h:713:12
+	makeExtern< void (*)(int,int) , rlglInit , SimNode_ExtFuncCall >(lib,"rlglInit","rlglInit")
+		->args({"width","height"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from rlgl.h:714:12
+	makeExtern< void (*)() , rlglClose , SimNode_ExtFuncCall >(lib,"rlglClose","rlglClose")
+		->addToModule(*this, SideEffects::worstDefault);
+// from rlgl.h:715:12
+	makeExtern< void (*)(void *) , rlLoadExtensions , SimNode_ExtFuncCall >(lib,"rlLoadExtensions","rlLoadExtensions")
+		->args({"loader"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from rlgl.h:716:13
+	makeExtern< void * (*)(const char *) , rlGetProcAddress , SimNode_ExtFuncCall >(lib,"rlGetProcAddress","rlGetProcAddress")
+		->args({"procName"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from rlgl.h:717:11
+	makeExtern< int (*)() , rlGetVersion , SimNode_ExtFuncCall >(lib,"rlGetVersion","rlGetVersion")
 		->addToModule(*this, SideEffects::worstDefault);
 }
 }

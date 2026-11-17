@@ -55,6 +55,10 @@ void Module_dasRaylib::initFunctions_3() {
 	makeExtern< unsigned char * (*)(const char *,int *) , LoadFileData , SimNode_ExtFuncCall >(lib,"LoadFileData","LoadFileData")
 		->args({"fileName","dataSize"})
 		->addToModule(*this, SideEffects::worstDefault);
+// from raylib.h:1128:22
+	makeExtern< unsigned char * (*)(const char *,int32_t &) , _rlr_LoadFileData , SimNode_ExtFuncCall >(lib,"LoadFileData","das::_rlr_LoadFileData")
+		->args({"fileName","dataSize"})
+		->addToModule(*this, SideEffects::worstDefault);
 // from raylib.h:1129:12
 	makeExtern< void (*)(unsigned char *) , UnloadFileData , SimNode_ExtFuncCall >(lib,"UnloadFileData","UnloadFileData")
 		->args({"data"})
@@ -204,10 +208,6 @@ void Module_dasRaylib::initFunctions_3() {
 // from raylib.h:1174:20
 	makeExtern< unsigned int (*)(const char *) , GetDirectoryFileCount , SimNode_ExtFuncCall >(lib,"GetDirectoryFileCount","GetDirectoryFileCount")
 		->args({"dirPath"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from raylib.h:1175:20
-	makeExtern< unsigned int (*)(const char *,const char *,bool) , GetDirectoryFileCountEx , SimNode_ExtFuncCall >(lib,"GetDirectoryFileCountEx","GetDirectoryFileCountEx")
-		->args({"basePath","filter","scanSubdirs"})
 		->addToModule(*this, SideEffects::worstDefault);
 }
 }

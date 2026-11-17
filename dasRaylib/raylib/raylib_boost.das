@@ -49,6 +49,7 @@ def public IsMouseButtonReleased(button : MouseButton) : bool { return IsMouseBu
 def public IsMouseButtonUp(button : MouseButton) : bool { return IsMouseButtonUp(int(button)); }
 def public SetConfigFlags(flags : ConfigFlags) { SetConfigFlags(uint(flags)); }
 def public UpdateCamera(var camera : Camera3D?; mode : CameraMode) { UpdateCamera(camera, int(mode)); }
+def public UpdateCamera(var camera : Camera3D; mode : CameraMode) { UpdateCamera(camera, int(mode)); }
 
 // ── rlgl: its RL_* primitive constants are uint, but rlBegin takes int ──
 def public rlBegin(mode : uint) { rlBegin(int(mode)); }
@@ -88,8 +89,20 @@ def public GuiTextInputBox(bounds : float4; title, message : string; var text : 
     }
 }
 
+def public GuiTextInputBox(bounds : float4; title, message : string; var text : array<uint8>; btnText : string; var btnActive : int&; var secretViewActive : bool&) : int {
+    unsafe {
+        return GuiTextInputBox(bounds, title, message, reinterpret<string>(addr(text[0])), length(text), btnText, btnActive, secretViewActive)
+    }
+}
+
 // raygui reads the labels through a char ** and does not change them.
 def public GuiListViewEx(bounds : float4; var items : array<string>; var scrollIndex, active, focus : int?) : int {
+    unsafe {
+        return GuiListViewEx(bounds, addr(items[0]), length(items), scrollIndex, active, focus)
+    }
+}
+
+def public GuiListViewEx(bounds : float4; var items : array<string>; var scrollIndex, active, focus : int&) : int {
     unsafe {
         return GuiListViewEx(bounds, addr(items[0]), length(items), scrollIndex, active, focus)
     }

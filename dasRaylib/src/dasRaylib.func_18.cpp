@@ -11,198 +11,196 @@
 namespace das {
 #include "dasRaylib.func.aot.decl.inc"
 void Module_dasRaylib::initFunctions_18() {
-// from rlgl.h:719:11
-	makeExtern< int (*)() , rlGetFramebufferWidth , SimNode_ExtFuncCall >(lib,"rlGetFramebufferWidth","rlGetFramebufferWidth")
+// from rcamera.h:148:12
+	makeExtern< void (*)(Camera3D *,float,bool) , CameraMoveRight , SimNode_ExtFuncCall >(lib,"CameraMoveRight","CameraMoveRight")
+		->args({"camera","distance","moveInWorldPlane"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from rlgl.h:720:12
-	makeExtern< void (*)(int) , rlSetFramebufferHeight , SimNode_ExtFuncCall >(lib,"rlSetFramebufferHeight","rlSetFramebufferHeight")
-		->args({"height"})
+// from rcamera.h:148:12
+	makeExtern< void (*)(Camera3D &,float,bool) , _rlr_CameraMoveRight , SimNode_ExtFuncCall >(lib,"CameraMoveRight","das::_rlr_CameraMoveRight")
+		->args({"camera","distance","moveInWorldPlane"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from rlgl.h:721:11
-	makeExtern< int (*)() , rlGetFramebufferHeight , SimNode_ExtFuncCall >(lib,"rlGetFramebufferHeight","rlGetFramebufferHeight")
+// from rcamera.h:149:12
+	makeExtern< void (*)(Camera3D *,float) , CameraMoveToTarget , SimNode_ExtFuncCall >(lib,"CameraMoveToTarget","CameraMoveToTarget")
+		->args({"camera","delta"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from rlgl.h:723:20
-	makeExtern< unsigned int (*)() , rlGetTextureIdDefault , SimNode_ExtFuncCall >(lib,"rlGetTextureIdDefault","rlGetTextureIdDefault")
+// from rcamera.h:149:12
+	makeExtern< void (*)(Camera3D &,float) , _rlr_CameraMoveToTarget , SimNode_ExtFuncCall >(lib,"CameraMoveToTarget","das::_rlr_CameraMoveToTarget")
+		->args({"camera","delta"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from rlgl.h:724:20
-	makeExtern< unsigned int (*)() , rlGetShaderIdDefault , SimNode_ExtFuncCall >(lib,"rlGetShaderIdDefault","rlGetShaderIdDefault")
+// from rcamera.h:152:12
+	makeExtern< void (*)(Camera3D *,float,bool) , CameraYaw , SimNode_ExtFuncCall >(lib,"CameraYaw","CameraYaw")
+		->args({"camera","angle","rotateAroundTarget"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from rlgl.h:725:12
-	makeExtern< int * (*)() , rlGetShaderLocsDefault , SimNode_ExtFuncCall >(lib,"rlGetShaderLocsDefault","rlGetShaderLocsDefault")
+// from rcamera.h:152:12
+	makeExtern< void (*)(Camera3D &,float,bool) , _rlr_CameraYaw , SimNode_ExtFuncCall >(lib,"CameraYaw","das::_rlr_CameraYaw")
+		->args({"camera","angle","rotateAroundTarget"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from rlgl.h:730:21
-	makeExtern< rlRenderBatch (*)(int,int) , rlLoadRenderBatch , SimNode_ExtFuncCallAndCopyOrMove >(lib,"rlLoadRenderBatch","rlLoadRenderBatch")
-		->args({"numBuffers","bufferElements"})
+// from rcamera.h:153:12
+	makeExtern< void (*)(Camera3D *,float,bool,bool,bool) , CameraPitch , SimNode_ExtFuncCall >(lib,"CameraPitch","CameraPitch")
+		->args({"camera","angle","lockView","rotateAroundTarget","rotateUp"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from rlgl.h:731:12
-	makeExtern< void (*)(rlRenderBatch) , rlUnloadRenderBatch , SimNode_ExtFuncCall >(lib,"rlUnloadRenderBatch","rlUnloadRenderBatch")
-		->args({"batch"})
-		->arg_type(0,makeType<const rlRenderBatch>(lib))
+// from rcamera.h:153:12
+	makeExtern< void (*)(Camera3D &,float,bool,bool,bool) , _rlr_CameraPitch , SimNode_ExtFuncCall >(lib,"CameraPitch","das::_rlr_CameraPitch")
+		->args({"camera","angle","lockView","rotateAroundTarget","rotateUp"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from rlgl.h:732:12
-	makeExtern< void (*)(rlRenderBatch *) , rlDrawRenderBatch , SimNode_ExtFuncCall >(lib,"rlDrawRenderBatch","rlDrawRenderBatch")
-		->args({"batch"})
+// from rcamera.h:154:12
+	makeExtern< void (*)(Camera3D *,float) , CameraRoll , SimNode_ExtFuncCall >(lib,"CameraRoll","CameraRoll")
+		->args({"camera","angle"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from rlgl.h:733:12
-	makeExtern< void (*)(rlRenderBatch *) , rlSetRenderBatchActive , SimNode_ExtFuncCall >(lib,"rlSetRenderBatchActive","rlSetRenderBatchActive")
-		->args({"batch"})
+// from rcamera.h:154:12
+	makeExtern< void (*)(Camera3D &,float) , _rlr_CameraRoll , SimNode_ExtFuncCall >(lib,"CameraRoll","das::_rlr_CameraRoll")
+		->args({"camera","angle"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from rlgl.h:734:12
-	makeExtern< void (*)() , rlDrawRenderBatchActive , SimNode_ExtFuncCall >(lib,"rlDrawRenderBatchActive","rlDrawRenderBatchActive")
+// from rcamera.h:156:14
+	makeExtern< float4x4 (*)(Camera3D *) , _rlw_GetCameraViewMatrix , SimNode_ExtFuncCallAndCopyOrMove >(lib,"GetCameraViewMatrix","das::_rlw_GetCameraViewMatrix")
+		->args({"camera"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from rlgl.h:735:12
-	makeExtern< bool (*)(int) , rlCheckRenderBatchLimit , SimNode_ExtFuncCall >(lib,"rlCheckRenderBatchLimit","rlCheckRenderBatchLimit")
-		->args({"vCount"})
+// from rcamera.h:156:14
+	makeExtern< float4x4 (*)(Camera3D &) , _rlr_GetCameraViewMatrix , SimNode_ExtFuncCallAndCopyOrMove >(lib,"GetCameraViewMatrix","das::_rlr_GetCameraViewMatrix")
+		->args({"camera"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from rlgl.h:737:12
-	makeExtern< void (*)(unsigned int) , rlSetTexture , SimNode_ExtFuncCall >(lib,"rlSetTexture","rlSetTexture")
-		->args({"id"})
+// from rcamera.h:157:14
+	makeExtern< float4x4 (*)(Camera3D *,float) , _rlw_GetCameraProjectionMatrix , SimNode_ExtFuncCallAndCopyOrMove >(lib,"GetCameraProjectionMatrix","das::_rlw_GetCameraProjectionMatrix")
+		->args({"camera","aspect"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from rlgl.h:742:20
-	makeExtern< unsigned int (*)() , rlLoadVertexArray , SimNode_ExtFuncCall >(lib,"rlLoadVertexArray","rlLoadVertexArray")
+// from rcamera.h:157:14
+	makeExtern< float4x4 (*)(Camera3D &,float) , _rlr_GetCameraProjectionMatrix , SimNode_ExtFuncCallAndCopyOrMove >(lib,"GetCameraProjectionMatrix","das::_rlr_GetCameraProjectionMatrix")
+		->args({"camera","aspect"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from rlgl.h:743:20
-	makeExtern< unsigned int (*)(const void *,int,bool) , rlLoadVertexBuffer , SimNode_ExtFuncCall >(lib,"rlLoadVertexBuffer","rlLoadVertexBuffer")
-		->args({"buffer","size","dynamic"})
+// from rlgl.h:606:12
+	makeExtern< void (*)(int) , rlMatrixMode , SimNode_ExtFuncCall >(lib,"rlMatrixMode","rlMatrixMode")
+		->args({"mode"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from rlgl.h:744:20
-	makeExtern< unsigned int (*)(const void *,int,bool) , rlLoadVertexBufferElement , SimNode_ExtFuncCall >(lib,"rlLoadVertexBufferElement","rlLoadVertexBufferElement")
-		->args({"buffer","size","dynamic"})
+// from rlgl.h:607:12
+	makeExtern< void (*)() , rlPushMatrix , SimNode_ExtFuncCall >(lib,"rlPushMatrix","rlPushMatrix")
 		->addToModule(*this, SideEffects::worstDefault);
-// from rlgl.h:745:12
-	makeExtern< void (*)(unsigned int,const void *,int,int) , rlUpdateVertexBuffer , SimNode_ExtFuncCall >(lib,"rlUpdateVertexBuffer","rlUpdateVertexBuffer")
-		->args({"bufferId","data","dataSize","offset"})
+// from rlgl.h:608:12
+	makeExtern< void (*)() , rlPopMatrix , SimNode_ExtFuncCall >(lib,"rlPopMatrix","rlPopMatrix")
 		->addToModule(*this, SideEffects::worstDefault);
-// from rlgl.h:746:12
-	makeExtern< void (*)(unsigned int,const void *,int,int) , rlUpdateVertexBufferElements , SimNode_ExtFuncCall >(lib,"rlUpdateVertexBufferElements","rlUpdateVertexBufferElements")
-		->args({"id","data","dataSize","offset"})
+// from rlgl.h:609:12
+	makeExtern< void (*)() , rlLoadIdentity , SimNode_ExtFuncCall >(lib,"rlLoadIdentity","rlLoadIdentity")
 		->addToModule(*this, SideEffects::worstDefault);
-// from rlgl.h:747:12
-	makeExtern< void (*)(unsigned int) , rlUnloadVertexArray , SimNode_ExtFuncCall >(lib,"rlUnloadVertexArray","rlUnloadVertexArray")
+// from rlgl.h:610:12
+	makeExtern< void (*)(float,float,float) , rlTranslatef , SimNode_ExtFuncCall >(lib,"rlTranslatef","rlTranslatef")
+		->args({"x","y","z"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from rlgl.h:611:12
+	makeExtern< void (*)(float,float,float,float) , rlRotatef , SimNode_ExtFuncCall >(lib,"rlRotatef","rlRotatef")
+		->args({"angle","x","y","z"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from rlgl.h:612:12
+	makeExtern< void (*)(float,float,float) , rlScalef , SimNode_ExtFuncCall >(lib,"rlScalef","rlScalef")
+		->args({"x","y","z"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from rlgl.h:613:12
+	makeExtern< void (*)(const float *) , rlMultMatrixf , SimNode_ExtFuncCall >(lib,"rlMultMatrixf","rlMultMatrixf")
+		->args({"matf"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from rlgl.h:614:12
+	makeExtern< void (*)(double,double,double,double,double,double) , rlFrustum , SimNode_ExtFuncCall >(lib,"rlFrustum","rlFrustum")
+		->args({"left","right","bottom","top","znear","zfar"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from rlgl.h:615:12
+	makeExtern< void (*)(double,double,double,double,double,double) , rlOrtho , SimNode_ExtFuncCall >(lib,"rlOrtho","rlOrtho")
+		->args({"left","right","bottom","top","znear","zfar"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from rlgl.h:616:12
+	makeExtern< void (*)(int,int,int,int) , rlViewport , SimNode_ExtFuncCall >(lib,"rlViewport","rlViewport")
+		->args({"x","y","width","height"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from rlgl.h:617:12
+	makeExtern< void (*)(double,double) , rlSetClipPlanes , SimNode_ExtFuncCall >(lib,"rlSetClipPlanes","rlSetClipPlanes")
+		->args({"nearPlane","farPlane"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from rlgl.h:618:14
+	makeExtern< double (*)() , rlGetCullDistanceNear , SimNode_ExtFuncCall >(lib,"rlGetCullDistanceNear","rlGetCullDistanceNear")
+		->addToModule(*this, SideEffects::worstDefault);
+// from rlgl.h:619:14
+	makeExtern< double (*)() , rlGetCullDistanceFar , SimNode_ExtFuncCall >(lib,"rlGetCullDistanceFar","rlGetCullDistanceFar")
+		->addToModule(*this, SideEffects::worstDefault);
+// from rlgl.h:624:12
+	makeExtern< void (*)(int) , rlBegin , SimNode_ExtFuncCall >(lib,"rlBegin","rlBegin")
+		->args({"mode"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from rlgl.h:625:12
+	makeExtern< void (*)() , rlEnd , SimNode_ExtFuncCall >(lib,"rlEnd","rlEnd")
+		->addToModule(*this, SideEffects::worstDefault);
+// from rlgl.h:626:12
+	makeExtern< void (*)(int,int) , rlVertex2i , SimNode_ExtFuncCall >(lib,"rlVertex2i","rlVertex2i")
+		->args({"x","y"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from rlgl.h:627:12
+	makeExtern< void (*)(float,float) , rlVertex2f , SimNode_ExtFuncCall >(lib,"rlVertex2f","rlVertex2f")
+		->args({"x","y"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from rlgl.h:628:12
+	makeExtern< void (*)(float,float,float) , rlVertex3f , SimNode_ExtFuncCall >(lib,"rlVertex3f","rlVertex3f")
+		->args({"x","y","z"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from rlgl.h:629:12
+	makeExtern< void (*)(float,float) , rlTexCoord2f , SimNode_ExtFuncCall >(lib,"rlTexCoord2f","rlTexCoord2f")
+		->args({"x","y"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from rlgl.h:630:12
+	makeExtern< void (*)(float,float,float) , rlNormal3f , SimNode_ExtFuncCall >(lib,"rlNormal3f","rlNormal3f")
+		->args({"x","y","z"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from rlgl.h:631:12
+	makeExtern< void (*)(unsigned char,unsigned char,unsigned char,unsigned char) , rlColor4ub , SimNode_ExtFuncCall >(lib,"rlColor4ub","rlColor4ub")
+		->args({"r","g","b","a"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from rlgl.h:632:12
+	makeExtern< void (*)(float,float,float) , rlColor3f , SimNode_ExtFuncCall >(lib,"rlColor3f","rlColor3f")
+		->args({"x","y","z"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from rlgl.h:633:12
+	makeExtern< void (*)(float,float,float,float) , rlColor4f , SimNode_ExtFuncCall >(lib,"rlColor4f","rlColor4f")
+		->args({"x","y","z","w"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from rlgl.h:642:12
+	makeExtern< bool (*)(unsigned int) , rlEnableVertexArray , SimNode_ExtFuncCall >(lib,"rlEnableVertexArray","rlEnableVertexArray")
 		->args({"vaoId"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from rlgl.h:748:12
-	makeExtern< void (*)(unsigned int) , rlUnloadVertexBuffer , SimNode_ExtFuncCall >(lib,"rlUnloadVertexBuffer","rlUnloadVertexBuffer")
-		->args({"vboId"})
+// from rlgl.h:643:12
+	makeExtern< void (*)() , rlDisableVertexArray , SimNode_ExtFuncCall >(lib,"rlDisableVertexArray","rlDisableVertexArray")
 		->addToModule(*this, SideEffects::worstDefault);
-// from rlgl.h:749:12
-	makeExtern< void (*)(unsigned int,int,int,bool,int,int) , rlSetVertexAttribute , SimNode_ExtFuncCall >(lib,"rlSetVertexAttribute","rlSetVertexAttribute")
-		->args({"index","compSize","type","normalized","stride","offset"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from rlgl.h:750:12
-	makeExtern< void (*)(unsigned int,int) , rlSetVertexAttributeDivisor , SimNode_ExtFuncCall >(lib,"rlSetVertexAttributeDivisor","rlSetVertexAttributeDivisor")
-		->args({"index","divisor"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from rlgl.h:751:12
-	makeExtern< void (*)(int,const void *,int,int) , rlSetVertexAttributeDefault , SimNode_ExtFuncCall >(lib,"rlSetVertexAttributeDefault","rlSetVertexAttributeDefault")
-		->args({"locIndex","value","attribType","count"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from rlgl.h:752:12
-	makeExtern< void (*)(int,int) , rlDrawVertexArray , SimNode_ExtFuncCall >(lib,"rlDrawVertexArray","rlDrawVertexArray")
-		->args({"offset","count"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from rlgl.h:753:12
-	makeExtern< void (*)(int,int,const void *) , rlDrawVertexArrayElements , SimNode_ExtFuncCall >(lib,"rlDrawVertexArrayElements","rlDrawVertexArrayElements")
-		->args({"offset","count","buffer"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from rlgl.h:754:12
-	makeExtern< void (*)(int,int,int) , rlDrawVertexArrayInstanced , SimNode_ExtFuncCall >(lib,"rlDrawVertexArrayInstanced","rlDrawVertexArrayInstanced")
-		->args({"offset","count","instances"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from rlgl.h:755:12
-	makeExtern< void (*)(int,int,const void *,int) , rlDrawVertexArrayElementsInstanced , SimNode_ExtFuncCall >(lib,"rlDrawVertexArrayElementsInstanced","rlDrawVertexArrayElementsInstanced")
-		->args({"offset","count","buffer","instances"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from rlgl.h:758:20
-	makeExtern< unsigned int (*)(const void *,int,int,int,int) , rlLoadTexture , SimNode_ExtFuncCall >(lib,"rlLoadTexture","rlLoadTexture")
-		->args({"data","width","height","format","mipmapCount"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from rlgl.h:759:20
-	makeExtern< unsigned int (*)(int,int,bool) , rlLoadTextureDepth , SimNode_ExtFuncCall >(lib,"rlLoadTextureDepth","rlLoadTextureDepth")
-		->args({"width","height","useRenderBuffer"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from rlgl.h:760:20
-	makeExtern< unsigned int (*)(const void *,int,int,int) , rlLoadTextureCubemap , SimNode_ExtFuncCall >(lib,"rlLoadTextureCubemap","rlLoadTextureCubemap")
-		->args({"data","size","format","mipmapCount"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from rlgl.h:761:12
-	makeExtern< void (*)(unsigned int,int,int,int,int,int,const void *) , rlUpdateTexture , SimNode_ExtFuncCall >(lib,"rlUpdateTexture","rlUpdateTexture")
-		->args({"id","offsetX","offsetY","width","height","format","data"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from rlgl.h:762:12
-	makeExtern< void (*)(int,unsigned int *,unsigned int *,unsigned int *) , rlGetGlTextureFormats , SimNode_ExtFuncCall >(lib,"rlGetGlTextureFormats","rlGetGlTextureFormats")
-		->args({"format","glInternalFormat","glFormat","glType"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from rlgl.h:763:19
-	makeExtern< const char * (*)(unsigned int) , rlGetPixelFormatName , SimNode_ExtFuncCall >(lib,"rlGetPixelFormatName","rlGetPixelFormatName")
-		->args({"format"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from rlgl.h:764:12
-	makeExtern< void (*)(unsigned int) , rlUnloadTexture , SimNode_ExtFuncCall >(lib,"rlUnloadTexture","rlUnloadTexture")
+// from rlgl.h:644:12
+	makeExtern< void (*)(unsigned int) , rlEnableVertexBuffer , SimNode_ExtFuncCall >(lib,"rlEnableVertexBuffer","rlEnableVertexBuffer")
 		->args({"id"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from rlgl.h:765:12
-	makeExtern< void (*)(unsigned int,int,int,int,int *) , rlGenTextureMipmaps , SimNode_ExtFuncCall >(lib,"rlGenTextureMipmaps","rlGenTextureMipmaps")
-		->args({"id","width","height","format","mipmaps"})
+// from rlgl.h:645:12
+	makeExtern< void (*)() , rlDisableVertexBuffer , SimNode_ExtFuncCall >(lib,"rlDisableVertexBuffer","rlDisableVertexBuffer")
 		->addToModule(*this, SideEffects::worstDefault);
-// from rlgl.h:766:13
-	makeExtern< void * (*)(unsigned int,int,int,int) , rlReadTexturePixels , SimNode_ExtFuncCall >(lib,"rlReadTexturePixels","rlReadTexturePixels")
-		->args({"id","width","height","format"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from rlgl.h:767:22
-	makeExtern< unsigned char * (*)(int,int) , rlReadScreenPixels , SimNode_ExtFuncCall >(lib,"rlReadScreenPixels","rlReadScreenPixels")
-		->args({"width","height"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from rlgl.h:770:20
-	makeExtern< unsigned int (*)() , rlLoadFramebuffer , SimNode_ExtFuncCall >(lib,"rlLoadFramebuffer","rlLoadFramebuffer")
-		->addToModule(*this, SideEffects::worstDefault);
-// from rlgl.h:771:12
-	makeExtern< void (*)(unsigned int,unsigned int,int,int,int) , rlFramebufferAttach , SimNode_ExtFuncCall >(lib,"rlFramebufferAttach","rlFramebufferAttach")
-		->args({"id","texId","attachType","texType","mipLevel"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from rlgl.h:772:12
-	makeExtern< bool (*)(unsigned int) , rlFramebufferComplete , SimNode_ExtFuncCall >(lib,"rlFramebufferComplete","rlFramebufferComplete")
+// from rlgl.h:646:12
+	makeExtern< void (*)(unsigned int) , rlEnableVertexBufferElement , SimNode_ExtFuncCall >(lib,"rlEnableVertexBufferElement","rlEnableVertexBufferElement")
 		->args({"id"})
 		->addToModule(*this, SideEffects::worstDefault);
-// from rlgl.h:773:12
-	makeExtern< void (*)(unsigned int) , rlUnloadFramebuffer , SimNode_ExtFuncCall >(lib,"rlUnloadFramebuffer","rlUnloadFramebuffer")
+// from rlgl.h:647:12
+	makeExtern< void (*)() , rlDisableVertexBufferElement , SimNode_ExtFuncCall >(lib,"rlDisableVertexBufferElement","rlDisableVertexBufferElement")
+		->addToModule(*this, SideEffects::worstDefault);
+// from rlgl.h:648:12
+	makeExtern< void (*)(unsigned int) , rlEnableVertexAttribute , SimNode_ExtFuncCall >(lib,"rlEnableVertexAttribute","rlEnableVertexAttribute")
+		->args({"index"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from rlgl.h:649:12
+	makeExtern< void (*)(unsigned int) , rlDisableVertexAttribute , SimNode_ExtFuncCall >(lib,"rlDisableVertexAttribute","rlDisableVertexAttribute")
+		->args({"index"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from rlgl.h:650:12
+	makeExtern< void (*)(int,void *) , rlEnableStatePointer , SimNode_ExtFuncCall >(lib,"rlEnableStatePointer","rlEnableStatePointer")
+		->args({"vertexAttribType","buffer"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from rlgl.h:651:12
+	makeExtern< void (*)(int) , rlDisableStatePointer , SimNode_ExtFuncCall >(lib,"rlDisableStatePointer","rlDisableStatePointer")
+		->args({"vertexAttribType"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from rlgl.h:654:12
+	makeExtern< void (*)(int) , rlActiveTextureSlot , SimNode_ExtFuncCall >(lib,"rlActiveTextureSlot","rlActiveTextureSlot")
+		->args({"slot"})
+		->addToModule(*this, SideEffects::worstDefault);
+// from rlgl.h:655:12
+	makeExtern< void (*)(unsigned int) , rlEnableTexture , SimNode_ExtFuncCall >(lib,"rlEnableTexture","rlEnableTexture")
 		->args({"id"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from rlgl.h:775:12
-	makeExtern< void (*)(int,int,int,int,int,void *) , rlCopyFramebuffer , SimNode_ExtFuncCall >(lib,"rlCopyFramebuffer","rlCopyFramebuffer")
-		->args({"x","y","width","height","format","pixels"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from rlgl.h:776:12
-	makeExtern< void (*)(int,int) , rlResizeFramebuffer , SimNode_ExtFuncCall >(lib,"rlResizeFramebuffer","rlResizeFramebuffer")
-		->args({"width","height"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from rlgl.h:779:20
-	makeExtern< unsigned int (*)(const char *,int) , rlLoadShader , SimNode_ExtFuncCall >(lib,"rlLoadShader","rlLoadShader")
-		->args({"code","type"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from rlgl.h:780:20
-	makeExtern< unsigned int (*)(const char *,const char *) , rlLoadShaderProgram , SimNode_ExtFuncCall >(lib,"rlLoadShaderProgram","rlLoadShaderProgram")
-		->args({"vsCode","fsCode"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from rlgl.h:781:20
-	makeExtern< unsigned int (*)(unsigned int,unsigned int) , rlLoadShaderProgramEx , SimNode_ExtFuncCall >(lib,"rlLoadShaderProgramEx","rlLoadShaderProgramEx")
-		->args({"vsId","fsId"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from rlgl.h:782:20
-	makeExtern< unsigned int (*)(unsigned int) , rlLoadShaderProgramCompute , SimNode_ExtFuncCall >(lib,"rlLoadShaderProgramCompute","rlLoadShaderProgramCompute")
-		->args({"csId"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from rlgl.h:783:12
-	makeExtern< void (*)(unsigned int) , rlUnloadShader , SimNode_ExtFuncCall >(lib,"rlUnloadShader","rlUnloadShader")
-		->args({"id"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from rlgl.h:784:12
-	makeExtern< void (*)(unsigned int) , rlUnloadShaderProgram , SimNode_ExtFuncCall >(lib,"rlUnloadShaderProgram","rlUnloadShaderProgram")
-		->args({"id"})
-		->addToModule(*this, SideEffects::worstDefault);
-// from rlgl.h:785:11
-	makeExtern< int (*)(unsigned int,const char *) , rlGetLocationUniform , SimNode_ExtFuncCall >(lib,"rlGetLocationUniform","rlGetLocationUniform")
-		->args({"id","uniformName"})
 		->addToModule(*this, SideEffects::worstDefault);
 }
 }

@@ -32,6 +32,7 @@ struct Signature {
     text : string       // plain text, used to measure alignment
     html : string
     from_boost : bool
+    has_ref : bool      // takes a mutable reference where raylib takes a pointer
 }
 
 struct Line {
@@ -148,11 +149,18 @@ def render_lines(lines : array<Line>) : string {
 def reflect_function(module_name : string; func : FunctionPtr) {
     var text = "def {func.name}("
     var html = "{keyword("def")} <span class=\"f\">{func.name}</span>("
+    var has_ref = false
     for (i in range(length(func.arguments))) {
         let sep = i == 0 ? "" : "; "
         let t = clean_type(func.arguments[i]._type)
-        text += "{sep}{func.arguments[i].name} : {t}"
-        html += "{sep}{func.arguments[i].name} : {type_html(t)}"
+        // handled structs (Camera3D, Image, ...) come through as `implicit` instead of `ref`
+        let arg_flags = func.arguments[i]._type.flags
+        let is_ref = (arg_flags.ref || arg_flags._implicit) && !arg_flags.constant && !func.arguments[i]._type.isPointer
+        has_ref = has_ref || is_ref
+        let var_text = is_ref ? "var " : ""
+        let var_html = is_ref ? "{keyword("var")} " : ""
+        text += "{sep}{var_text}{func.arguments[i].name} : {t}"
+        html += "{sep}{var_html}{func.arguments[i].name} : {type_html(t)}"
     }
     text += ")"
     html += ")"
@@ -161,7 +169,7 @@ def reflect_function(module_name : string; func : FunctionPtr) {
         text += " : {t}"
         html += " : {type_html(t)}"
     }
-    signatures[string(func.name)] |> push(Signature(text = text, html = html, from_boost = module_name == "raylib_boost"))
+    signatures[string(func.name)] |> push(Signature(text = text, html = html, from_boost = module_name == "raylib_boost", has_ref = has_ref))
 }
 
 def reflect_functions() {
@@ -238,6 +246,13 @@ def unbound_reason(declaration : string) : string {
     return "other"
 }
 
+def overload_comment(sig : Signature) : string {
+    if (sig.from_boost) {
+        return "raylib_boost overload, takes the enum directly"
+    }
+    return sig.has_ref ? "takes the value itself instead of a pointer" : "pointer form, can also take null"
+}
+
 def add_function(section, name, comment, declaration : string; var pending : array<string>) {
     if (key_exists(documented, name)) {
         return
@@ -256,7 +271,7 @@ def add_function(section, name, comment, declaration : string; var pending : arr
     }
     var first = true
     for (sig in signatures[name]) {
-        add_code(section, sig.text, sig.html, first ? comment : "raylib_boost overload, takes the enum directly")
+        add_code(section, sig.text, sig.html, first ? comment : overload_comment(sig))
         first = false
     }
 }
