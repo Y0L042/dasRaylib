@@ -2,7 +2,7 @@ options gen2
 require daslib/daspkg
 
 // Latest released version. Bump together with the git tag (vX.Y.Z) and CHANGELOG.md.
-let LATEST_VERSION = "1.0.0"
+let LATEST_VERSION = "0.1.1"
 
 [export]
 def package() {
